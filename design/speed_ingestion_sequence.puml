@@ -1,0 +1,243 @@
+@startuml SPEED_Ingestion_Sequence
+skinparam roundcorner 10
+skinparam shadowing false
+
+title SPEED Dataset - Neo4j Ingestion Sequence Diagram
+
+actor User
+participant "main()" as Main
+participant "SPEEDKnowledgeGraphIngestion" as Ingestion
+database "Neo4j Database" as Neo4j
+participant "CSV File" as CSV
+participant "Logger" as Logger
+
+== Initialization ==
+
+User -> Main: python ingest_speed_to_neo4j.py [args]
+activate Main
+
+Main -> Main: Parse command line arguments
+Main -> Main: Load config.yaml (if exists)
+Main -> Ingestion: new SPEEDKnowledgeGraphIngestion(uri, user, password, csv_path)
+activate Ingestion
+
+Ingestion -> Logger: Setup logging
+activate Logger
+Logger --> Ingestion: Logger instance
+deactivate Logger
+
+== Connection and Data Loading ==
+
+Main -> Ingestion: run_ingestion()
+activate Ingestion
+
+Ingestion -> Neo4j: connect()
+activate Neo4j
+Neo4j --> Ingestion: Connection established
+deactivate Neo4j
+
+Ingestion -> CSV: load_csv()
+activate CSV
+CSV --> Ingestion: DataFrame loaded
+deactivate CSV
+
+== Schema Creation ==
+
+Ingestion -> Neo4j: create_constraints_and_indexes()
+activate Neo4j
+
+note right of Neo4j
+  Create constraints:
+  - Event.eventid UNIQUE
+  - Location.location_id UNIQUE
+  - Actor.actor_id UNIQUE
+  - EventType.type_id UNIQUE
+  - TemporalInfo.temporal_id UNIQUE
+  - NewsSource.source_id UNIQUE
+  
+  Create indexes:
+  - Event.year, country, valid_from
+  - Location.country, region
+  - Actor.name, actor_role
+end note
+
+Neo4j --> Ingestion: Constraints and indexes created
+deactivate Neo4j
+
+== Node Creation (Steps 2-7) ==
+
+group Node Ingestion
+
+Ingestion -> Neo4j: ingest_events() [batch_size=10000]
+activate Neo4j
+note right of Neo4j
+  For each batch:
+  - Create Event nodes
+  - Set temporal properties
+  - Assign valid_from/valid_to
+end note
+Neo4j --> Ingestion: Event nodes created
+deactivate Neo4j
+
+Ingestion -> Neo4j: ingest_locations()
+activate Neo4j
+note right of Neo4j
+  - Extract unique locations
+  - Deduplicate by location_id
+  - Create Location nodes
+end note
+Neo4j --> Ingestion: Location nodes created
+deactivate Neo4j
+
+Ingestion -> Neo4j: ingest_actors()
+activate Neo4j
+note right of Neo4j
+  - Extract initiators, targets, victims
+  - Create Actor nodes with polymorphic labels
+  - Group/Individual/GovernmentEntity
+end note
+Neo4j --> Ingestion: Actor nodes created
+deactivate Neo4j
+
+Ingestion -> Neo4j: ingest_event_characteristics()
+activate Neo4j
+note right of Neo4j
+  Create nodes:
+  - EventType
+  - IntensityMetrics
+  - Drivers
+  - Outcomes
+end note
+Neo4j --> Ingestion: Event characteristics created
+deactivate Neo4j
+
+Ingestion -> Neo4j: ingest_temporal_info()
+activate Neo4j
+note right of Neo4j
+  - Create TemporalInfo nodes
+  - Store Julian dates
+  - Store date type metadata
+end note
+Neo4j --> Ingestion: TemporalInfo nodes created
+deactivate Neo4j
+
+Ingestion -> Neo4j: ingest_news_sources()
+activate Neo4j
+note right of Neo4j
+  - Extract unique news sources
+  - Create NewsSource nodes
+  - Store provenance data
+end note
+Neo4j --> Ingestion: NewsSource nodes created
+deactivate Neo4j
+
+end
+
+== Relationship Creation (Steps 8-11) ==
+
+group Relationship Creation
+
+Ingestion -> Neo4j: create_event_relationships()
+activate Neo4j
+note right of Neo4j
+  Create relationships:
+  - OCCURRED_AT (Event -> Location)
+  - HAS_TYPE (Event -> EventType)
+  - HAS_INTENSITY (Event -> IntensityMetrics)
+  - DRIVEN_BY (Event -> Drivers)
+  - RESULTS_IN (Event -> Outcomes)
+  - HAS_TEMPORAL_INFO (Event -> TemporalInfo)
+  - REPORTED_IN (Event -> NewsSource)
+end note
+Neo4j --> Ingestion: Event relationships created
+deactivate Neo4j
+
+Ingestion -> Neo4j: create_actor_relationships()
+activate Neo4j
+note right of Neo4j
+  Create relationships:
+  - HAS_INITIATOR (Event -> Actor)
+  - HAS_TARGET (Event -> Actor)
+  - HAS_VICTIM (Event -> Actor)
+end note
+Neo4j --> Ingestion: Actor relationships created
+deactivate Neo4j
+
+Ingestion -> Neo4j: create_temporal_relationships()
+activate Neo4j
+note right of Neo4j
+  Create relationships:
+  - LINKED_TO (Event -> Event)
+    with temporal validity
+  - REACTS_TO (Event -> Event)
+    for post-hoc reactions
+end note
+Neo4j --> Ingestion: Temporal relationships created
+deactivate Neo4j
+
+Ingestion -> Neo4j: create_location_hierarchy()
+activate Neo4j
+note right of Neo4j
+  Create CONTAINS relationships
+  for location hierarchy
+  (Country -> Region -> City)
+end note
+Neo4j --> Ingestion: Location hierarchy created
+deactivate Neo4j
+
+end
+
+== Validation ==
+
+Ingestion -> Neo4j: validate_graph()
+activate Neo4j
+
+note right of Neo4j
+  Validation checks:
+  - Node counts by type
+  - Relationship counts
+  - Data quality checks:
+    * Events without locations
+    * Events without temporal info
+    * Actors without type
+end note
+
+Neo4j --> Ingestion: Validation results
+deactivate Neo4j
+
+Ingestion -> Logger: Log validation statistics
+activate Logger
+Logger --> Ingestion
+deactivate Logger
+
+== Cleanup ==
+
+Ingestion -> Neo4j: close()
+activate Neo4j
+Neo4j --> Ingestion: Connection closed
+deactivate Neo4j
+
+Ingestion --> Main: Ingestion complete
+deactivate Ingestion
+
+Main --> User: Success message
+deactivate Main
+
+== Error Handling ==
+
+alt Error occurs
+  Ingestion -> Logger: Log error
+  activate Logger
+  Logger --> Ingestion
+  deactivate Logger
+  
+  Ingestion -> Neo4j: close()
+  activate Neo4j
+  Neo4j --> Ingestion
+  deactivate Neo4j
+  
+  Ingestion --> Main: Exception raised
+  Main --> User: Error message
+end
+
+@enduml

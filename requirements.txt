@@ -1,8 +1,22 @@
+# SPEED Knowledge Graph Ingestion - Python Dependencies
+
+# Neo4j driver
+neo4j==5.16.0
+
 # Core data manipulation libraries
 pandas>=2.0.0
 numpy>=1.24.0
 
-# Excel file reading support
+# Date/time handling
+python-dateutil>=2.8.0
+
+# Configuration
+pyyaml>=6.0
+
+# Progress bars
+tqdm>=4.65.0
+
+# Excel file reading support (for codebook)
 openpyxl>=3.1.0  # For .xlsx files
 xlrd>=2.0.1      # For .xls files
 
@@ -11,6 +25,6 @@ jupyter>=1.0.0
 ipython>=8.0.0
 ipykernel>=6.25.0
 
-# Optional but recommended for better display
-matplotlib>=3.7.0  # For potential visualizations
-seaborn>=0.12.0    # For statistical plots
+# Visualization (for validation notebook)
+matplotlib>=3.7.0
+seaborn>=0.12.0
