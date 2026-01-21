@@ -1,0 +1,197 @@
+@startuml SPEED_Neo4j_Graph_Model
+skinparam roundcorner 10
+skinparam shadowing false
+
+title SPEED Dataset - Neo4j Graph Database Model (Node and Relationship Model)
+
+' ============================================
+' Node Labels (Neo4j)
+' ============================================
+
+package "Core Nodes" {
+  class Event <<Node>> {
+    +eventid: String
+    +year: Integer
+    +month: Integer
+    +day: Integer
+    +event: Boolean
+    +posthoc: String
+    +quasi_event: Boolean
+    +coup: Boolean
+    +coup_failed: Boolean
+  }
+  
+  class Location <<Node>> {
+    +location_id: String
+    +country: String
+    +cowcode: Integer
+    +region: String
+    +latitude: Float
+    +longitude: Float
+    +loc_type: String
+  }
+  
+  class Actor <<Node>> {
+    +actor_id: String
+    +actor_role: String
+    +actor_type: String
+    +name: String
+  }
+}
+
+package "Actor Subtypes" {
+  class Group <<Node>> {
+    +group_id: String
+    +group_name: String
+    +category: String
+  }
+  
+  class Individual <<Node>> {
+    +individual_id: String
+    +individual_type: String
+    +gov_level: String
+  }
+  
+  class GovernmentEntity <<Node>> {
+    +gov_entity_id: String
+    +gov_level: String
+    +entity_type: String
+  }
+}
+
+package "Event Characteristics" {
+  class EventType <<Node>> {
+    +type_id: String
+    +ev_type: String
+    +pe_type: String
+    +sym_type: String
+    +exp_type: String
+    +atk_type: String
+    +dsa_type: String
+    +stat_act: String
+  }
+  
+  class IntensityMetrics <<Node>> {
+    +metrics_id: String
+    +n_killed: Integer
+    +n_injured: Integer
+    +n_participants: Integer
+    +weapon_type: String
+    +pol_violence: Float
+    +stat_violence: Float
+  }
+  
+  class Drivers <<Node>> {
+    +driver_id: String
+    +sc_animosity: Boolean
+    +anti_gov: Boolean
+    +class_conflict: Boolean
+    +eco_scarcity: Boolean
+  }
+  
+  class Outcomes <<Node>> {
+    +outcome_id: String
+    +property_damaged: Boolean
+    +arrests: Boolean
+    +victim_effect: String
+  }
+}
+
+package "Temporal" {
+  class TemporalInfo <<Node>> {
+    +temporal_id: String
+    +date_type: String
+    +start_date: Float
+    +end_date: Float
+    +duration: Integer
+  }
+}
+
+package "Source" {
+  class NewsSource <<Node>> {
+    +source_id: String
+    +news_source: String
+    +article_id: String
+    +pub_date: Date
+    +code_date: Date
+  }
+}
+
+' ============================================
+' Relationships (Neo4j)
+' ============================================
+
+Event --> Location : "OCCURRED_AT"
+Event --> EventType : "HAS_TYPE"
+Event --> IntensityMetrics : "HAS_INTENSITY"
+Event --> Drivers : "DRIVEN_BY"
+Event --> Outcomes : "RESULTS_IN"
+Event --> TemporalInfo : "HAS_TEMPORAL_INFO"
+Event --> NewsSource : "REPORTED_IN"
+
+Event --> Actor : "HAS_INITIATOR"
+Event --> Actor : "HAS_TARGET"
+Event --> Actor : "HAS_VICTIM"
+
+Actor <|-- Group : "IS_A"
+Actor <|-- Individual : "IS_A"
+Actor <|-- GovernmentEntity : "IS_A"
+
+Event --> Event : "LINKED_TO"
+Event --> Event : "REACTS_TO"
+
+Location --> Location : "CONTAINS"
+
+' ============================================
+' Relationship Properties
+' ============================================
+
+note right of Actor
+  HAS_INITIATOR Properties:
+  - know_ini: String
+  - ambig_ini: Boolean
+  - ini_type: String
+end note
+
+note left of Event
+  LINKED_TO Properties:
+  - link_type: String
+  - from_eventid: String
+  - to_eventid: String
+  
+  REACTS_TO Properties:
+  - posthoc: String
+  - reaction_type: String
+end note
+
+' ============================================
+' Query Patterns Supported
+' ============================================
+
+note bottom of Event
+  Query Patterns for Questions:
+  
+  1. Origins & Drivers:
+  (Event)-[:DRIVEN_BY]->(Drivers)
+  
+  2. Intensity:
+  (Event)-[:HAS_INTENSITY]->(IntensityMetrics)
+  
+  3. Dynamics & Outcomes:
+  (Event)-[:LINKED_TO]->(Event)
+  (Event)-[:RESULTS_IN]->(Outcomes)
+  
+  4. Temporal Boundaries:
+  (Event)-[:HAS_TEMPORAL_INFO]->(TemporalInfo)
+  
+  5. Precursor Events:
+  (Event)-[:HAS_TYPE]->(EventType)
+  WHERE EventType.ev_type = 'Political Expression'
+  
+  6. Actors:
+  (Event)-[:HAS_INITIATOR]->(Actor)
+  (Event)-[:HAS_TARGET]->(Actor)
+  (Event)-[:HAS_VICTIM]->(Actor)
+end note
+
+@enduml

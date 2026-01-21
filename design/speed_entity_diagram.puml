@@ -1,0 +1,266 @@
+@startuml SPEED_Entity_Diagram
+skinparam roundcorner 10
+skinparam shadowing false
+
+title SPEED Dataset - Entity Relationship Diagram (For Neo4j Graph Database Ontology)
+
+' ============================================
+' Core Entities
+' ============================================
+
+class Event <<Entity>> {
+  +eventid : String
+  --
+  +year : Integer
+  +month : Integer
+  +day : Integer
+  --
+  +jul_psd : Float
+  +jul_ped : Float
+  +jul_eed : Float
+  +jul_led : Float
+  +jul_start_date : Float
+  +jul_end_date : Float
+  +day_span : Integer
+  --
+  +event : Boolean
+  +posthoc : String
+  +quasi_event : Boolean
+  +coup : Boolean
+  +coup_failed : Boolean
+  --
+  +recap : Boolean
+  +linked : Boolean
+  --
+  +aid : String
+  +news_source : String
+  +code_year : Integer
+  +code_month : Integer
+  +code_day : Integer
+}
+
+class EventType <<Entity>> {
+  +type_id : String
+  --
+  +ev_type : String
+  +pe_type : String
+  +sym_type : String
+  +exp_type : String
+  +atk_type : String
+  +dsa_type : String
+  +stat_act : String
+  --
+  +ad_viol : String
+  +ad_tact : String
+}
+
+class Location <<Entity>> {
+  +location_id : String
+  --
+  +country : String
+  +cowcode : Integer
+  +region : String
+  --
+  +gp3 : String
+  +gp4 : String
+  +gp7 : Float
+  +gp8 : Float
+  --
+  +loc_type : String
+  +pinpoint : String
+}
+
+class Actor <<Entity>> {
+  +actor_id : String
+  --
+  +actor_type : String
+  --
+  +ini_type : String
+  +tar_type : String
+  +vic_type : String
+  --
+  +know_ini : String
+  +ambig_ini : Boolean
+}
+
+class Group <<Entity>> {
+  +group_id : String
+  --
+  +group_name : String
+  +group_category : String
+  --
+  +ini_igrp1 : String
+  +tar_igrp1 : String
+  +vic_igrp1 : String
+  --
+  +ini_sgrp1 : String
+  +tar_sgrp1 : String
+  +vic_sgrp1 : String
+  --
+  +ini_pgrp1 : String
+  +tar_pgrp1 : String
+  +vic_pgrp1 : String
+}
+
+class Individual <<Entity>> {
+  +individual_id : String
+  --
+  +ngov_i1 : String
+  +gov_i1 : String
+  --
+  +human_t1 : String
+  +gov_t1 : String
+  --
+  +human_v1 : String
+  +gov_v1 : String
+  --
+  +g_lvl_i : String
+  +g_lvl_t : String
+  +g_lvl_v : String
+}
+
+class GovernmentEntity <<Entity>> {
+  +gov_entity_id : String
+  --
+  +gov_level : String
+  --
+  +tar_gpol : Boolean
+  +gp_type : String
+}
+
+class EventLink <<Entity>> {
+  +link_id : String
+  --
+  +from_eventid : String
+  +to_eventid : String
+  --
+  +link_type : String
+}
+
+class IntensityMetrics <<Entity>> {
+  +metrics_id : String
+  --
+  +n_of_ini_p : Integer
+  +n_of_ini_a : Integer
+  --
+  +n_killed_p : Integer
+  +n_killed_a : Integer
+  +n_injurd : Integer
+  +n_injurd_d : Integer
+  --
+  +weap_grd : Integer
+  +weapon : String
+  --
+  +e_length : String
+  --
+  +per_atk_i : Integer
+  +per_atk_e : Integer
+  --
+  +pol_express : Float
+  +intang_rep : Float
+  +mass_express : Float
+  +pol_viol : Float
+  +stat_viol : Float
+  +st_repress : Float
+  --
+  +ambig_wgt : Float
+}
+
+class Drivers <<Entity>> {
+  +driver_id : String
+  --
+  +sc_animosity : Boolean
+  +anti_gov_sentmnts : Boolean
+  +class_conflict : Boolean
+  +pol_desires : Boolean
+  +retain_power : Boolean
+  +eco_scarcity : Boolean
+  +pers_security : Boolean
+  --
+  +pub_order : Boolean
+  +retribution : Boolean
+}
+
+class Outcomes <<Entity>> {
+  +outcome_id : String
+  --
+  +dam_prop : Boolean
+  +property_damaged : String
+  +property_owner : String
+  --
+  +arrests : Boolean
+  --
+  +victim_effect : String
+  --
+  +ctry_bias : Float
+}
+
+class TemporalInfo <<Entity>> {
+  +temporal_id : String
+  --
+  +date_typ : String
+  --
+  +pub_mon : Integer
+  +pub_date : Integer
+  +pub_year : Integer
+}
+
+' ============================================
+' Relationships
+' ============================================
+
+Event "1" --> "*" EventType : has_type
+Event "1" --> "1" Location : occurs_at
+Event "1" --> "*" Actor : involves
+Event "1" --> "0..1" EventLink : may_link_to
+Event "1" --> "1" IntensityMetrics : has_intensity
+Event "1" --> "1" Drivers : driven_by
+Event "1" --> "1" Outcomes : results_in
+Event "1" --> "1" TemporalInfo : has_temporal_info
+
+Actor "1" --> "0..1" Group : may_be
+Actor "1" --> "0..1" Individual : may_be
+Actor "1" --> "0..1" GovernmentEntity : may_be
+
+EventLink "1" --> "1" Event : from_event
+EventLink "1" --> "1" Event : to_event
+
+Location "1" --> "*" Location : contains
+
+' ============================================
+' Notes
+' ============================================
+
+note right of Event
+  Core Entity
+  Represents destabilizing events
+  from 1946 to present
+end note
+
+note right of Actor
+  Polymorphic Entity
+  Can be Initiator, Target, or Victim
+  Can be Group, Individual, or Government
+end note
+
+note right of Drivers
+  Root Causes
+  Anti-government vs socio-cultural
+  Basic human needs
+  Class-based concerns
+end note
+
+note right of IntensityMetrics
+  Severity Measures
+  Event intensity
+  Participants, weapons, casualties
+end note
+
+note right of EventLink
+  Event Relationships
+  Intervention and deterrence
+  Escalation patterns
+  Spatial and temporal diffusion
+end note
+
+@enduml

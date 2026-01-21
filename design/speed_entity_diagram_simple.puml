@@ -1,0 +1,36 @@
+@startuml
+title SPEED Dataset - Entity Relationship Diagram
+
+entity Event {
+  * eventid : String
+  --
+  year : Integer
+  month : Integer
+  day : Integer
+}
+
+entity Location {
+  * location_id : String
+  --
+  country : String
+  cowcode : Integer
+  region : String
+}
+
+entity Actor {
+  * actor_id : String
+  --
+  actor_type : String
+}
+
+entity EventType {
+  * type_id : String
+  --
+  ev_type : String
+}
+
+Event ||--|| Location
+Event ||--o{ EventType
+Event ||--o{ Actor
+
+@enduml

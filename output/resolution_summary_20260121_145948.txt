@@ -1,0 +1,178 @@
+SPEED Dataset - Enum Resolution Summary
+================================================================================
+
+Generated: 2026-01-21 14:59:48
+Source data: data/ssp_public.xls
+Codebook: data/SPEED-Codebook.xls
+
+Dataset Summary:
+  Total rows in dataset: 62,141
+  Sample rows exported: 5
+  Total columns: 106
+  Columns with enum mappings: 27
+  Note: Original enum values have been replaced with resolved text values
+
+Resolved Columns:
+--------------------------------------------------------------------------------
+
+KNOW_INI:
+  Mapping Variable: know_ini
+  Description: Was the id of the initiator known?
+  Unique values in sample: 2
+  Total enum values in codebook: 3
+
+INI_TYPE:
+  Mapping Variable: ini_type
+  Description: Type of initiator
+  Unique values in sample: 3
+  Total enum values in codebook: 5
+
+NGOV_I1:
+  Mapping Variable: ngov_i1
+  Description: Type of non-government initiators
+  Unique values in sample: 4
+  Total enum values in codebook: 41
+
+GOV_I1:
+  Mapping Variable: gov_i1
+  Description: Type of government initiator, 1
+  Unique values in sample: 2
+  Total enum values in codebook: 24
+
+TAR_TYPE:
+  Mapping Variable: tar_type
+  Description: Type of target
+  Unique values in sample: 3
+  Total enum values in codebook: 5
+
+G_LVL_T:
+  Mapping Variable: g_lvl_t
+  Description: Level of government target
+  Unique values in sample: 2
+  Total enum values in codebook: 4
+
+VIC_TYPE:
+  Mapping Variable: vic_type
+  Description: Type of entity victimized
+  Unique values in sample: 2
+  Total enum values in codebook: 3
+
+DATE_TYP:
+  Mapping Variable: date_typ
+  Description: Type of date information available
+  Unique values in sample: 2
+  Total enum values in codebook: 4
+
+GP_TYPE:
+  Mapping Variable: gp_type
+  Description: Type of geo-political entity targeted
+  Unique values in sample: 2
+  Total enum values in codebook: 5
+
+posthoc:
+  Mapping Variable: posthoc
+  Description: Post hoc reaction?
+  Unique values in sample: 1
+  Total enum values in codebook: 2
+
+EV_TYPE:
+  Mapping Variable: ev_type
+  Description: Event type
+  Unique values in sample: 2
+  Total enum values in codebook: 7
+
+LINK_TYPE:
+  Mapping Variable: link_type
+  Description: Type of event link
+  Unique values in sample: 2
+  Total enum values in codebook: 2
+
+LOC_TYPE:
+  Mapping Variable: loc_type
+  Description: Event location type
+  Unique values in sample: 3
+  Total enum values in codebook: 29
+
+PE_TYPE:
+  Mapping Variable: pe_type
+  Description: Type of political expression event
+  Unique values in sample: 5
+  Total enum values in codebook: 11
+
+SYM_TYPE:
+  Mapping Variable: sym_type
+  Description: Type of symbolic event
+  Unique values in sample: 2
+  Total enum values in codebook: 15
+
+AD_VIOL:
+  Mapping Variable: ad_viol
+  Description: Were violent acts advocated?
+  Unique values in sample: 1
+  Total enum values in codebook: 4
+
+AD_TACT:
+  Mapping Variable: ad_tact
+  Description: Tactics advocated in political exp
+  Unique values in sample: 2
+  Total enum values in codebook: 18
+
+EXP_TYPE:
+  Mapping Variable: exp_type
+  Description: Reduced political expression type
+  Unique values in sample: 4
+  Total enum values in codebook: 4
+
+ATK_TYPE:
+  Mapping Variable: atk_type
+  Description: Type of political motivated attack
+  Unique values in sample: 2
+  Total enum values in codebook: 23
+
+DSA_TYPE:
+  Mapping Variable: dsa_type
+  Description: Broad category of disruptive state act
+  Unique values in sample: 1
+  Total enum values in codebook: 5
+
+STAT_ACT:
+  Mapping Variable: stat_act
+  Description: Type of disruptive state act
+  Unique values in sample: 1
+  Total enum values in codebook: 57
+
+E_LENGTH:
+  Mapping Variable: e_length
+  Description: Length of event, truncated
+  Unique values in sample: 1
+  Total enum values in codebook: 4
+
+region:
+  Mapping Variable: region
+  Description: Eight category world region variable
+  Unique values in sample: 1
+  Total enum values in codebook: 8
+
+victim_effect:
+  Mapping Variable: victim_effect
+  Description: Impact of event on victim
+  Unique values in sample: 3
+  Total enum values in codebook: 13
+
+weapon:
+  Mapping Variable: weapon
+  Description: Type of weapon used
+  Unique values in sample: 2
+  Total enum values in codebook: 27
+
+property_damaged:
+  Mapping Variable: property_damaged
+  Description: Type of property damaged
+  Unique values in sample: 1
+  Total enum values in codebook: 47
+
+property_owner:
+  Mapping Variable: property_owner
+  Description: Type of owner for damaged property
+  Unique values in sample: 1
+  Total enum values in codebook: 12

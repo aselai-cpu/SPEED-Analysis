@@ -1,0 +1,184 @@
+@startuml SPEED_CSV_to_Neo4j_Mapping
+skinparam roundcorner 10
+skinparam shadowing false
+
+title SPEED Dataset - CSV to Neo4j Mapping (Data Transformation Guide)
+
+' ============================================
+' CSV Source
+' ============================================
+
+package "CSV Data Source" {
+  class "resolved_data_*.csv" as CSV {
+    Contains 106 columns
+    --
+    - Event identifiers
+    - Actor information
+    - Location data
+    - Event types
+    - Intensity metrics
+    - Drivers
+    - Outcomes
+    - Temporal info
+  }
+}
+
+' ============================================
+' Neo4j Nodes
+' ============================================
+
+package "Neo4j Nodes" {
+  class Event <<Node>> {
+    Properties from CSV:
+    - eventid (PK)
+    - year, month, day
+    - event, posthoc, coup
+    - aid, news_source
+  }
+  
+  class Location <<Node>> {
+    Properties from CSV:
+    - country, cowcode
+    - region
+    - gp3, gp4 (names)
+    - gp7, gp8 (coordinates)
+    - loc_type
+  }
+  
+  class Actor <<Node>> {
+    Properties from CSV:
+    - actor_id (derived)
+    - role: initiator|target|victim
+    - type: group|individual|government
+  }
+  
+  class Group <<Node>> {
+    Properties from CSV:
+    - ini_igrp1, tar_igrp1, vic_igrp1
+    - ini_sgrp1, tar_sgrp1, vic_sgrp1
+    - ini_pgrp1, tar_pgrp1, vic_pgrp1
+  }
+  
+  class EventType <<Node>> {
+    Properties from CSV:
+    - ev_type
+    - pe_type, sym_type
+    - exp_type, atk_type
+    - dsa_type, stat_act
+  }
+  
+  class IntensityMetrics <<Node>> {
+    Properties from CSV:
+    - n_killed_p, n_killed_a
+    - n_injurd, n_injurd_d
+    - n_of_ini_p, n_of_ini_a
+    - weapon, weap_grd
+    - pol_viol, stat_viol
+    - e_length
+  }
+  
+  class Drivers <<Node>> {
+    Properties from CSV:
+    - sc_animosity
+    - anti_gov_sentmnts
+    - class_conflict
+    - eco_scarcity
+    - pol_desires
+    - retain_power
+    - pers_security
+  }
+  
+  class Outcomes <<Node>> {
+    Properties from CSV:
+    - dam_prop
+    - property_damaged
+    - property_owner
+    - arrests
+    - victim_effect
+  }
+}
+
+' ============================================
+' Mapping Flow
+' ============================================
+
+CSV --> Event : "eventid, year, month..."
+CSV --> Location : "country, cowcode, gp3..."
+CSV --> Actor : "INI_*, TAR_*, VIC_*"
+CSV --> Group : "INI_IGRP1, INI_SGRP1..."
+CSV --> EventType : "EV_TYPE, PE_TYPE..."
+CSV --> IntensityMetrics : "N_KILLED_*, N_INJURD..."
+CSV --> Drivers : "SC_ANIMOSITY, ANTI_GOV..."
+CSV --> Outcomes : "DAM_PROP, arrests..."
+
+' ============================================
+' Relationships
+' ============================================
+
+package "Neo4j Relationships" {
+  class "Relationships" as Relationships {
+    OCCURRED_AT
+    HAS_TYPE
+    HAS_INTENSITY
+    DRIVEN_BY
+    RESULTS_IN
+    HAS_INITIATOR
+    HAS_TARGET
+    HAS_VICTIM
+    LINKED_TO
+    IS_A
+  }
+}
+
+Event --> Relationships : "creates"
+Location --> Relationships : "uses"
+Actor --> Relationships : "uses"
+EventType --> Relationships : "uses"
+IntensityMetrics --> Relationships : "uses"
+Drivers --> Relationships : "uses"
+Outcomes --> Relationships : "uses"
+Group --> Relationships : "uses"
+
+' ============================================
+' Transformation Rules
+' ============================================
+
+note right of CSV
+  Transformation Rules:
+  
+  1. One CSV row = One Event node
+  2. Actor nodes created from:
+     - INI_* columns -> Initiator
+     - TAR_* columns -> Target
+     - VIC_* columns -> Victim
+  
+  3. Group nodes created from:
+     - IGRP1 -> Insurgent Group
+     - SGRP1 -> Socio-cultural Group
+     - PGRP1 -> Political Group
+  
+  4. EventLink created when:
+     - linked = true
+     - FROM_EID and TO_EID present
+  
+  5. Location nodes deduplicated:
+     - Same country/cowcode = same node
+     - Hierarchical: Country -> Region
+end note
+
+note bottom of Relationships
+  Relationship Creation:
+  
+  - OCCURRED_AT: Every event -> location
+  - HAS_TYPE: Every event -> event type
+  - HAS_INTENSITY: Every event -> metrics
+  - DRIVEN_BY: Event -> drivers (if any true)
+  - RESULTS_IN: Event -> outcomes
+  - HAS_INITIATOR: Event -> actors
+  - HAS_TARGET: Event -> actors
+  - HAS_VICTIM: Event -> actors
+  - LINKED_TO: Event -> Event (when linked=true)
+  - IS_A: Actor -> Group/Individual/GovEntity
+end note
+
+@enduml

@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="886px" preserveAspectRatio="none" style="width:2293px;height:886px;" version="1.1" viewBox="0 0 2293 886" width="2293px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="672" x="804" y="17.4023">SPEED Dataset - Neo4j Graph Database Model (Node and Relationship Model)</text><!--MD5=[55b6b07fa26e632f88879ceeb447c14c]
+cluster Core Nodes--><polygon fill="#FFFFFF" points="70,27.1992,159,27.1992,166,49.6875,616,49.6875,616,579.5992,70,579.5992,70,27.1992" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="70" x2="166" y1="49.6875" y2="49.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="83" x="74" y="42.7344">Core Nodes</text><!--MD5=[cb7eecd6c644ac8189009aa1d7ba958f]
+cluster Actor Subtypes--><polygon fill="#FFFFFF" points="16,735.1992,130,735.1992,137,757.6875,531,757.6875,531,879.3292,16,879.3292,16,735.1992" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="16" x2="137" y1="757.6875" y2="757.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="108" x="20" y="750.7344">Actor Subtypes</text><!--MD5=[4b0f5bf70ed7ca8327a9ff19d6a342f8]
+cluster Event Characteristics--><polygon fill="#FFFFFF" points="982,377.1692,1139,377.1692,1146,399.6575,1703,399.6575,1703,586.0792,982,586.0792,982,377.1692" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="982" x2="1146" y1="399.6575" y2="399.6575"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="151" x="986" y="392.7044">Event Characteristics</text><!--MD5=[6b699271e02b6a316c864d9262c2d162]
+cluster Temporal--><polygon fill="#FFFFFF" points="1727,396.6092,1802,396.6092,1809,419.0975,1887,419.0975,1887,566.6492,1727,566.6492,1727,396.6092" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1727" x2="1809" y1="419.0975" y2="419.0975"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="69" x="1731" y="412.1444">Temporal</text><!--MD5=[498a707edf4a51645a1a637c5052cf0d]
+cluster Source--><polygon fill="#FFFFFF" points="1911,396.6092,1964,396.6092,1971,419.0975,2077,419.0975,2077,566.6492,1911,566.6492,1911,396.6092" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1911" x2="1971" y1="419.0975" y2="419.0975"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="47" x="1915" y="412.1444">Source</text><!--MD5=[ac13618b1a974308c1f12eb6c57723dc]
+class Event--><rect codeLine="11" fill="#FEFECE" height="170.8613" id="Event" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="138" x="258" y="62.1992"/><ellipse cx="303.25" cy="81.332" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M305.7231,87.4751 Q305.1421,87.7739 304.5029,87.9233 Q303.8638,88.0728 303.1582,88.0728 Q300.6514,88.0728 299.3315,86.4209 Q298.0117,84.769 298.0117,81.6479 Q298.0117,78.5186 299.3315,76.8667 Q300.6514,75.2148 303.1582,75.2148 Q303.8638,75.2148 304.5112,75.3643 Q305.1587,75.5137 305.7231,75.8125 L305.7231,78.5352 Q305.0923,77.9541 304.4988,77.6843 Q303.9053,77.4146 303.2744,77.4146 Q301.9297,77.4146 301.2449,78.4812 Q300.5601,79.5479 300.5601,81.6479 Q300.5601,83.7397 301.2449,84.8064 Q301.9297,85.873 303.2744,85.873 Q303.9053,85.873 304.4988,85.6033 Q305.0923,85.3335 305.7231,84.7524 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="321.75" y="78.8008">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="31" x="327.75" y="92.9336">Event</text><line style="stroke:#A80036;stroke-width:1.5;" x1="259" x2="395" y1="100.4648" y2="100.4648"/><ellipse cx="269" cy="111.4648" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="77" x="278" y="115.0996">eventid: String</text><ellipse cx="269" cy="124.4199" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="67" x="278" y="128.0547">year: Integer</text><ellipse cx="269" cy="137.375" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="79" x="278" y="141.0098">month: Integer</text><ellipse cx="269" cy="150.3301" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="63" x="278" y="153.9648">day: Integer</text><ellipse cx="269" cy="163.2852" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="77" x="278" y="166.9199">event: Boolean</text><ellipse cx="269" cy="176.2402" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="82" x="278" y="179.875">posthoc: String</text><ellipse cx="269" cy="189.1953" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="112" x="278" y="192.8301">quasi_event: Boolean</text><ellipse cx="269" cy="202.1504" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="75" x="278" y="205.7852">coup: Boolean</text><ellipse cx="269" cy="215.1055" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="110" x="278" y="218.7402">coup_failed: Boolean</text><line style="stroke:#A80036;stroke-width:1.5;" x1="259" x2="395" y1="225.0605" y2="225.0605"/><!--MD5=[4f1f3706c1a355a8488e154afcaed5df]
+class Location--><rect codeLine="23" fill="#FEFECE" height="144.9512" id="Location" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="123" x="376.5" y="418.6492"/><ellipse cx="411.3" cy="437.782" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M413.7731,443.9251 Q413.1921,444.2239 412.5529,444.3733 Q411.9138,444.5228 411.2082,444.5228 Q408.7014,444.5228 407.3815,442.8709 Q406.0617,441.219 406.0617,438.0979 Q406.0617,434.9686 407.3815,433.3167 Q408.7014,431.6648 411.2082,431.6648 Q411.9138,431.6648 412.5612,431.8143 Q413.2087,431.9637 413.7731,432.2625 L413.7731,434.9852 Q413.1423,434.4041 412.5488,434.1343 Q411.9553,433.8646 411.3244,433.8646 Q409.9797,433.8646 409.2949,434.9312 Q408.6101,435.9979 408.6101,438.0979 Q408.6101,440.1897 409.2949,441.2564 Q409.9797,442.323 411.3244,442.323 Q411.9553,442.323 412.5488,442.0533 Q413.1423,441.7835 413.7731,441.2024 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="431.7" y="435.2508">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="47" x="429.7" y="449.3836">Location</text><line style="stroke:#A80036;stroke-width:1.5;" x1="377.5" x2="498.5" y1="456.9148" y2="456.9148"/><ellipse cx="387.5" cy="467.9148" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="97" x="396.5" y="471.5496">location_id: String</text><ellipse cx="387.5" cy="480.8699" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="80" x="396.5" y="484.5047">country: String</text><ellipse cx="387.5" cy="493.825" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="91" x="396.5" y="497.4598">cowcode: Integer</text><ellipse cx="387.5" cy="506.7801" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="396.5" y="510.4148">region: String</text><ellipse cx="387.5" cy="519.7352" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="72" x="396.5" y="523.3699">latitude: Float</text><ellipse cx="387.5" cy="532.6902" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="83" x="396.5" y="536.325">longitude: Float</text><ellipse cx="387.5" cy="545.6453" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="83" x="396.5" y="549.2801">loc_type: String</text><line style="stroke:#A80036;stroke-width:1.5;" x1="377.5" x2="498.5" y1="555.6004" y2="555.6004"/><!--MD5=[44201db48fb57df1a9c7f5b6b15426b0]
+class Actor--><rect codeLine="33" fill="#FEFECE" height="106.0859" id="Actor" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="121" x="210.5" y="438.0792"/><ellipse cx="248" cy="457.212" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M250.4731,463.3551 Q249.8921,463.6539 249.2529,463.8033 Q248.6138,463.9528 247.9082,463.9528 Q245.4014,463.9528 244.0815,462.3009 Q242.7617,460.649 242.7617,457.5279 Q242.7617,454.3986 244.0815,452.7467 Q245.4014,451.0948 247.9082,451.0948 Q248.6138,451.0948 249.2612,451.2443 Q249.9087,451.3937 250.4731,451.6925 L250.4731,454.4152 Q249.8423,453.8341 249.2488,453.5643 Q248.6553,453.2946 248.0244,453.2946 Q246.6797,453.2946 245.9949,454.3612 Q245.3101,455.4279 245.3101,457.5279 Q245.3101,459.6197 245.9949,460.6864 Q246.6797,461.753 248.0244,461.753 Q248.6553,461.753 249.2488,461.4833 Q249.8423,461.2135 250.4731,460.6324 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="265" y="454.6808">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30" x="271.5" y="468.8136">Actor</text><line style="stroke:#A80036;stroke-width:1.5;" x1="211.5" x2="330.5" y1="476.3448" y2="476.3448"/><ellipse cx="221.5" cy="487.3448" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="82" x="230.5" y="490.9796">actor_id: String</text><ellipse cx="221.5" cy="500.2999" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="230.5" y="503.9347">actor_role: String</text><ellipse cx="221.5" cy="513.255" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="95" x="230.5" y="516.8898">actor_type: String</text><ellipse cx="221.5" cy="526.2101" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="67" x="230.5" y="529.8448">name: String</text><line style="stroke:#A80036;stroke-width:1.5;" x1="211.5" x2="330.5" y1="536.1652" y2="536.1652"/><!--MD5=[41314a0efc36828092cff9ebad2fcafd]
+class Group--><rect codeLine="42" fill="#FEFECE" height="93.1309" id="Group" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="132" x="32" y="770.1992"/><ellipse cx="74.45" cy="789.332" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M76.9231,795.4751 Q76.3421,795.7739 75.7029,795.9233 Q75.0638,796.0728 74.3582,796.0728 Q71.8514,796.0728 70.5315,794.4209 Q69.2117,792.769 69.2117,789.6479 Q69.2117,786.5186 70.5315,784.8667 Q71.8514,783.2148 74.3582,783.2148 Q75.0638,783.2148 75.7112,783.3643 Q76.3587,783.5137 76.9231,783.8125 L76.9231,786.5352 Q76.2923,785.9541 75.6988,785.6843 Q75.1053,785.4146 74.4744,785.4146 Q73.1297,785.4146 72.4449,786.4812 Q71.7601,787.5479 71.7601,789.6479 Q71.7601,791.7397 72.4449,792.8064 Q73.1297,793.873 74.4744,793.873 Q75.1053,793.873 75.6988,793.6033 Q76.2923,793.3335 76.9231,792.7524 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="92.55" y="786.8008">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="36" x="96.05" y="800.9336">Group</text><line style="stroke:#A80036;stroke-width:1.5;" x1="33" x2="163" y1="808.4648" y2="808.4648"/><ellipse cx="43" cy="819.4648" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="87" x="52" y="823.0996">group_id: String</text><ellipse cx="43" cy="832.4199" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="106" x="52" y="836.0547">group_name: String</text><ellipse cx="43" cy="845.375" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="85" x="52" y="849.0098">category: String</text><line style="stroke:#A80036;stroke-width:1.5;" x1="33" x2="163" y1="855.3301" y2="855.3301"/><!--MD5=[3ada0b1ccda01f6af47785107eed7eb1]
+class Individual--><rect codeLine="48" fill="#FEFECE" height="93.1309" id="Individual" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="145" x="198.5" y="770.1992"/><ellipse cx="239.6" cy="789.332" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M242.0731,795.4751 Q241.4921,795.7739 240.8529,795.9233 Q240.2138,796.0728 239.5082,796.0728 Q237.0014,796.0728 235.6815,794.4209 Q234.3617,792.769 234.3617,789.6479 Q234.3617,786.5186 235.6815,784.8667 Q237.0014,783.2148 239.5082,783.2148 Q240.2138,783.2148 240.8612,783.3643 Q241.5087,783.5137 242.0731,783.8125 L242.0731,786.5352 Q241.4423,785.9541 240.8488,785.6843 Q240.2553,785.4146 239.6244,785.4146 Q238.2797,785.4146 237.5949,786.4812 Q236.9101,787.5479 236.9101,789.6479 Q236.9101,791.7397 237.5949,792.8064 Q238.2797,793.873 239.6244,793.873 Q240.2553,793.873 240.8488,793.6033 Q241.4423,793.3335 242.0731,792.7524 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="265.4" y="786.8008">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="55" x="259.4" y="800.9336">Individual</text><line style="stroke:#A80036;stroke-width:1.5;" x1="199.5" x2="342.5" y1="808.4648" y2="808.4648"/><ellipse cx="209.5" cy="819.4648" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="106" x="218.5" y="823.0996">individual_id: String</text><ellipse cx="209.5" cy="832.4199" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="119" x="218.5" y="836.0547">individual_type: String</text><ellipse cx="209.5" cy="845.375" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="88" x="218.5" y="849.0098">gov_level: String</text><line style="stroke:#A80036;stroke-width:1.5;" x1="199.5" x2="342.5" y1="855.3301" y2="855.3301"/><!--MD5=[ae4a7fd27732a49234c6e0ae94968c43]
+class GovernmentEntity--><rect codeLine="54" fill="#FEFECE" height="93.1309" id="GovernmentEntity" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="136" x="379" y="770.1992"/><ellipse cx="395.35" cy="789.332" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M397.8231,795.4751 Q397.2421,795.7739 396.6029,795.9233 Q395.9638,796.0728 395.2582,796.0728 Q392.7514,796.0728 391.4315,794.4209 Q390.1117,792.769 390.1117,789.6479 Q390.1117,786.5186 391.4315,784.8667 Q392.7514,783.2148 395.2582,783.2148 Q395.9638,783.2148 396.6112,783.3643 Q397.2587,783.5137 397.8231,783.8125 L397.8231,786.5352 Q397.1923,785.9541 396.5988,785.6843 Q396.0053,785.4146 395.3744,785.4146 Q394.0297,785.4146 393.3449,786.4812 Q392.6601,787.5479 392.6601,789.6479 Q392.6601,791.7397 393.3449,792.8064 Q394.0297,793.873 395.3744,793.873 Q396.0053,793.873 396.5988,793.6033 Q397.1923,793.3335 397.8231,792.7524 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="438.65" y="786.8008">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="101" x="409.65" y="800.9336">GovernmentEntity</text><line style="stroke:#A80036;stroke-width:1.5;" x1="380" x2="514" y1="808.4648" y2="808.4648"/><ellipse cx="390" cy="819.4648" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="110" x="399" y="823.0996">gov_entity_id: String</text><ellipse cx="390" cy="832.4199" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="88" x="399" y="836.0547">gov_level: String</text><ellipse cx="390" cy="845.375" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="97" x="399" y="849.0098">entity_type: String</text><line style="stroke:#A80036;stroke-width:1.5;" x1="380" x2="514" y1="855.3301" y2="855.3301"/><!--MD5=[51255159981deef4d2967e1585ccf960]
+class EventType--><rect codeLine="62" fill="#FEFECE" height="157.9063" id="EventType" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="115" x="997.5" y="412.1692"/><ellipse cx="1022.85" cy="431.302" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1025.3231,437.4451 Q1024.7421,437.7439 1024.1029,437.8933 Q1023.4638,438.0428 1022.7582,438.0428 Q1020.2514,438.0428 1018.9315,436.3909 Q1017.6117,434.739 1017.6117,431.6179 Q1017.6117,428.4886 1018.9315,426.8367 Q1020.2514,425.1848 1022.7582,425.1848 Q1023.4638,425.1848 1024.1112,425.3343 Q1024.7587,425.4837 1025.3231,425.7825 L1025.3231,428.5052 Q1024.6923,427.9241 1024.0988,427.6543 Q1023.5053,427.3846 1022.8744,427.3846 Q1021.5297,427.3846 1020.8449,428.4512 Q1020.1601,429.5179 1020.1601,431.6179 Q1020.1601,433.7097 1020.8449,434.7764 Q1021.5297,435.843 1022.8744,435.843 Q1023.5053,435.843 1024.0988,435.5733 Q1024.6923,435.3035 1025.3231,434.7224 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="1047.65" y="428.7708">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="60" x="1039.15" y="442.9036">EventType</text><line style="stroke:#A80036;stroke-width:1.5;" x1="998.5" x2="1111.5" y1="450.4348" y2="450.4348"/><ellipse cx="1008.5" cy="461.4348" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="77" x="1017.5" y="465.0696">type_id: String</text><ellipse cx="1008.5" cy="474.3899" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="79" x="1017.5" y="478.0247">ev_type: String</text><ellipse cx="1008.5" cy="487.345" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="80" x="1017.5" y="490.9798">pe_type: String</text><ellipse cx="1008.5" cy="500.3001" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="89" x="1017.5" y="503.9348">sym_type: String</text><ellipse cx="1008.5" cy="513.2552" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="87" x="1017.5" y="516.8899">exp_type: String</text><ellipse cx="1008.5" cy="526.2102" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="83" x="1017.5" y="529.845">atk_type: String</text><ellipse cx="1008.5" cy="539.1653" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="1017.5" y="542.8001">dsa_type: String</text><ellipse cx="1008.5" cy="552.1204" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="80" x="1017.5" y="555.7552">stat_act: String</text><line style="stroke:#A80036;stroke-width:1.5;" x1="998.5" x2="1111.5" y1="562.0755" y2="562.0755"/><!--MD5=[98d003b321cb9d6a0901c58fd8172c38]
+class IntensityMetrics--><rect codeLine="73" fill="#FEFECE" height="144.9512" id="IntensityMetrics" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="147" x="1147.5" y="418.6492"/><ellipse cx="1174.65" cy="437.782" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1177.1231,443.9251 Q1176.5421,444.2239 1175.9029,444.3733 Q1175.2638,444.5228 1174.5582,444.5228 Q1172.0514,444.5228 1170.7315,442.8709 Q1169.4117,441.219 1169.4117,438.0979 Q1169.4117,434.9686 1170.7315,433.3167 Q1172.0514,431.6648 1174.5582,431.6648 Q1175.2638,431.6648 1175.9112,431.8143 Q1176.5587,431.9637 1177.1231,432.2625 L1177.1231,434.9852 Q1176.4923,434.4041 1175.8988,434.1343 Q1175.3053,433.8646 1174.6744,433.8646 Q1173.3297,433.8646 1172.6449,434.9312 Q1171.9601,435.9979 1171.9601,438.0979 Q1171.9601,440.1897 1172.6449,441.2564 Q1173.3297,442.323 1174.6744,442.323 Q1175.3053,442.323 1175.8988,442.0533 Q1176.4923,441.7835 1177.1231,441.2024 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="1213.85" y="435.2508">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="88" x="1191.35" y="449.3836">IntensityMetrics</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1148.5" x2="1293.5" y1="456.9148" y2="456.9148"/><ellipse cx="1158.5" cy="467.9148" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="94" x="1167.5" y="471.5496">metrics_id: String</text><ellipse cx="1158.5" cy="480.8699" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="85" x="1167.5" y="484.5047">n_killed: Integer</text><ellipse cx="1158.5" cy="493.825" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="95" x="1167.5" y="497.4598">n_injured: Integer</text><ellipse cx="1158.5" cy="506.7801" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="121" x="1167.5" y="510.4148">n_participants: Integer</text><ellipse cx="1158.5" cy="519.7352" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="108" x="1167.5" y="523.3699">weapon_type: String</text><ellipse cx="1158.5" cy="532.6902" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="99" x="1167.5" y="536.325">pol_violence: Float</text><ellipse cx="1158.5" cy="545.6453" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="102" x="1167.5" y="549.2801">stat_violence: Float</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1148.5" x2="1293.5" y1="555.6004" y2="555.6004"/><!--MD5=[a448e097961bd610cd5ed44d3912e1dd]
+class Drivers--><rect codeLine="83" fill="#FEFECE" height="119.041" id="Drivers" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="147" x="1329.5" y="431.6092"/><ellipse cx="1378.25" cy="450.742" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1380.7231,456.8851 Q1380.1421,457.1839 1379.5029,457.3333 Q1378.8638,457.4828 1378.1582,457.4828 Q1375.6514,457.4828 1374.3315,455.8309 Q1373.0117,454.179 1373.0117,451.0579 Q1373.0117,447.9286 1374.3315,446.2767 Q1375.6514,444.6248 1378.1582,444.6248 Q1378.8638,444.6248 1379.5112,444.7743 Q1380.1587,444.9237 1380.7231,445.2225 L1380.7231,447.9452 Q1380.0923,447.3641 1379.4988,447.0943 Q1378.9053,446.8246 1378.2744,446.8246 Q1376.9297,446.8246 1376.2449,447.8912 Q1375.5601,448.9579 1375.5601,451.0579 Q1375.5601,453.1497 1376.2449,454.2164 Q1376.9297,455.283 1378.2744,455.283 Q1378.9053,455.283 1379.4988,455.0133 Q1380.0923,454.7435 1380.7231,454.1624 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="1397.75" y="448.2108">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="41" x="1398.75" y="462.3436">Drivers</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1330.5" x2="1475.5" y1="469.8748" y2="469.8748"/><ellipse cx="1340.5" cy="480.8748" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="1349.5" y="484.5096">driver_id: String</text><ellipse cx="1340.5" cy="493.8299" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="118" x="1349.5" y="497.4647">sc_animosity: Boolean</text><ellipse cx="1340.5" cy="506.785" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="94" x="1349.5" y="510.4198">anti_gov: Boolean</text><ellipse cx="1340.5" cy="519.7401" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="121" x="1349.5" y="523.3748">class_conflict: Boolean</text><ellipse cx="1340.5" cy="532.6952" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="115" x="1349.5" y="536.3299">eco_scarcity: Boolean</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1330.5" x2="1475.5" y1="542.6502" y2="542.6502"/><!--MD5=[02f405e2e9d39542bac8421908f3211b]
+class Outcomes--><rect codeLine="91" fill="#FEFECE" height="106.0859" id="Outcomes" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="176" x="1511" y="438.0792"/><ellipse cx="1566.25" cy="457.212" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1568.7231,463.3551 Q1568.1421,463.6539 1567.5029,463.8033 Q1566.8638,463.9528 1566.1582,463.9528 Q1563.6514,463.9528 1562.3315,462.3009 Q1561.0117,460.649 1561.0117,457.5279 Q1561.0117,454.3986 1562.3315,452.7467 Q1563.6514,451.0948 1566.1582,451.0948 Q1566.8638,451.0948 1567.5112,451.2443 Q1568.1587,451.3937 1568.7231,451.6925 L1568.7231,454.4152 Q1568.0923,453.8341 1567.4988,453.5643 Q1566.9053,453.2946 1566.2744,453.2946 Q1564.9297,453.2946 1564.2449,454.3612 Q1563.5601,455.4279 1563.5601,457.5279 Q1563.5601,459.6197 1564.2449,460.6864 Q1564.9297,461.753 1566.2744,461.753 Q1566.9053,461.753 1567.4988,461.4833 Q1568.0923,461.2135 1568.7231,460.6324 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="1593.75" y="454.6808">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="57" x="1586.75" y="468.8136">Outcomes</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1512" x2="1686" y1="476.3448" y2="476.3448"/><ellipse cx="1522" cy="487.3448" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="101" x="1531" y="490.9796">outcome_id: String</text><ellipse cx="1522" cy="500.2999" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="150" x="1531" y="503.9347">property_damaged: Boolean</text><ellipse cx="1522" cy="513.255" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="1531" y="516.8898">arrests: Boolean</text><ellipse cx="1522" cy="526.2101" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="106" x="1531" y="529.8448">victim_effect: String</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1512" x2="1686" y1="536.1652" y2="536.1652"/><!--MD5=[87a3670ade254984ba5fbf70ff1bce64]
+class TemporalInfo--><rect codeLine="100" fill="#FEFECE" height="119.041" id="TemporalInfo" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="128" x="1743" y="431.6092"/><ellipse cx="1766.55" cy="450.742" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1769.0231,456.8851 Q1768.4421,457.1839 1767.8029,457.3333 Q1767.1638,457.4828 1766.4582,457.4828 Q1763.9514,457.4828 1762.6315,455.8309 Q1761.3117,454.179 1761.3117,451.0579 Q1761.3117,447.9286 1762.6315,446.2767 Q1763.9514,444.6248 1766.4582,444.6248 Q1767.1638,444.6248 1767.8112,444.7743 Q1768.4587,444.9237 1769.0231,445.2225 L1769.0231,447.9452 Q1768.3923,447.3641 1767.7988,447.0943 Q1767.2053,446.8246 1766.5744,446.8246 Q1765.2297,446.8246 1764.5449,447.8912 Q1763.8601,448.9579 1763.8601,451.0579 Q1763.8601,453.1497 1764.5449,454.2164 Q1765.2297,455.283 1766.5744,455.283 Q1767.2053,455.283 1767.7988,455.0133 Q1768.3923,454.7435 1769.0231,454.1624 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="1799.45" y="448.2108">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="77" x="1782.45" y="462.3436">TemporalInfo</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1744" x2="1870" y1="469.8748" y2="469.8748"/><ellipse cx="1754" cy="480.8748" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="102" x="1763" y="484.5096">temporal_id: String</text><ellipse cx="1754" cy="493.8299" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="90" x="1763" y="497.4647">date_type: String</text><ellipse cx="1754" cy="506.785" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="1763" y="510.4198">start_date: Float</text><ellipse cx="1754" cy="519.7401" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="81" x="1763" y="523.3748">end_date: Float</text><ellipse cx="1754" cy="532.6952" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="90" x="1763" y="536.3299">duration: Integer</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1744" x2="1870" y1="542.6502" y2="542.6502"/><!--MD5=[db9ec94a84162f181a6130b645aee67e]
+class NewsSource--><rect codeLine="110" fill="#FEFECE" height="119.041" id="NewsSource" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="134" x="1927" y="431.6092"/><ellipse cx="1956.85" cy="450.742" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1959.3231,456.8851 Q1958.7421,457.1839 1958.1029,457.3333 Q1957.4638,457.4828 1956.7582,457.4828 Q1954.2514,457.4828 1952.9315,455.8309 Q1951.6117,454.179 1951.6117,451.0579 Q1951.6117,447.9286 1952.9315,446.2767 Q1954.2514,444.6248 1956.7582,444.6248 Q1957.4638,444.6248 1958.1112,444.7743 Q1958.7587,444.9237 1959.3231,445.2225 L1959.3231,447.9452 Q1958.6923,447.3641 1958.0988,447.0943 Q1957.5053,446.8246 1956.8744,446.8246 Q1955.5297,446.8246 1954.8449,447.8912 Q1954.1601,448.9579 1954.1601,451.0579 Q1954.1601,453.1497 1954.8449,454.2164 Q1955.5297,455.283 1956.8744,455.283 Q1957.5053,455.283 1958.0988,455.0133 Q1958.6923,454.7435 1959.3231,454.1624 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="1987.15" y="448.2108">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="69" x="1974.15" y="462.3436">NewsSource</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1928" x2="2060" y1="469.8748" y2="469.8748"/><ellipse cx="1938" cy="480.8748" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="91" x="1947" y="484.5096">source_id: String</text><ellipse cx="1938" cy="493.8299" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="108" x="1947" y="497.4647">news_source: String</text><ellipse cx="1938" cy="506.785" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="87" x="1947" y="510.4198">article_id: String</text><ellipse cx="1938" cy="519.7401" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="80" x="1947" y="523.3748">pub_date: Date</text><ellipse cx="1938" cy="532.6952" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="85" x="1947" y="536.3299">code_date: Date</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1928" x2="2060" y1="542.6502" y2="542.6502"/><path d="M2096,460.5092 L2096,521.7514 A5,5 0 0 0 2101,526.7514 L2281,526.7514 A5,5 0 0 0 2286,521.7514 L2286,465.5092 L2276,455.5092 L2101,455.5092 A5,5 0 0 0 2096,460.5092 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2276,455.5092 L2276,463.0092 A2.5,2.5 0 0 0 2278.5,465.5092 L2286,465.5092 L2276,455.5092 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="169" x="2102" y="473.0776">HAS_INITIATOR Properties:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="114" x="2102" y="488.3881">- know_ini: String</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="131" x="2102" y="503.6987">- ambig_ini: Boolean</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="107" x="2102" y="519.0092">- ini_type: String</text><path d="M635.5,86.3792 L635.5,143.6292 L396.49,147.6292 L635.5,151.6292 L635.5,208.8636 A5,5 0 0 0 640.5,213.8636 L795.5,213.8636 A5,5 0 0 0 800.5,208.8636 L800.5,91.3792 L790.5,81.3792 L640.5,81.3792 A5,5 0 0 0 635.5,86.3792 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M790.5,81.3792 L790.5,88.8792 A2.5,2.5 0 0 0 793,91.3792 L800.5,91.3792 L790.5,81.3792 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="142" x="641.5" y="98.9476">LINKED_TO Properties:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="115" x="641.5" y="114.2581">- link_type: String</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="140" x="641.5" y="129.5687">- from_eventid: String</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="123" x="641.5" y="144.8792">- to_eventid: String</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="0" x="645.5" y="160.1898"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="144" x="641.5" y="175.5003">REACTS_TO Properties:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="108" x="641.5" y="190.8109">- posthoc: String</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="142" x="641.5" y="206.1214">- reaction_type: String</text><path d="M631.5,315.0592 L631.5,667.2018 A5,5 0 0 0 636.5,672.2018 L957.5,672.2018 A5,5 0 0 0 962.5,667.2018 L962.5,320.0592 L952.5,310.0592 L636.5,310.0592 A5,5 0 0 0 631.5,315.0592 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M952.5,310.0592 L952.5,317.5592 A2.5,2.5 0 0 0 955,320.0592 L962.5,320.0592 L952.5,310.0592 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="186" x="637.5" y="327.6276">Query Patterns for Questions:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="0" x="641.5" y="342.9381"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="128" x="637.5" y="358.2487">1. Origins &amp; Drivers:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="202" x="637.5" y="373.5592">(Event)-[:DRIVEN_BY]-&gt;(Drivers)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="0" x="641.5" y="388.8698"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="75" x="637.5" y="404.1803">2. Intensity:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="288" x="637.5" y="419.4909">(Event)-[:HAS_INTENSITY]-&gt;(IntensityMetrics)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="0" x="641.5" y="434.8014"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="163" x="637.5" y="450.112">3. Dynamics &amp; Outcomes:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="193" x="637.5" y="465.4225">(Event)-[:LINKED_TO]-&gt;(Event)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="226" x="637.5" y="480.733">(Event)-[:RESULTS_IN]-&gt;(Outcomes)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="0" x="641.5" y="496.0436"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="152" x="637.5" y="511.3541">4. Temporal Boundaries:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="310" x="637.5" y="526.6647">(Event)-[:HAS_TEMPORAL_INFO]-&gt;(TemporalInfo)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="0" x="641.5" y="541.9752"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="124" x="637.5" y="557.2858">5. Precursor Events:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="215" x="637.5" y="572.5963">(Event)-[:HAS_TYPE]-&gt;(EventType)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="310" x="637.5" y="587.9069">WHERE EventType.ev_type = 'Political Expression'</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="0" x="641.5" y="603.2174"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="61" x="637.5" y="618.528">6. Actors:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="220" x="637.5" y="633.8385">(Event)-[:HAS_INITIATOR]-&gt;(Actor)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="204" x="637.5" y="649.1491">(Event)-[:HAS_TARGET]-&gt;(Actor)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="199" x="637.5" y="664.4596">(Event)-[:HAS_VICTIM]-&gt;(Actor)</text><!--MD5=[515c8a56a8381999efcb2376de3fd02e]
+link Event to Location--><path codeLine="123" d="M396.5,206.7092 C411.64,223.2092 425.63,242.3792 434,263.0592 C452.97,309.9192 453.94,366.7992 450.19,411.9092 " fill="none" id="Event-to-Location" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="449.76,416.6892,454.5406,408.0784,450.2024,411.7088,446.572,407.3706,449.76,416.6892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="94" x="439.21" y="276.6276">OCCURRED_AT</text><!--MD5=[b435d1a722045c709b124c89654a6513]
+link Event to EventType--><path codeLine="124" d="M396.29,170.2692 C455,188.2392 541.6,213.8692 618,233.0592 C777.54,273.1092 853.44,204.9892 980,310.0592 C1009.07,334.1892 1027.04,371.4792 1038.07,405.8792 " fill="none" id="Event-to-EventType" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1039.47,410.3692,1040.6484,400.5911,1038.0006,405.59,1033.0017,402.9422,1039.47,410.3692" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="63" x="937.39" y="276.6276">HAS_TYPE</text><!--MD5=[126b51b6e68e5176ebbd76d39b45ae19]
+link Event to IntensityMetrics--><path codeLine="125" d="M396.3,173.1092 C454.66,192.6692 540.75,219.0392 618,233.0592 C789.49,264.1692 839.05,224.4192 1009,263.0592 C1065.26,275.8492 1087.27,271.2992 1130,310.0592 C1160.29,337.5292 1181.88,377.3992 1196.41,412.6392 " fill="none" id="Event-to-IntensityMetrics" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1198.11,416.8492,1198.4293,407.0055,1196.2285,412.2167,1191.0173,410.0159,1198.11,416.8492" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="99" x="1084.05" y="276.6276">HAS_INTENSITY</text><!--MD5=[bd50bd50be41be6a449a092512b1df5a]
+link Event to Drivers--><path codeLine="126" d="M396.22,173.6092 C454.53,193.4592 540.58,219.9792 618,233.0592 C869.89,275.5992 942.3,209.1092 1192,263.0592 C1247.99,275.1492 1269.63,271.5192 1312,310.0592 C1345.94,340.9292 1368.98,387.3592 1383.38,425.3292 " fill="none" id="Event-to-Drivers" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1385.09,429.9292,1385.7015,420.0994,1383.3469,425.2429,1378.2034,422.8883,1385.09,429.9292" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="69" x="1266.5" y="276.6276">DRIVEN_BY</text><!--MD5=[cc6ad614d9990ddf85e28feb3f3c3e3e]
+link Event to Outcomes--><path codeLine="127" d="M396.47,173.9292 C454.76,193.8992 540.64,220.4292 618,233.0592 C937.16,285.1592 1026.46,207.2592 1345,263.0592 C1413.4,275.0392 1439.76,266.7092 1494,310.0592 C1533.47,341.5992 1561.13,392.3092 1578.11,431.8892 " fill="none" id="Event-to-Outcomes" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1579.95,436.2492,1580.144,426.4023,1578.0097,431.641,1572.7709,429.5067,1579.95,436.2492" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="74" x="1444" y="276.6276">RESULTS_IN</text><!--MD5=[1f4a468219e0a7929ba54303df8bda61]
+link Event to TemporalInfo--><path codeLine="128" d="M396.45,174.0892 C454.71,194.1692 540.59,220.7492 618,233.0592 C1017.2,296.5292 1127.14,203.8592 1527,263.0592 C1607.09,274.9092 1638.74,260.7992 1703,310.0592 C1741.1,339.2592 1767.67,386.6992 1784.42,425.5592 " fill="none" id="Event-to-TemporalInfo" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1786.23,429.8292,1786.4131,419.9821,1784.2846,425.2232,1779.0435,423.0947,1786.23,429.8292" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="138" x="1649.67" y="276.6276">HAS_TEMPORAL_INFO</text><!--MD5=[8c177f683f9c8153d11e1478e5ddaf71]
+link Event to NewsSource--><path codeLine="129" d="M396.42,174.2492 C454.67,194.4092 540.55,221.0392 618,233.0592 C876.99,273.2392 1543.28,197.3592 1797,263.0592 C1840.69,274.3692 1854.23,279.0392 1887,310.0592 C1921.36,342.5792 1948.43,388.5492 1966.75,425.9092 " fill="none" id="Event-to-NewsSource" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1968.73,429.9892,1968.3959,420.146,1966.5455,425.4917,1961.1998,423.6413,1968.73,429.9892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="86" x="1848.64" y="276.6276">REPORTED_IN</text><!--MD5=[015d4764bae422af0bb89bdde3fc727f]
+link Event to Actor--><path codeLine="131" d="M257.65,166.3392 C209.19,182.7392 148,212.4292 118,263.0592 C79.4,328.1892 148.06,400.1692 205.45,445.2692 " fill="none" id="Event-to-Actor" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="209.06,448.0792,204.4181,439.3929,205.1155,445.0065,199.5019,445.704,209.06,448.0792" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="98" x="119" y="276.6276">HAS_INITIATOR</text><!--MD5=[015d4764bae422af0bb89bdde3fc727f]
+link Event to Actor--><path codeLine="132" d="M269.19,233.5192 C264.66,243.1692 260.77,253.1092 258,263.0592 C242.51,318.7592 248.99,385.0292 257.38,431.5492 " fill="none" id="Event-to-Actor-1" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="258.24,436.2092,260.5263,426.6294,257.3255,431.2936,252.6613,428.0927,258.24,436.2092" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="82" x="259" y="276.6276">HAS_TARGET</text><!--MD5=[015d4764bae422af0bb89bdde3fc727f]
+link Event to Actor--><path codeLine="133" d="M342.67,233.4192 C344.04,243.3792 345.21,253.4192 346,263.0592 C350.92,322.7692 326.46,387.3292 304.17,432.2892 " fill="none" id="Event-to-Actor-2" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="302.01,436.5992,309.6206,430.3479,304.2518,432.1299,302.4698,426.7611,302.01,436.5992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="77" x="347.62" y="276.6276">HAS_VICTIM</text><!--MD5=[e41f249f3fd314841a7dc2ddfa026a89]
+reverse link Actor to Group--><path codeLine="135" d="M233.09,563.0492 C199.48,625.9192 151.4,715.8592 122.59,769.7692 " fill="none" id="Actor-backto-Group" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="226.7,560.1592,242.3,545.8192,239.04,566.7592,226.7,560.1592" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="27" x="154.96" y="715.7676">IS_A</text><!--MD5=[729c8a2eaa2943eff65563efb4854d6f]
+reverse link Actor to Individual--><path codeLine="136" d="M271,565.9192 C271,628.6192 271,716.6692 271,769.7692 " fill="none" id="Actor-backto-Individual" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="264,565.9992,271,545.9992,278,565.9992,264,565.9992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="27" x="272" y="715.7676">IS_A</text><!--MD5=[b12e9aa4a329fe6ae8b2d789cd881a00]
+reverse link Actor to GovernmentEntity--><path codeLine="137" d="M304.05,563.7092 C319.94,597.0592 339.7,637.0492 359,672.1992 C377.29,705.5092 399.7,742.0092 417.33,769.8692 " fill="none" id="Actor-backto-GovernmentEntity" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="297.8,566.8592,295.58,545.7792,310.46,560.8792,297.8,566.8592" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="27" x="385.37" y="715.7676">IS_A</text><!--MD5=[1cd9a91bcab640e28c1da9a925056398]
+link Event to Event--><path codeLine="139" d="M396.01,136.0492 C415.77,136.5092 431,140.3592 431,147.6292 C431,154.0892 418.92,157.8592 402.32,158.9292 " fill="none" id="Event-to-Event" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="397.52,159.1292,406.683,162.7402,402.5154,158.9151,406.3405,154.7475,397.52,159.1292" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="71" x="437" y="152.6976">LINKED_TO</text><!--MD5=[1cd9a91bcab640e28c1da9a925056398]
+link Event to Event--><path codeLine="140" d="M396.24,126.9492 C451.6,120.0992 514,126.9892 514,147.6292 C514,167.4992 456.15,174.6192 402.43,169.0092 " fill="none" id="Event-to-Event-1" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="397.74,168.4692,406.2244,173.4708,402.7073,169.0402,407.1379,165.5231,397.74,168.4692" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="73" x="520" y="152.6976">REACTS_TO</text><!--MD5=[d7873a85d90f714e94e37937bd032f3f]
+link Location to Location--><path codeLine="142" d="M499.72,449.9792 C519.16,450.6092 534.5,464.3192 534.5,491.1292 C534.5,514.9992 522.33,528.4892 505.94,531.5992 " fill="none" id="Location-to-Location" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="501.22,532.1092,510.5925,535.1353,506.192,531.5806,509.7467,527.1801,501.22,532.1092" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="67" x="540.5" y="496.1976">CONTAINS</text><!--MD5=[c94f45d1e2e22cd782f72cc77e19b8b5]
+link Actor to GMN35--><path d="M279.99,437.8292 C291.99,385.3092 318.86,307.8092 376.5,271.5592 C455.65,221.7792 1978.16,225.4592 2059.5,271.5592 C2129.28,311.0992 2166.03,404.0392 2181.64,455.4192 " fill="none" id="Actor-GMN35" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><!--MD5=[9628c09787c57ea8bb41295b37a82d6d]
+link Event to GMN41--><path d="M396.35,179.3292 C457.5,208.2192 547.32,255.1492 616,310.0592 C621.02,314.0692 626.05,318.2092 631.08,322.4392 " fill="none" id="Event-GMN41" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><!--MD5=[fee100e11fcb6496db4f56a14ecd74ff]
+@startuml SPEED_Neo4j_Graph_Model
+skinparam roundcorner 10
+skinparam shadowing false
+
+title SPEED Dataset - Neo4j Graph Database Model (Node and Relationship Model)
+
+' ============================================
+' Node Labels (Neo4j)
+' ============================================
+
+package "Core Nodes" {
+  class Event <<Node>> {
+    +eventid: String
+    +year: Integer
+    +month: Integer
+    +day: Integer
+    +event: Boolean
+    +posthoc: String
+    +quasi_event: Boolean
+    +coup: Boolean
+    +coup_failed: Boolean
+  }
+  
+  class Location <<Node>> {
+    +location_id: String
+    +country: String
+    +cowcode: Integer
+    +region: String
+    +latitude: Float
+    +longitude: Float
+    +loc_type: String
+  }
+  
+  class Actor <<Node>> {
+    +actor_id: String
+    +actor_role: String
+    +actor_type: String
+    +name: String
+  }
+}
+
+package "Actor Subtypes" {
+  class Group <<Node>> {
+    +group_id: String
+    +group_name: String
+    +category: String
+  }
+  
+  class Individual <<Node>> {
+    +individual_id: String
+    +individual_type: String
+    +gov_level: String
+  }
+  
+  class GovernmentEntity <<Node>> {
+    +gov_entity_id: String
+    +gov_level: String
+    +entity_type: String
+  }
+}
+
+package "Event Characteristics" {
+  class EventType <<Node>> {
+    +type_id: String
+    +ev_type: String
+    +pe_type: String
+    +sym_type: String
+    +exp_type: String
+    +atk_type: String
+    +dsa_type: String
+    +stat_act: String
+  }
+  
+  class IntensityMetrics <<Node>> {
+    +metrics_id: String
+    +n_killed: Integer
+    +n_injured: Integer
+    +n_participants: Integer
+    +weapon_type: String
+    +pol_violence: Float
+    +stat_violence: Float
+  }
+  
+  class Drivers <<Node>> {
+    +driver_id: String
+    +sc_animosity: Boolean
+    +anti_gov: Boolean
+    +class_conflict: Boolean
+    +eco_scarcity: Boolean
+  }
+  
+  class Outcomes <<Node>> {
+    +outcome_id: String
+    +property_damaged: Boolean
+    +arrests: Boolean
+    +victim_effect: String
+  }
+}
+
+package "Temporal" {
+  class TemporalInfo <<Node>> {
+    +temporal_id: String
+    +date_type: String
+    +start_date: Float
+    +end_date: Float
+    +duration: Integer
+  }
+}
+
+package "Source" {
+  class NewsSource <<Node>> {
+    +source_id: String
+    +news_source: String
+    +article_id: String
+    +pub_date: Date
+    +code_date: Date
+  }
+}
+
+' ============================================
+' Relationships (Neo4j)
+' ============================================
+
+Event - -> Location : "OCCURRED_AT"
+Event - -> EventType : "HAS_TYPE"
+Event - -> IntensityMetrics : "HAS_INTENSITY"
+Event - -> Drivers : "DRIVEN_BY"
+Event - -> Outcomes : "RESULTS_IN"
+Event - -> TemporalInfo : "HAS_TEMPORAL_INFO"
+Event - -> NewsSource : "REPORTED_IN"
+
+Event - -> Actor : "HAS_INITIATOR"
+Event - -> Actor : "HAS_TARGET"
+Event - -> Actor : "HAS_VICTIM"
+
+Actor <|- - Group : "IS_A"
+Actor <|- - Individual : "IS_A"
+Actor <|- - GovernmentEntity : "IS_A"
+
+Event - -> Event : "LINKED_TO"
+Event - -> Event : "REACTS_TO"
+
+Location - -> Location : "CONTAINS"
+
+' ============================================
+' Relationship Properties
+' ============================================
+
+note right of Actor
+  HAS_INITIATOR Properties:
+  - know_ini: String
+  - ambig_ini: Boolean
+  - ini_type: String
+end note
+
+note left of Event
+  LINKED_TO Properties:
+  - link_type: String
+  - from_eventid: String
+  - to_eventid: String
+  
+  REACTS_TO Properties:
+  - posthoc: String
+  - reaction_type: String
+end note
+
+' ============================================
+' Query Patterns Supported
+' ============================================
+
+note bottom of Event
+  Query Patterns for Questions:
+  
+  1. Origins & Drivers:
+  (Event)-[:DRIVEN_BY]->(Drivers)
+  
+  2. Intensity:
+  (Event)-[:HAS_INTENSITY]->(IntensityMetrics)
+  
+  3. Dynamics & Outcomes:
+  (Event)-[:LINKED_TO]->(Event)
+  (Event)-[:RESULTS_IN]->(Outcomes)
+  
+  4. Temporal Boundaries:
+  (Event)-[:HAS_TEMPORAL_INFO]->(TemporalInfo)
+  
+  5. Precursor Events:
+  (Event)-[:HAS_TYPE]->(EventType)
+  WHERE EventType.ev_type = 'Political Expression'
+  
+  6. Actors:
+  (Event)-[:HAS_INITIATOR]->(Actor)
+  (Event)-[:HAS_TARGET]->(Actor)
+  (Event)-[:HAS_VICTIM]->(Actor)
+end note
+
+@enduml
+
+@startuml SPEED_Neo4j_Graph_Model
+skinparam roundcorner 10
+skinparam shadowing false
+
+title SPEED Dataset - Neo4j Graph Database Model (Node and Relationship Model)
+
+
+package "Core Nodes" {
+  class Event <<Node>> {
+    +eventid: String
+    +year: Integer
+    +month: Integer
+    +day: Integer
+    +event: Boolean
+    +posthoc: String
+    +quasi_event: Boolean
+    +coup: Boolean
+    +coup_failed: Boolean
+  }
+  
+  class Location <<Node>> {
+    +location_id: String
+    +country: String
+    +cowcode: Integer
+    +region: String
+    +latitude: Float
+    +longitude: Float
+    +loc_type: String
+  }
+  
+  class Actor <<Node>> {
+    +actor_id: String
+    +actor_role: String
+    +actor_type: String
+    +name: String
+  }
+}
+
+package "Actor Subtypes" {
+  class Group <<Node>> {
+    +group_id: String
+    +group_name: String
+    +category: String
+  }
+  
+  class Individual <<Node>> {
+    +individual_id: String
+    +individual_type: String
+    +gov_level: String
+  }
+  
+  class GovernmentEntity <<Node>> {
+    +gov_entity_id: String
+    +gov_level: String
+    +entity_type: String
+  }
+}
+
+package "Event Characteristics" {
+  class EventType <<Node>> {
+    +type_id: String
+    +ev_type: String
+    +pe_type: String
+    +sym_type: String
+    +exp_type: String
+    +atk_type: String
+    +dsa_type: String
+    +stat_act: String
+  }
+  
+  class IntensityMetrics <<Node>> {
+    +metrics_id: String
+    +n_killed: Integer
+    +n_injured: Integer
+    +n_participants: Integer
+    +weapon_type: String
+    +pol_violence: Float
+    +stat_violence: Float
+  }
+  
+  class Drivers <<Node>> {
+    +driver_id: String
+    +sc_animosity: Boolean
+    +anti_gov: Boolean
+    +class_conflict: Boolean
+    +eco_scarcity: Boolean
+  }
+  
+  class Outcomes <<Node>> {
+    +outcome_id: String
+    +property_damaged: Boolean
+    +arrests: Boolean
+    +victim_effect: String
+  }
+}
+
+package "Temporal" {
+  class TemporalInfo <<Node>> {
+    +temporal_id: String
+    +date_type: String
+    +start_date: Float
+    +end_date: Float
+    +duration: Integer
+  }
+}
+
+package "Source" {
+  class NewsSource <<Node>> {
+    +source_id: String
+    +news_source: String
+    +article_id: String
+    +pub_date: Date
+    +code_date: Date
+  }
+}
+
+
+Event - -> Location : "OCCURRED_AT"
+Event - -> EventType : "HAS_TYPE"
+Event - -> IntensityMetrics : "HAS_INTENSITY"
+Event - -> Drivers : "DRIVEN_BY"
+Event - -> Outcomes : "RESULTS_IN"
+Event - -> TemporalInfo : "HAS_TEMPORAL_INFO"
+Event - -> NewsSource : "REPORTED_IN"
+
+Event - -> Actor : "HAS_INITIATOR"
+Event - -> Actor : "HAS_TARGET"
+Event - -> Actor : "HAS_VICTIM"
+
+Actor <|- - Group : "IS_A"
+Actor <|- - Individual : "IS_A"
+Actor <|- - GovernmentEntity : "IS_A"
+
+Event - -> Event : "LINKED_TO"
+Event - -> Event : "REACTS_TO"
+
+Location - -> Location : "CONTAINS"
+
+
+note right of Actor
+  HAS_INITIATOR Properties:
+  - know_ini: String
+  - ambig_ini: Boolean
+  - ini_type: String
+end note
+
+note left of Event
+  LINKED_TO Properties:
+  - link_type: String
+  - from_eventid: String
+  - to_eventid: String
+  
+  REACTS_TO Properties:
+  - posthoc: String
+  - reaction_type: String
+end note
+
+
+note bottom of Event
+  Query Patterns for Questions:
+  
+  1. Origins & Drivers:
+  (Event)-[:DRIVEN_BY]->(Drivers)
+  
+  2. Intensity:
+  (Event)-[:HAS_INTENSITY]->(IntensityMetrics)
+  
+  3. Dynamics & Outcomes:
+  (Event)-[:LINKED_TO]->(Event)
+  (Event)-[:RESULTS_IN]->(Outcomes)
+  
+  4. Temporal Boundaries:
+  (Event)-[:HAS_TEMPORAL_INFO]->(TemporalInfo)
+  
+  5. Precursor Events:
+  (Event)-[:HAS_TYPE]->(EventType)
+  WHERE EventType.ev_type = 'Political Expression'
+  
+  6. Actors:
+  (Event)-[:HAS_INITIATOR]->(Actor)
+  (Event)-[:HAS_TARGET]->(Actor)
+  (Event)-[:HAS_VICTIM]->(Actor)
+end note
+
+@enduml
+
+PlantUML version 1.2021.00(Sun Jan 10 18:25:05 SGT 2021)
+(MIT source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: SG
+--></g></svg>

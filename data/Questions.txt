@@ -1,0 +1,33 @@
+The Social, Political and Economic Event Database (SPEED) project, specifically through its Societal Stability Protocol (SSP), is designed to answer a wide array of questions regarding the nature, causes, and dynamics of **civil unrest** and **destabilizing events** globally from 1946 to the present. By extracting "bottom-up" observations from millions of news reports, the dataset addresses the following specific research questions and lines of inquiry:
+
+**1. What are the origins and drivers of civil unrest?**
+One of SPEED's primary analytic capacities is identifying *why* destabilizing events occur. The dataset allows researchers to decompose civil unrest into distinct behavioral domains to answer questions such as:
+*   What proportion of destabilizing events are rooted in **anti-government sentiments** versus **socio-cultural animosities** (e.g., ethnic or religious tension)?.
+*   To what extent are events driven by **basic human needs** (eco-scarcities like food or water shortages) or **class-based concerns**?.
+*   How has the role of political, socio-economic, and cultural factors in generating global civil strife changed over the post-World War II era?.
+
+**2. How intense and disruptive are these events?**
+Unlike datasets that rely on simple event counts (frequency), SPEED answers questions regarding the **intensity** of unrest. It creates composite measures to determine:
+*   How severe was a specific event or episode? The data distinguishes between events based on the number of participants, the types of weapons used, and the number of people killed or injured.
+*   What are the comparative trends in intensity between different modes of unrest? For example, researchers can trace when **political violence** becomes more intense than **political protest** within a specific region or timeframe.
+
+**3. What are the dynamics and outcomes of civil strife?**
+SPEED data is structured to link related events, allowing researchers to study the sequence and interaction of events. This helps answer:
+*   **Intervention and Deterrence:** What are the deterrent effects of various government strategies for handling unrest?.
+*   **Escalation:** How do government actions affect the trajectory of unrest? For example, under what conditions does violent repression deflate opposition, and when does it stimulate an armed insurgency?.
+*   **Diffusion:** How do destabilizing events unfold spatially and temporally?. Because SPEED geocodes events down to the city level, researchers can analyze how unrest spreads across a country or region.
+
+**4. When do episodes of instability begin and end?**
+The dataset is used to objectively define the temporal boundaries of conflict. It answers:
+*   What criteria define a **major episode of civil strife** versus a **middling episode**?.
+*   When does a specific episode of instability (e.g., in South Africa or Lebanon) officially start and conclude based on empirical intensity metrics rather than subjective judgments?.
+
+**5. What is the role of "small-bore" events?**
+SPEED is distinct from other datasets because it answers questions about **precursor events**. It asks:
+*   What role do small-scale, non-violent acts (such as symbolic protests or verbal expressions of discontent) play in the development of larger conflicts like civil wars or coups?.
+*   How do "destabilizing state acts"—such as censorship, curfews, or the suspension of constitutions—contribute to societal instability?.
+
+**6. Who is involved in civil unrest?**
+The dataset provides detailed information on the actors involved, answering:
+*   Which specific **socio-cultural groups**, **government agencies**, or **civic organizations** are initiating or establishing targets for destabilizing events?.
+*   Are there patterns involving **international involvement**, such as foreign support for domestic initiators of unrest?.

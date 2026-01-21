@@ -1,0 +1,16 @@
+# Core data manipulation libraries
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Excel file reading support
+openpyxl>=3.1.0  # For .xlsx files
+xlrd>=2.0.1      # For .xls files
+
+# Jupyter notebook environment
+jupyter>=1.0.0
+ipython>=8.0.0
+ipykernel>=6.25.0
+
+# Optional but recommended for better display
+matplotlib>=3.7.0  # For potential visualizations
+seaborn>=0.12.0    # For statistical plots

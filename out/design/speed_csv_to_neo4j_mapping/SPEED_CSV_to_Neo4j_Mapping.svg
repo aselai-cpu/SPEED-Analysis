@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1140px" preserveAspectRatio="none" style="width:1562px;height:1140px;" version="1.1" viewBox="0 0 1562 1140" width="1562px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="596" x="476.51" y="17.4023">SPEED Dataset - CSV to Neo4j Mapping (Data Transformation Guide)</text><!--MD5=[20b30d4c3a6fd2163292cf7f4176b9b5]
+cluster CSV Data Source--><polygon fill="#FFFFFF" points="715,67.9992,839,67.9992,846,90.4875,895,90.4875,895,283.5992,715,283.5992,715,67.9992" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="715" x2="846" y1="90.4875" y2="90.4875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="118" x="719" y="83.5344">CSV Data Source</text><!--MD5=[a2c8a7a4c7b1f11df841a7c89fc9f9ac]
+cluster Neo4j Nodes--><polygon fill="#FFFFFF" points="16,406.4092,114,406.4092,121,428.8975,1545,428.8975,1545,615.3092,16,615.3092,16,406.4092" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="16" x2="121" y1="428.8975" y2="428.8975"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="92" x="20" y="421.9444">Neo4j Nodes</text><!--MD5=[c870fb0f827d62b45d7410406f56238a]
+cluster Neo4j Relationships--><polygon fill="#FFFFFF" points="755,664.3092,907,664.3092,914,686.7975,917,686.7975,917,892.8592,755,892.8592,755,664.3092" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="755" x2="914" y1="686.7975" y2="686.7975"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="146" x="759" y="679.8444">Neo4j Relationships</text><!--MD5=[99e59e298f82d0739002b1da02b8f777]
+class CSV--><rect codeLine="11" fill="#FEFECE" height="164.5957" id="CSV" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="147" x="731.5" y="102.9992"/><ellipse cx="746.5" cy="118.9992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M748.9731,125.1423 Q748.3921,125.4411 747.7529,125.5905 Q747.1138,125.7399 746.4082,125.7399 Q743.9014,125.7399 742.5815,124.0881 Q741.2617,122.4362 741.2617,119.3151 Q741.2617,116.1857 742.5815,114.5339 Q743.9014,112.882 746.4082,112.882 Q747.1138,112.882 747.7612,113.0314 Q748.4087,113.1809 748.9731,113.4797 L748.9731,116.2023 Q748.3423,115.6213 747.7488,115.3515 Q747.1553,115.0817 746.5244,115.0817 Q745.1797,115.0817 744.4949,116.1484 Q743.8101,117.215 743.8101,119.3151 Q743.8101,121.4069 744.4949,122.4736 Q745.1797,123.5402 746.5244,123.5402 Q747.1553,123.5402 747.7488,123.2705 Q748.3423,123.0007 748.9731,122.4196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="115" x="760.5" y="123.5344">resolved_data_*.csv</text><line style="stroke:#A80036;stroke-width:1.5;" x1="732.5" x2="877.5" y1="134.9992" y2="134.9992"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="121" x="737.5" y="149.634">Contains 106 columns</text><line style="stroke:#A80036;stroke-width:1.0;" x1="732.5" x2="877.5" y1="155.9543" y2="155.9543"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="739.5" y="163.9543"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="751.5" y="170.5891">Event identifiers</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="739.5" y="176.9094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="96" x="751.5" y="183.5441">Actor information</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="739.5" y="189.8645"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="72" x="751.5" y="196.4992">Location data</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="739.5" y="202.8195"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="61" x="751.5" y="209.4543">Event types</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="739.5" y="215.7746"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="89" x="751.5" y="222.4094">Intensity metrics</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="739.5" y="228.7297"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="39" x="751.5" y="235.3645">Drivers</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="739.5" y="241.6848"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="55" x="751.5" y="248.3195">Outcomes</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="739.5" y="254.6398"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="75" x="751.5" y="261.2746">Temporal info</text><!--MD5=[ac13618b1a974308c1f12eb6c57723dc]
+class Event--><rect codeLine="30" fill="#FEFECE" height="119.041" id="Event" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="138" x="32" y="460.8392"/><ellipse cx="77.25" cy="479.972" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M79.7231,486.1151 Q79.1421,486.4139 78.5029,486.5633 Q77.8638,486.7128 77.1582,486.7128 Q74.6514,486.7128 73.3315,485.0609 Q72.0117,483.409 72.0117,480.2879 Q72.0117,477.1586 73.3315,475.5067 Q74.6514,473.8548 77.1582,473.8548 Q77.8638,473.8548 78.5112,474.0043 Q79.1587,474.1537 79.7231,474.4525 L79.7231,477.1752 Q79.0923,476.5941 78.4988,476.3243 Q77.9053,476.0546 77.2744,476.0546 Q75.9297,476.0546 75.2449,477.1212 Q74.5601,478.1879 74.5601,480.2879 Q74.5601,482.3797 75.2449,483.4464 Q75.9297,484.513 77.2744,484.513 Q77.9053,484.513 78.4988,484.2433 Q79.0923,483.9735 79.7231,483.3924 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="95.75" y="477.4408">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="31" x="101.75" y="491.5736">Event</text><line style="stroke:#A80036;stroke-width:1.5;" x1="33" x2="169" y1="499.1048" y2="499.1048"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="111" x="52" y="513.7396">Properties from CSV:</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="40" y="520.0599"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="89" x="52" y="526.6947">year, month, day</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="40" y="533.015"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="112" x="52" y="539.6498">event, posthoc, coup</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="40" y="545.9701"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="92" x="52" y="552.6048">aid, news_source</text><line style="stroke:#A80036;stroke-width:1.5;" x1="33" x2="169" y1="558.9252" y2="558.9252"/><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="40" y="566.9252"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="63" x="52" y="573.5599">eventid (PK)</text><!--MD5=[4f1f3706c1a355a8488e154afcaed5df]
+class Location--><rect codeLine="38" fill="#FEFECE" height="131.9961" id="Location" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="149" x="204.5" y="454.3592"/><ellipse cx="251.25" cy="473.492" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M253.7231,479.6351 Q253.1421,479.9339 252.5029,480.0833 Q251.8638,480.2328 251.1582,480.2328 Q248.6514,480.2328 247.3315,478.5809 Q246.0117,476.929 246.0117,473.8079 Q246.0117,470.6786 247.3315,469.0267 Q248.6514,467.3748 251.1582,467.3748 Q251.8638,467.3748 252.5112,467.5243 Q253.1587,467.6737 253.7231,467.9725 L253.7231,470.6952 Q253.0923,470.1141 252.4988,469.8443 Q251.9053,469.5746 251.2744,469.5746 Q249.9297,469.5746 249.2449,470.6412 Q248.5601,471.7079 248.5601,473.8079 Q248.5601,475.8997 249.2449,476.9664 Q249.9297,478.033 251.2744,478.033 Q251.9053,478.033 252.4988,477.7633 Q253.0923,477.4935 253.7231,476.9124 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="273.75" y="470.9608">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="47" x="271.75" y="485.0936">Location</text><line style="stroke:#A80036;stroke-width:1.5;" x1="205.5" x2="352.5" y1="492.6248" y2="492.6248"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="111" x="224.5" y="507.2596">Properties from CSV:</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="212.5" y="513.5799"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="95" x="224.5" y="520.2147">country, cowcode</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="212.5" y="526.535"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="35" x="224.5" y="533.1698">region</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="212.5" y="539.4901"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="45" x="224.5" y="546.1248">loc_type</text><line style="stroke:#A80036;stroke-width:1.5;" x1="205.5" x2="352.5" y1="552.4452" y2="552.4452"/><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="212.5" y="560.4452"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="94" x="224.5" y="567.0799">gp3, gp4 (names)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="212.5" y="573.4002"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="123" x="224.5" y="580.035">gp7, gp8 (coordinates)</text><!--MD5=[44201db48fb57df1a9c7f5b6b15426b0]
+class Actor--><rect codeLine="47" fill="#FEFECE" height="106.0859" id="Actor" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="213" x="388.5" y="467.3192"/><ellipse cx="471.25" cy="486.452" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M473.7231,492.5951 Q473.1421,492.8939 472.5029,493.0433 Q471.8638,493.1928 471.1582,493.1928 Q468.6514,493.1928 467.3315,491.5409 Q466.0117,489.889 466.0117,486.7679 Q466.0117,483.6386 467.3315,481.9867 Q468.6514,480.3348 471.1582,480.3348 Q471.8638,480.3348 472.5112,480.4843 Q473.1587,480.6337 473.7231,480.9325 L473.7231,483.6552 Q473.0923,483.0741 472.4988,482.8043 Q471.9053,482.5346 471.2744,482.5346 Q469.9297,482.5346 469.2449,483.6012 Q468.5601,484.6679 468.5601,486.7679 Q468.5601,488.8597 469.2449,489.9264 Q469.9297,490.993 471.2744,490.993 Q471.9053,490.993 472.4988,490.7233 Q473.0923,490.4535 473.7231,489.8724 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="489.75" y="483.9208">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30" x="496.25" y="498.0536">Actor</text><line style="stroke:#A80036;stroke-width:1.5;" x1="389.5" x2="600.5" y1="505.5848" y2="505.5848"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="111" x="408.5" y="520.2196">Properties from CSV:</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="396.5" y="526.5399"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="141" x="408.5" y="533.1747">role: initiator|target|victim</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="396.5" y="539.495"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="187" x="408.5" y="546.1298">type: group|individual|government</text><line style="stroke:#A80036;stroke-width:1.5;" x1="389.5" x2="600.5" y1="552.4501" y2="552.4501"/><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="396.5" y="560.4501"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="95" x="408.5" y="567.0848">actor_id (derived)</text><!--MD5=[41314a0efc36828092cff9ebad2fcafd]
+class Group--><rect codeLine="54" fill="#FEFECE" height="106.0859" id="Group" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="198" x="636" y="467.3192"/><ellipse cx="711.25" cy="486.452" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M713.7231,492.5951 Q713.1421,492.8939 712.5029,493.0433 Q711.8638,493.1928 711.1582,493.1928 Q708.6514,493.1928 707.3315,491.5409 Q706.0117,489.889 706.0117,486.7679 Q706.0117,483.6386 707.3315,481.9867 Q708.6514,480.3348 711.1582,480.3348 Q711.8638,480.3348 712.5112,480.4843 Q713.1587,480.6337 713.7231,480.9325 L713.7231,483.6552 Q713.0923,483.0741 712.4988,482.8043 Q711.9053,482.5346 711.2744,482.5346 Q709.9297,482.5346 709.2449,483.6012 Q708.5601,484.6679 708.5601,486.7679 Q708.5601,488.8597 709.2449,489.9264 Q709.9297,490.993 711.2744,490.993 Q711.9053,490.993 712.4988,490.7233 Q713.0923,490.4535 713.7231,489.8724 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="729.75" y="483.9208">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="36" x="733.25" y="498.0536">Group</text><line style="stroke:#A80036;stroke-width:1.5;" x1="637" x2="833" y1="505.5848" y2="505.5848"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="111" x="656" y="520.2196">Properties from CSV:</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="644" y="526.5399"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="160" x="656" y="533.1747">ini_igrp1, tar_igrp1, vic_igrp1</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="644" y="539.495"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="169" x="656" y="546.1298">ini_sgrp1, tar_sgrp1, vic_sgrp1</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="644" y="552.4501"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="172" x="656" y="559.0848">ini_pgrp1, tar_pgrp1, vic_pgrp1</text><line style="stroke:#A80036;stroke-width:1.5;" x1="637" x2="833" y1="565.4052" y2="565.4052"/><!--MD5=[51255159981deef4d2967e1585ccf960]
+class EventType--><rect codeLine="61" fill="#FEFECE" height="119.041" id="EventType" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="137" x="869.5" y="460.8392"/><ellipse cx="904.75" cy="479.972" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M907.2231,486.1151 Q906.6421,486.4139 906.0029,486.5633 Q905.3638,486.7128 904.6582,486.7128 Q902.1514,486.7128 900.8315,485.0609 Q899.5117,483.409 899.5117,480.2879 Q899.5117,477.1586 900.8315,475.5067 Q902.1514,473.8548 904.6582,473.8548 Q905.3638,473.8548 906.0112,474.0043 Q906.6587,474.1537 907.2231,474.4525 L907.2231,477.1752 Q906.5923,476.5941 905.9988,476.3243 Q905.4053,476.0546 904.7744,476.0546 Q903.4297,476.0546 902.7449,477.1212 Q902.0601,478.1879 902.0601,480.2879 Q902.0601,482.3797 902.7449,483.4464 Q903.4297,484.513 904.7744,484.513 Q905.4053,484.513 905.9988,484.2433 Q906.5923,483.9735 907.2231,483.3924 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="931.75" y="477.4408">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="60" x="923.25" y="491.5736">EventType</text><line style="stroke:#A80036;stroke-width:1.5;" x1="870.5" x2="1005.5" y1="499.1048" y2="499.1048"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="111" x="889.5" y="513.7396">Properties from CSV:</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="877.5" y="520.0599"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="41" x="889.5" y="526.6947">ev_type</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="877.5" y="533.015"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="99" x="889.5" y="539.6498">pe_type, sym_type</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="877.5" y="545.9701"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="100" x="889.5" y="552.6048">exp_type, atk_type</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="877.5" y="558.9252"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="96" x="889.5" y="565.5599">dsa_type, stat_act</text><line style="stroke:#A80036;stroke-width:1.5;" x1="870.5" x2="1005.5" y1="571.8802" y2="571.8802"/><!--MD5=[98d003b321cb9d6a0901c58fd8172c38]
+class IntensityMetrics--><rect codeLine="69" fill="#FEFECE" height="144.9512" id="IntensityMetrics" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="143" x="1041.5" y="447.8792"/><ellipse cx="1066.85" cy="467.012" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1069.3231,473.1551 Q1068.7421,473.4539 1068.1029,473.6033 Q1067.4638,473.7528 1066.7582,473.7528 Q1064.2514,473.7528 1062.9315,472.1009 Q1061.6117,470.449 1061.6117,467.3279 Q1061.6117,464.1986 1062.9315,462.5467 Q1064.2514,460.8948 1066.7582,460.8948 Q1067.4638,460.8948 1068.1112,461.0443 Q1068.7587,461.1937 1069.3231,461.4925 L1069.3231,464.2152 Q1068.6923,463.6341 1068.0988,463.3643 Q1067.5053,463.0946 1066.8744,463.0946 Q1065.5297,463.0946 1064.8449,464.1612 Q1064.1601,465.2279 1064.1601,467.3279 Q1064.1601,469.4197 1064.8449,470.4864 Q1065.5297,471.553 1066.8744,471.553 Q1067.5053,471.553 1068.0988,471.2833 Q1068.6923,471.0135 1069.3231,470.4324 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="1105.65" y="464.4808">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="88" x="1083.15" y="478.6136">IntensityMetrics</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1042.5" x2="1183.5" y1="486.1448" y2="486.1448"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="111" x="1061.5" y="500.7796">Properties from CSV:</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1049.5" y="507.0999"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="113" x="1061.5" y="513.7347">n_killed_p, n_killed_a</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1049.5" y="520.055"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="109" x="1061.5" y="526.6898">n_injurd, n_injurd_d</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1049.5" y="533.0101"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="117" x="1061.5" y="539.6448">n_of_ini_p, n_of_ini_a</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1049.5" y="545.9652"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="99" x="1061.5" y="552.5999">weapon, weap_grd</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1049.5" y="558.9202"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="1061.5" y="565.555">pol_viol, stat_viol</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1049.5" y="571.8753"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="46" x="1061.5" y="578.5101">e_length</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1042.5" x2="1183.5" y1="584.8304" y2="584.8304"/><!--MD5=[a448e097961bd610cd5ed44d3912e1dd]
+class Drivers--><rect codeLine="79" fill="#FEFECE" height="157.9063" id="Drivers" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="137" x="1219.5" y="441.4092"/><ellipse cx="1263.3" cy="460.542" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1265.7731,466.6851 Q1265.1921,466.9839 1264.5529,467.1333 Q1263.9138,467.2828 1263.2082,467.2828 Q1260.7014,467.2828 1259.3815,465.6309 Q1258.0617,463.979 1258.0617,460.8579 Q1258.0617,457.7286 1259.3815,456.0767 Q1260.7014,454.4248 1263.2082,454.4248 Q1263.9138,454.4248 1264.5612,454.5743 Q1265.2087,454.7237 1265.7731,455.0225 L1265.7731,457.7452 Q1265.1423,457.1641 1264.5488,456.8943 Q1263.9553,456.6246 1263.3244,456.6246 Q1261.9797,456.6246 1261.2949,457.6912 Q1260.6101,458.7579 1260.6101,460.8579 Q1260.6101,462.9497 1261.2949,464.0164 Q1261.9797,465.083 1263.3244,465.083 Q1263.9553,465.083 1264.5488,464.8133 Q1265.1423,464.5435 1265.7731,463.9624 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="1282.7" y="458.0108">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="41" x="1283.7" y="472.1436">Drivers</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1220.5" x2="1355.5" y1="479.6748" y2="479.6748"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="111" x="1239.5" y="494.3096">Properties from CSV:</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1227.5" y="500.6299"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="70" x="1239.5" y="507.2647">sc_animosity</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1227.5" y="513.585"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="102" x="1239.5" y="520.2198">anti_gov_sentmnts</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1227.5" y="526.5401"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="1239.5" y="533.1748">class_conflict</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1227.5" y="539.4952"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="67" x="1239.5" y="546.1299">eco_scarcity</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1227.5" y="552.4502"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="62" x="1239.5" y="559.085">pol_desires</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1227.5" y="565.4053"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="70" x="1239.5" y="572.0401">retain_power</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1227.5" y="578.3604"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="1239.5" y="584.9952">pers_security</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1220.5" x2="1355.5" y1="591.3155" y2="591.3155"/><!--MD5=[02f405e2e9d39542bac8421908f3211b]
+class Outcomes--><rect codeLine="90" fill="#FEFECE" height="131.9961" id="Outcomes" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="137" x="1391.5" y="454.3592"/><ellipse cx="1428.1" cy="473.492" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1430.5731,479.6351 Q1429.9921,479.9339 1429.3529,480.0833 Q1428.7138,480.2328 1428.0082,480.2328 Q1425.5014,480.2328 1424.1815,478.5809 Q1422.8617,476.929 1422.8617,473.8079 Q1422.8617,470.6786 1424.1815,469.0267 Q1425.5014,467.3748 1428.0082,467.3748 Q1428.7138,467.3748 1429.3612,467.5243 Q1430.0087,467.6737 1430.5731,467.9725 L1430.5731,470.6952 Q1429.9423,470.1141 1429.3488,469.8443 Q1428.7553,469.5746 1428.1244,469.5746 Q1426.7797,469.5746 1426.0949,470.6412 Q1425.4101,471.7079 1425.4101,473.8079 Q1425.4101,475.8997 1426.0949,476.9664 Q1426.7797,478.033 1428.1244,478.033 Q1428.7553,478.033 1429.3488,477.7633 Q1429.9423,477.4935 1430.5731,476.9124 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="1453.9" y="470.9608">«Node»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="57" x="1446.9" y="485.0936">Outcomes</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1392.5" x2="1527.5" y1="492.6248" y2="492.6248"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="111" x="1411.5" y="507.2596">Properties from CSV:</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1399.5" y="513.5799"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="55" x="1411.5" y="520.2147">dam_prop</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1399.5" y="526.535"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="102" x="1411.5" y="533.1698">property_damaged</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1399.5" y="539.4901"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="1411.5" y="546.1248">property_owner</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1399.5" y="552.4452"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="38" x="1411.5" y="559.0799">arrests</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1399.5" y="565.4002"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="68" x="1411.5" y="572.035">victim_effect</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1392.5" x2="1527.5" y1="578.3553" y2="578.3553"/><!--MD5=[5c610c81761a9a2e7e682a4d4e067cee]
+class Relationships--><rect codeLine="118" fill="#FEFECE" height="177.5508" id="Relationships" rx="5" ry="5" style="stroke:#A80036;stroke-width:1.5;" width="108" x="782" y="699.3092"/><ellipse cx="797" cy="715.3092" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M799.4731,721.4523 Q798.8921,721.7511 798.2529,721.9005 Q797.6138,722.0499 796.9082,722.0499 Q794.4014,722.0499 793.0815,720.3981 Q791.7617,718.7462 791.7617,715.6251 Q791.7617,712.4957 793.0815,710.8439 Q794.4014,709.192 796.9082,709.192 Q797.6138,709.192 798.2612,709.3414 Q798.9087,709.4909 799.4731,709.7897 L799.4731,712.5123 Q798.8423,711.9313 798.2488,711.6615 Q797.6553,711.3917 797.0244,711.3917 Q795.6797,711.3917 794.9949,712.4584 Q794.3101,713.525 794.3101,715.6251 Q794.3101,717.7169 794.9949,718.7836 Q795.6797,719.8502 797.0244,719.8502 Q797.6553,719.8502 798.2488,719.5805 Q798.8423,719.3107 799.4731,718.7296 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="76" x="811" y="719.8444">Relationships</text><line style="stroke:#A80036;stroke-width:1.5;" x1="783" x2="889" y1="731.3092" y2="731.3092"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="82" x="788" y="745.944">OCCURRED_AT</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="54" x="788" y="758.8991">HAS_TYPE</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="83" x="788" y="771.8541">HAS_INTENSITY</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="58" x="788" y="784.8092">DRIVEN_BY</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="63" x="788" y="797.7643">RESULTS_IN</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="83" x="788" y="810.7194">HAS_INITIATOR</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="71" x="788" y="823.6745">HAS_TARGET</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="65" x="788" y="836.6295">HAS_VICTIM</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="60" x="788" y="849.5846">LINKED_TO</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="23" x="788" y="862.5397">IS_A</text><line style="stroke:#A80036;stroke-width:1.5;" x1="783" x2="889" y1="868.86" y2="868.86"/><path d="M914,32.1992 L914,181.2992 L878.62,185.2992 L914,189.2992 L914,338.4102 A5,5 0 0 0 919,343.4102 L1187,343.4102 A5,5 0 0 0 1192,338.4102 L1192,37.1992 L1182,27.1992 L919,27.1992 A5,5 0 0 0 914,32.1992 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1182,27.1992 L1182,34.6992 A2.5,2.5 0 0 0 1184.5,37.1992 L1192,37.1992 L1182,27.1992 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="139" x="920" y="44.7676">Transformation Rules:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="0" x="924" y="60.0781"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="212" x="920" y="75.3887">1. One CSV row = One Event node</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="180" x="920" y="90.6992">2. Actor nodes created from:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="177" x="932" y="106.0098">- INI_* columns -&gt; Initiator</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="174" x="932" y="121.3203">- TAR_* columns -&gt; Target</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="170" x="932" y="136.6309">- VIC_* columns -&gt; Victim</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="0" x="924" y="151.9414"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="184" x="920" y="167.252">3. Group nodes created from:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="176" x="932" y="182.5625">- IGRP1 -&gt; Insurgent Group</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="209" x="932" y="197.873">- SGRP1 -&gt; Socio-cultural Group</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="169" x="932" y="213.1836">- PGRP1 -&gt; Political Group</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="0" x="924" y="228.4941"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="168" x="920" y="243.8047">4. EventLink created when:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="94" x="932" y="259.1152">- linked = true</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="204" x="932" y="274.4258">- FROM_EID and TO_EID present</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="0" x="924" y="289.7363"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="201" x="920" y="305.0469">5. Location nodes deduplicated:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="245" x="932" y="320.3574">- Same country/cowcode = same node</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="214" x="932" y="335.668">- Hierarchical: Country -&gt; Region</text><path d="M671.5,944.8592 L671.5,1128.5858 A5,5 0 0 0 676.5,1133.5858 L995.5,1133.5858 A5,5 0 0 0 1000.5,1128.5858 L1000.5,949.8592 L990.5,939.8592 L840,939.8592 L836,877.0892 L832,939.8592 L676.5,939.8592 A5,5 0 0 0 671.5,944.8592 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M990.5,939.8592 L990.5,947.3592 A2.5,2.5 0 0 0 993,949.8592 L1000.5,949.8592 L990.5,939.8592 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="139" x="677.5" y="957.4276">Relationship Creation:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="0" x="681.5" y="972.7381"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="262" x="677.5" y="988.0487">- OCCURRED_AT: Every event -&gt; location</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="245" x="677.5" y="1003.3592">- HAS_TYPE: Every event -&gt; event type</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="263" x="677.5" y="1018.6698">- HAS_INTENSITY: Every event -&gt; metrics</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="268" x="677.5" y="1033.9803">- DRIVEN_BY: Event -&gt; drivers (if any true)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="216" x="677.5" y="1049.2909">- RESULTS_IN: Event -&gt; outcomes</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="217" x="677.5" y="1064.6014">- HAS_INITIATOR: Event -&gt; actors</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="201" x="677.5" y="1079.912">- HAS_TARGET: Event -&gt; actors</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="196" x="677.5" y="1095.2225">- HAS_VICTIM: Event -&gt; actors</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="308" x="677.5" y="1110.533">- LINKED_TO: Event -&gt; Event (when linked=true)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="281" x="677.5" y="1125.8436">- IS_A: Actor -&gt; Group/Individual/GovEntity</text><!--MD5=[825a78b4a9ad7f9ea7328e057858772f]
+link CSV to Event--><path codeLine="104" d="M731.21,204.5992 C619.7,233.5092 402.82,294.6292 229,373.4092 C209.21,382.3692 202.97,383.6792 187,398.4092 C169.18,414.8392 152.84,435.5292 139.3,455.1292 " fill="none" id="CSV-to-Event" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="136.59,459.1092,144.9644,453.9256,139.4062,454.9778,138.3541,449.4196,136.59,459.1092" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="141" x="230" y="386.9776">eventid, year, month...</text><!--MD5=[3c71bd8ff17c0d4ac509548c78929a69]
+link CSV to Location--><path codeLine="105" d="M731.4,205.0692 C636.59,232.6892 472.01,292.7992 371,398.4092 C356.08,413.9992 341.3,431.9792 328.1,449.2292 " fill="none" id="CSV-to-Location" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="325.33,452.8692,333.96,448.1233,328.3551,448.8881,327.5902,443.2832,325.33,452.8692" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="155" x="390.44" y="386.9776">country, cowcode, gp3...</text><!--MD5=[4935696e08093921b2e8fd9fb20be76e]
+link CSV to Actor--><path codeLine="106" d="M731.17,235.9192 C683.29,270.5692 621.74,320.0392 577,373.4092 C554.77,399.9192 535.48,433.3492 521.2,461.5092 " fill="none" id="CSV-to-Actor" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="519.09,465.7192,526.7006,459.4679,521.3318,461.2499,519.5498,455.8811,519.09,465.7192" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="119" x="578" y="386.9776">INI_*, TAR_*, VIC_*</text><!--MD5=[f36ebf0eef9f5bc387e4716c737bc6d7]
+link CSV to Group--><path codeLine="107" d="M752.58,267.7392 C735.1,299.4192 717.83,336.8492 709,373.4092 C702.09,402.0192 706.54,434.1892 713.58,461.0292 " fill="none" id="CSV-to-Group" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="714.82,465.5692,716.2891,455.8305,713.4936,460.7484,708.5757,457.9529,714.82,465.5692" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="145" x="710" y="386.9776">INI_IGRP1, INI_SGRP1...</text><!--MD5=[88f7bd13bfbfbad3f5b5e3896e729996]
+link CSV to EventType--><path codeLine="108" d="M837.54,267.7792 C860.5,325.2792 890.85,401.2892 912.16,454.6592 " fill="none" id="CSV-to-EventType" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="913.89,458.9892,914.2614,449.1474,912.033,454.3468,906.8336,452.1185,913.89,458.9892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="123" x="884.41" y="386.9776">EV_TYPE, PE_TYPE...</text><!--MD5=[d0f4b7dad9dd88c83a5777c0f98f8a2d]
+link CSV to IntensityMetrics--><path codeLine="109" d="M837.05,267.8492 C851.57,295.4592 871.34,324.1392 897,343.4092 C940.62,376.1492 971.47,341.9092 1016,373.4092 C1040.81,390.9592 1061.03,417.0292 1076.46,442.3092 " fill="none" id="CSV-to-IntensityMetrics" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1078.91,446.3892,1077.7095,436.6138,1076.3375,442.1018,1070.8496,440.7298,1078.91,446.3892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="155" x="1035.17" y="386.9776">N_KILLED_*, N_INJURD...</text><!--MD5=[7ed5569b3ee1476174ece8d841f062d3]
+link CSV to Drivers--><path codeLine="110" d="M834.52,267.9292 C848.95,296.4092 869.33,325.6692 897,343.4092 C1010.56,416.1992 1084.8,301.6292 1199,373.4092 C1222.59,388.2392 1240.85,411.8192 1254.52,435.7492 " fill="none" id="CSV-to-Drivers" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1256.8,439.8492,1255.9014,430.0414,1254.3609,435.4845,1248.9178,433.944,1256.8,439.8492" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="179" x="1218.12" y="386.9776">SC_ANIMOSITY, ANTI_GOV...</text><!--MD5=[6008ca11913c00ab8ebdf1d8c0a012d2]
+link CSV to Outcomes--><path codeLine="111" d="M833.73,267.6892 C848.14,296.5092 868.71,326.0592 897,343.4092 C993.6,402.6292 1314.96,305.9492 1406,373.4092 C1429.71,390.9792 1443.02,420.1292 1450.49,447.7792 " fill="none" id="CSV-to-Outcomes" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1451.71,452.5492,1453.3541,442.8386,1450.4705,447.7053,1445.6038,444.8217,1451.71,452.5492" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="132" x="1422.02" y="386.9776">DAM_PROP, arrests...</text><!--MD5=[cbd419b7abc8d19834d5d34d431bee7a]
+link Event to Relationships--><path codeLine="132" d="M140.07,580.1692 C153.28,596.2092 169.23,612.2092 187,623.3092 C378.92,743.2692 654.47,775.4992 775.31,784.0492 " fill="none" id="Event-to-Relationships" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="780.13,784.3792,771.4256,779.7712,775.1418,784.0362,770.8768,787.7523,780.13,784.3792" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="45" x="218.93" y="644.8776">creates</text><!--MD5=[6e37e1f1ac0f54e868b76123c60c0078]
+link Location to Relationships--><path codeLine="133" d="M329.12,586.7892 C341.69,600.1992 355.92,613.2692 371,623.3092 C501.04,709.9392 682.08,756.2992 775.25,775.7692 " fill="none" id="Location-to-Relationships" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="780.05,776.7692,772.0476,771.028,775.1538,775.7557,770.426,778.8619,780.05,776.7692" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="29" x="405.82" y="644.8776">uses</text><!--MD5=[590f928f493610616b25a696144cc699]
+link Actor to Relationships--><path codeLine="134" d="M557.67,573.7392 C577.18,589.8092 598.86,607.4392 619,623.3092 C671.65,664.7992 732.68,710.6592 776.57,743.2792 " fill="none" id="Actor-to-Relationships" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="780.36,746.0792,775.506,737.5096,776.3412,743.1044,770.7463,743.9397,780.36,746.0792" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="29" x="649.14" y="644.8776">uses</text><!--MD5=[216c0b32688b989ccf887cbe5bd0b4ed]
+link EventType to Relationships--><path codeLine="135" d="M915.36,580.3292 C902.66,613.4192 886.52,655.4792 872.11,693.0092 " fill="none" id="EventType-to-Relationships" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="870.36,697.5792,877.3099,690.6008,872.1453,692.9088,869.8373,687.7442,870.36,697.5792" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="29" x="894.11" y="644.8776">uses</text><!--MD5=[e9f2caace9756c74a09a16d6e6c0498e]
+link IntensityMetrics to Relationships--><path codeLine="136" d="M1052.45,593.2392 C1043.14,603.5392 1033.47,613.8492 1024,623.3092 C982.8,664.4692 932.98,707.5992 894.99,739.2592 " fill="none" id="IntensityMetrics-to-Relationships" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="891.57,742.0992,901.0457,739.4139,895.4123,738.8997,895.9265,733.2663,891.57,742.0992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="29" x="1015.45" y="644.8776">uses</text><!--MD5=[a4ed90b9ead1c8d32834323a3c75c2e0]
+link Drivers to Relationships--><path codeLine="137" d="M1228.53,599.6392 C1220.17,608.2092 1211.25,616.3492 1202,623.3092 C1105.8,695.7492 972.48,745.0792 896.14,769.4492 " fill="none" id="Drivers-to-Relationships" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="891.74,770.8392,901.5283,771.9293,896.5058,769.3267,899.1084,764.3041,891.74,770.8392" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="29" x="1185.55" y="644.8776">uses</text><!--MD5=[efe4fac00c7c472f1ab85fdd1d718247]
+link Outcomes to Relationships--><path codeLine="138" d="M1414.5,586.7992 C1402.6,600.3692 1388.89,613.4992 1374,623.3092 C1220.5,724.4992 1001.72,765.4392 896.76,780.0092 " fill="none" id="Outcomes-to-Relationships" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="891.82,780.6892,901.2832,783.4183,896.7728,780.0041,900.187,775.4937,891.82,780.6892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="29" x="1362.34" y="644.8776">uses</text><!--MD5=[3e95284e45cc59abee43f5ba9c0e2ac1]
+link Group to Relationships--><path codeLine="139" d="M754.95,573.8592 C767.86,607.8092 785.02,652.9692 800.24,692.9892 " fill="none" id="Group-to-Relationships" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="801.93,697.4392,802.479,687.6057,800.1572,692.7641,794.9988,690.4422,801.93,697.4392" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="29" x="783.47" y="644.8776">uses</text><!--MD5=[0039ffebd296df5eafa8b2294314e836]
+@startuml SPEED_CSV_to_Neo4j_Mapping
+skinparam roundcorner 10
+skinparam shadowing false
+
+title SPEED Dataset - CSV to Neo4j Mapping (Data Transformation Guide)
+
+' ============================================
+' CSV Source
+' ============================================
+
+package "CSV Data Source" {
+  class "resolved_data_*.csv" as CSV {
+    Contains 106 columns
+    - -
+    - Event identifiers
+    - Actor information
+    - Location data
+    - Event types
+    - Intensity metrics
+    - Drivers
+    - Outcomes
+    - Temporal info
+  }
+}
+
+' ============================================
+' Neo4j Nodes
+' ============================================
+
+package "Neo4j Nodes" {
+  class Event <<Node>> {
+    Properties from CSV:
+    - eventid (PK)
+    - year, month, day
+    - event, posthoc, coup
+    - aid, news_source
+  }
+  
+  class Location <<Node>> {
+    Properties from CSV:
+    - country, cowcode
+    - region
+    - gp3, gp4 (names)
+    - gp7, gp8 (coordinates)
+    - loc_type
+  }
+  
+  class Actor <<Node>> {
+    Properties from CSV:
+    - actor_id (derived)
+    - role: initiator|target|victim
+    - type: group|individual|government
+  }
+  
+  class Group <<Node>> {
+    Properties from CSV:
+    - ini_igrp1, tar_igrp1, vic_igrp1
+    - ini_sgrp1, tar_sgrp1, vic_sgrp1
+    - ini_pgrp1, tar_pgrp1, vic_pgrp1
+  }
+  
+  class EventType <<Node>> {
+    Properties from CSV:
+    - ev_type
+    - pe_type, sym_type
+    - exp_type, atk_type
+    - dsa_type, stat_act
+  }
+  
+  class IntensityMetrics <<Node>> {
+    Properties from CSV:
+    - n_killed_p, n_killed_a
+    - n_injurd, n_injurd_d
+    - n_of_ini_p, n_of_ini_a
+    - weapon, weap_grd
+    - pol_viol, stat_viol
+    - e_length
+  }
+  
+  class Drivers <<Node>> {
+    Properties from CSV:
+    - sc_animosity
+    - anti_gov_sentmnts
+    - class_conflict
+    - eco_scarcity
+    - pol_desires
+    - retain_power
+    - pers_security
+  }
+  
+  class Outcomes <<Node>> {
+    Properties from CSV:
+    - dam_prop
+    - property_damaged
+    - property_owner
+    - arrests
+    - victim_effect
+  }
+}
+
+' ============================================
+' Mapping Flow
+' ============================================
+
+CSV - -> Event : "eventid, year, month..."
+CSV - -> Location : "country, cowcode, gp3..."
+CSV - -> Actor : "INI_*, TAR_*, VIC_*"
+CSV - -> Group : "INI_IGRP1, INI_SGRP1..."
+CSV - -> EventType : "EV_TYPE, PE_TYPE..."
+CSV - -> IntensityMetrics : "N_KILLED_*, N_INJURD..."
+CSV - -> Drivers : "SC_ANIMOSITY, ANTI_GOV..."
+CSV - -> Outcomes : "DAM_PROP, arrests..."
+
+' ============================================
+' Relationships
+' ============================================
+
+package "Neo4j Relationships" {
+  class "Relationships" as Relationships {
+    OCCURRED_AT
+    HAS_TYPE
+    HAS_INTENSITY
+    DRIVEN_BY
+    RESULTS_IN
+    HAS_INITIATOR
+    HAS_TARGET
+    HAS_VICTIM
+    LINKED_TO
+    IS_A
+  }
+}
+
+Event - -> Relationships : "creates"
+Location - -> Relationships : "uses"
+Actor - -> Relationships : "uses"
+EventType - -> Relationships : "uses"
+IntensityMetrics - -> Relationships : "uses"
+Drivers - -> Relationships : "uses"
+Outcomes - -> Relationships : "uses"
+Group - -> Relationships : "uses"
+
+' ============================================
+' Transformation Rules
+' ============================================
+
+note right of CSV
+  Transformation Rules:
+  
+  1. One CSV row = One Event node
+  2. Actor nodes created from:
+     - INI_* columns -> Initiator
+     - TAR_* columns -> Target
+     - VIC_* columns -> Victim
+  
+  3. Group nodes created from:
+     - IGRP1 -> Insurgent Group
+     - SGRP1 -> Socio-cultural Group
+     - PGRP1 -> Political Group
+  
+  4. EventLink created when:
+     - linked = true
+     - FROM_EID and TO_EID present
+  
+  5. Location nodes deduplicated:
+     - Same country/cowcode = same node
+     - Hierarchical: Country -> Region
+end note
+
+note bottom of Relationships
+  Relationship Creation:
+  
+  - OCCURRED_AT: Every event -> location
+  - HAS_TYPE: Every event -> event type
+  - HAS_INTENSITY: Every event -> metrics
+  - DRIVEN_BY: Event -> drivers (if any true)
+  - RESULTS_IN: Event -> outcomes
+  - HAS_INITIATOR: Event -> actors
+  - HAS_TARGET: Event -> actors
+  - HAS_VICTIM: Event -> actors
+  - LINKED_TO: Event -> Event (when linked=true)
+  - IS_A: Actor -> Group/Individual/GovEntity
+end note
+
+@enduml
+
+@startuml SPEED_CSV_to_Neo4j_Mapping
+skinparam roundcorner 10
+skinparam shadowing false
+
+title SPEED Dataset - CSV to Neo4j Mapping (Data Transformation Guide)
+
+
+package "CSV Data Source" {
+  class "resolved_data_*.csv" as CSV {
+    Contains 106 columns
+    - -
+    - Event identifiers
+    - Actor information
+    - Location data
+    - Event types
+    - Intensity metrics
+    - Drivers
+    - Outcomes
+    - Temporal info
+  }
+}
+
+
+package "Neo4j Nodes" {
+  class Event <<Node>> {
+    Properties from CSV:
+    - eventid (PK)
+    - year, month, day
+    - event, posthoc, coup
+    - aid, news_source
+  }
+  
+  class Location <<Node>> {
+    Properties from CSV:
+    - country, cowcode
+    - region
+    - gp3, gp4 (names)
+    - gp7, gp8 (coordinates)
+    - loc_type
+  }
+  
+  class Actor <<Node>> {
+    Properties from CSV:
+    - actor_id (derived)
+    - role: initiator|target|victim
+    - type: group|individual|government
+  }
+  
+  class Group <<Node>> {
+    Properties from CSV:
+    - ini_igrp1, tar_igrp1, vic_igrp1
+    - ini_sgrp1, tar_sgrp1, vic_sgrp1
+    - ini_pgrp1, tar_pgrp1, vic_pgrp1
+  }
+  
+  class EventType <<Node>> {
+    Properties from CSV:
+    - ev_type
+    - pe_type, sym_type
+    - exp_type, atk_type
+    - dsa_type, stat_act
+  }
+  
+  class IntensityMetrics <<Node>> {
+    Properties from CSV:
+    - n_killed_p, n_killed_a
+    - n_injurd, n_injurd_d
+    - n_of_ini_p, n_of_ini_a
+    - weapon, weap_grd
+    - pol_viol, stat_viol
+    - e_length
+  }
+  
+  class Drivers <<Node>> {
+    Properties from CSV:
+    - sc_animosity
+    - anti_gov_sentmnts
+    - class_conflict
+    - eco_scarcity
+    - pol_desires
+    - retain_power
+    - pers_security
+  }
+  
+  class Outcomes <<Node>> {
+    Properties from CSV:
+    - dam_prop
+    - property_damaged
+    - property_owner
+    - arrests
+    - victim_effect
+  }
+}
+
+
+CSV - -> Event : "eventid, year, month..."
+CSV - -> Location : "country, cowcode, gp3..."
+CSV - -> Actor : "INI_*, TAR_*, VIC_*"
+CSV - -> Group : "INI_IGRP1, INI_SGRP1..."
+CSV - -> EventType : "EV_TYPE, PE_TYPE..."
+CSV - -> IntensityMetrics : "N_KILLED_*, N_INJURD..."
+CSV - -> Drivers : "SC_ANIMOSITY, ANTI_GOV..."
+CSV - -> Outcomes : "DAM_PROP, arrests..."
+
+
+package "Neo4j Relationships" {
+  class "Relationships" as Relationships {
+    OCCURRED_AT
+    HAS_TYPE
+    HAS_INTENSITY
+    DRIVEN_BY
+    RESULTS_IN
+    HAS_INITIATOR
+    HAS_TARGET
+    HAS_VICTIM
+    LINKED_TO
+    IS_A
+  }
+}
+
+Event - -> Relationships : "creates"
+Location - -> Relationships : "uses"
+Actor - -> Relationships : "uses"
+EventType - -> Relationships : "uses"
+IntensityMetrics - -> Relationships : "uses"
+Drivers - -> Relationships : "uses"
+Outcomes - -> Relationships : "uses"
+Group - -> Relationships : "uses"
+
+
+note right of CSV
+  Transformation Rules:
+  
+  1. One CSV row = One Event node
+  2. Actor nodes created from:
+     - INI_* columns -> Initiator
+     - TAR_* columns -> Target
+     - VIC_* columns -> Victim
+  
+  3. Group nodes created from:
+     - IGRP1 -> Insurgent Group
+     - SGRP1 -> Socio-cultural Group
+     - PGRP1 -> Political Group
+  
+  4. EventLink created when:
+     - linked = true
+     - FROM_EID and TO_EID present
+  
+  5. Location nodes deduplicated:
+     - Same country/cowcode = same node
+     - Hierarchical: Country -> Region
+end note
+
+note bottom of Relationships
+  Relationship Creation:
+  
+  - OCCURRED_AT: Every event -> location
+  - HAS_TYPE: Every event -> event type
+  - HAS_INTENSITY: Every event -> metrics
+  - DRIVEN_BY: Event -> drivers (if any true)
+  - RESULTS_IN: Event -> outcomes
+  - HAS_INITIATOR: Event -> actors
+  - HAS_TARGET: Event -> actors
+  - HAS_VICTIM: Event -> actors
+  - LINKED_TO: Event -> Event (when linked=true)
+  - IS_A: Actor -> Group/Individual/GovEntity
+end note
+
+@enduml
+
+PlantUML version 1.2021.00(Sun Jan 10 18:25:05 SGT 2021)
+(MIT source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: SG
+--></g></svg>
