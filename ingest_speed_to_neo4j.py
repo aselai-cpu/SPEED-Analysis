@@ -285,8 +285,8 @@ class SPEEDKnowledgeGraphIngestion:
                 if event_data:
                     query = """
                     UNWIND $events AS event
-                    CREATE (e:Event)
-                    SET e = event,
+                    MERGE (e:Event {eventid: event.eventid})
+                    SET e += event,
                         e.valid_from = CASE WHEN event.valid_from IS NOT NULL
                                            THEN datetime(event.valid_from)
                                            ELSE NULL END,
@@ -602,19 +602,100 @@ class SPEEDKnowledgeGraphIngestion:
         self.logger.info("Creating event relationships...")
 
         with self.driver.session() as session:
-            # OCCURRED_AT
+            # OCCURRED_AT - Match Events to Locations based on location data
             self.logger.info("Creating OCCURRED_AT relationships...")
-            query = """
-            MATCH (e:Event)
-            WHERE e.country IS NOT NULL
-            WITH e
-            MATCH (l:Location)
-            WHERE l.country = e.country
-            WITH e, l
-            LIMIT 1
-            MERGE (e)-[:OCCURRED_AT]->(l)
+            
+            # Build location_id for all rows using the same method as ingest_locations
+            # This ensures exact matching
+            location_cols = [
+                'Country in which the event occurred',
+                'Cowcode of country where event occurred',
+                'Country name(caps and lower case)',
+                'Lowest level entity name (caps and lower case)'
+            ]
+            
+            # Create location_id using the exact same logic as ingest_locations
+            location_df = self.df[location_cols + ['Event identification number']].copy()
+            location_df.columns = ['country', 'cowcode', 'gp3', 'gp4', 'eventid']
+            
+            # Match exact logic from ingest_locations
+            location_df['location_id'] = (
+                location_df['country'].fillna('').astype(str) + '_' +
+                location_df['cowcode'].fillna(0).astype(str) + '_' +
+                location_df['gp3'].fillna('').astype(str) + '_' +
+                location_df['gp4'].fillna('').astype(str)
+            )
+            
+            # Process in batches to avoid memory issues
+            batch_size = 10000
+            total_relationships = 0
+            
+            for i in tqdm(range(0, len(location_df), batch_size), desc="OCCURRED_AT relationships"):
+                batch = location_df.iloc[i:i + batch_size]
+                
+                # Prepare relationship data
+                relationships = []
+                for _, row in batch.iterrows():
+                    eventid = self.safe_str(row.get('eventid'))
+                    location_id = self.safe_str(row.get('location_id'))
+                    
+                    if eventid and location_id and location_id != '_0__':
+                        relationships.append({
+                            'eventid': eventid,
+                            'location_id': location_id
+                        })
+                
+                # Batch create relationships
+                if relationships:
+                    query = """
+                    UNWIND $relationships AS rel
+                    MATCH (e:Event {eventid: rel.eventid})
+                    MATCH (l:Location {location_id: rel.location_id})
+                    MERGE (e)-[:OCCURRED_AT]->(l)
+                    RETURN count(*) as created
+                    """
+                    result = session.run(query, relationships=relationships)
+                    record = result.single()
+                    if record:
+                        total_relationships += record['created']
+            
+            # Validate relationships were created
+            validation_query = """
+            MATCH (e:Event)-[:OCCURRED_AT]->(l:Location)
+            RETURN count(*) as relationship_count
             """
-            session.run(query)
+            result = session.run(validation_query)
+            record = result.single()
+            actual_count = record['relationship_count'] if record else 0
+            
+            self.logger.info(f"Created {total_relationships} OCCURRED_AT relationships")
+            self.logger.info(f"Validation: {actual_count} OCCURRED_AT relationships exist in graph")
+            
+            if actual_count == 0:
+                self.logger.warning("⚠️ No OCCURRED_AT relationships found! Checking for issues...")
+                # Check if events exist
+                event_count_query = "MATCH (e:Event) RETURN count(e) as count"
+                event_result = session.run(event_count_query)
+                event_record = event_result.single()
+                event_count = event_record['count'] if event_record else 0
+                
+                # Check if locations exist
+                loc_count_query = "MATCH (l:Location) RETURN count(l) as count"
+                loc_result = session.run(loc_count_query)
+                loc_record = loc_result.single()
+                loc_count = loc_record['count'] if loc_record else 0
+                
+                self.logger.info(f"Events in graph: {event_count}, Locations in graph: {loc_count}")
+                
+                # Sample a few location_ids to debug
+                sample_query = """
+                MATCH (l:Location)
+                RETURN l.location_id as location_id
+                LIMIT 5
+                """
+                sample_result = session.run(sample_query)
+                sample_ids = [record['location_id'] for record in sample_result]
+                self.logger.info(f"Sample location_ids: {sample_ids}")
 
             # HAS_TYPE
             self.logger.info("Creating HAS_TYPE relationships...")

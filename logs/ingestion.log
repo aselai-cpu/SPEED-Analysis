@@ -14,3 +14,248 @@
 2026-01-21 17:44:18,771 - SPEED_Ingestion - INFO - Ingesting Actor nodes...
 2026-01-21 17:44:22,376 - SPEED_Ingestion - INFO - Created 3014 Actor nodes
 2026-01-21 17:44:22,422 - SPEED_Ingestion - INFO - Ingesting event characteristics...
+2026-01-21 18:18:53,498 - SPEED_Ingestion - INFO - Event characteristics ingested successfully
+2026-01-21 18:18:53,545 - SPEED_Ingestion - INFO - Ingesting temporal information...
+2026-01-21 18:20:04,323 - SPEED_Ingestion - INFO - Temporal information ingested successfully
+2026-01-21 18:20:04,370 - SPEED_Ingestion - INFO - Ingesting news sources...
+2026-01-21 18:20:35,494 - SPEED_Ingestion - INFO - Created 25939 NewsSource nodes
+2026-01-21 18:20:35,528 - SPEED_Ingestion - INFO - Creating event relationships...
+2026-01-21 18:20:35,528 - SPEED_Ingestion - INFO - Creating OCCURRED_AT relationships...
+2026-01-21 18:20:35,708 - SPEED_Ingestion - INFO - Creating HAS_TYPE relationships...
+2026-01-21 18:20:36,387 - SPEED_Ingestion - INFO - Creating HAS_INTENSITY relationships...
+2026-01-21 18:20:37,093 - SPEED_Ingestion - INFO - Creating DRIVEN_BY relationships...
+2026-01-21 18:20:37,731 - SPEED_Ingestion - INFO - Creating RESULTS_IN relationships...
+2026-01-21 18:20:38,219 - SPEED_Ingestion - INFO - Creating HAS_TEMPORAL_INFO relationships...
+2026-01-21 18:20:39,081 - SPEED_Ingestion - INFO - Creating REPORTED_IN relationships...
+2026-01-21 18:20:39,426 - SPEED_Ingestion - INFO - Event relationships created successfully
+2026-01-21 18:20:39,426 - SPEED_Ingestion - INFO - Creating actor relationships...
+2026-01-21 18:21:06,930 - SPEED_Ingestion - INFO - Actor relationships created successfully
+2026-01-21 18:21:06,965 - SPEED_Ingestion - INFO - Creating temporal relationships...
+2026-01-21 18:21:33,803 - SPEED_Ingestion - INFO - Temporal relationships created successfully
+2026-01-21 18:21:33,821 - SPEED_Ingestion - INFO - Creating location hierarchy...
+2026-01-21 18:21:33,821 - SPEED_Ingestion - INFO - Location hierarchy creation skipped (requires geographic data)
+2026-01-21 18:21:33,821 - SPEED_Ingestion - INFO - Validating graph structure...
+2026-01-21 18:21:33,821 - SPEED_Ingestion - INFO - 
+=== Graph Statistics ===
+2026-01-21 18:21:33,832 - SPEED_Ingestion - INFO - Events: 62,141
+2026-01-21 18:21:33,836 - SPEED_Ingestion - INFO - Locations: 6,192
+2026-01-21 18:21:33,840 - SPEED_Ingestion - INFO - Actors: 3,014
+2026-01-21 18:21:33,845 - SPEED_Ingestion - INFO - EventTypes: 62,141
+2026-01-21 18:21:33,850 - SPEED_Ingestion - INFO - IntensityMetrics: 62,141
+2026-01-21 18:21:33,859 - SPEED_Ingestion - INFO - Drivers: 62,141
+2026-01-21 18:21:33,867 - SPEED_Ingestion - INFO - Outcomes: 62,141
+2026-01-21 18:21:33,874 - SPEED_Ingestion - INFO - TemporalInfo: 62,141
+2026-01-21 18:21:33,881 - SPEED_Ingestion - INFO - NewsSources: 25,939
+2026-01-21 18:21:33,881 - SPEED_Ingestion - INFO - 
+=== Relationship Statistics ===
+2026-01-21 18:21:33,984 - SPEED_Ingestion - INFO - HAS_TYPE: 62,141
+2026-01-21 18:21:33,984 - SPEED_Ingestion - INFO - HAS_INTENSITY: 62,141
+2026-01-21 18:21:33,984 - SPEED_Ingestion - INFO - RESULTS_IN: 62,141
+2026-01-21 18:21:33,985 - SPEED_Ingestion - INFO - HAS_TEMPORAL_INFO: 62,141
+2026-01-21 18:21:33,985 - SPEED_Ingestion - INFO - DRIVEN_BY: 46,134
+2026-01-21 18:21:33,985 - SPEED_Ingestion - INFO - HAS_INITIATOR: 17,516
+2026-01-21 18:21:33,985 - SPEED_Ingestion - INFO - LINKED_TO: 14,889
+2026-01-21 18:21:33,985 - SPEED_Ingestion - INFO - HAS_TARGET: 11,795
+2026-01-21 18:21:33,985 - SPEED_Ingestion - INFO - HAS_VICTIM: 1,022
+2026-01-21 18:21:33,985 - SPEED_Ingestion - INFO - OCCURRED_AT: 1
+2026-01-21 18:21:33,985 - SPEED_Ingestion - INFO - 
+=== Data Quality Checks ===
+2026-01-21 18:21:34,065 - SPEED_Ingestion - INFO - Events without locations: ⚠️  62,140 issues
+2026-01-21 18:21:34,122 - SPEED_Ingestion - INFO - Events without temporal info: ✅ PASS
+2026-01-21 18:21:34,140 - SPEED_Ingestion - INFO - Actors without type: ✅ PASS
+2026-01-21 18:21:34,140 - SPEED_Ingestion - INFO - 
+=== Validation Complete ===
+2026-01-21 18:21:34,140 - SPEED_Ingestion - INFO - ================================================================================
+2026-01-21 18:21:34,140 - SPEED_Ingestion - INFO - ✅ Ingestion Complete Successfully!
+2026-01-21 18:21:34,140 - SPEED_Ingestion - INFO - ================================================================================
+2026-01-21 18:21:34,141 - SPEED_Ingestion - INFO - Neo4j connection closed
+2026-01-21 23:42:38,506 - SPEED_Ingestion - INFO - ================================================================================
+2026-01-21 23:42:38,506 - SPEED_Ingestion - INFO - Starting SPEED Temporal Knowledge Graph Ingestion
+2026-01-21 23:42:38,506 - SPEED_Ingestion - INFO - ================================================================================
+2026-01-21 23:42:38,550 - SPEED_Ingestion - INFO - Connected to Neo4j at bolt://localhost:7687
+2026-01-21 23:42:38,551 - SPEED_Ingestion - INFO - Loading CSV from output/resolved_data_20260121_152103.csv
+2026-01-21 23:42:38,890 - SPEED_Ingestion - INFO - Loaded 62141 rows and 106 columns
+2026-01-21 23:42:38,890 - SPEED_Ingestion - INFO - Columns: ['Cowcode of country where event occurred', 'Month of event - multi-day=average', 'Year of event - multi-day=average', 'Event identification number', 'Country in which the event occurred', 'Name of insurgent group initiator', 'Name of insurgent group target', 'Name of insurgent group victim', 'Name of socio-cultural group initiator', 'Name of socio-cultural group target']...
+2026-01-21 23:42:38,890 - SPEED_Ingestion - INFO - Creating constraints and indexes...
+2026-01-21 23:42:39,012 - SPEED_Ingestion - INFO - Constraints and indexes created successfully
+2026-01-21 23:42:39,012 - SPEED_Ingestion - INFO - Ingesting Event nodes...
+2026-01-21 23:42:42,958 - SPEED_Ingestion - INFO - Created 62141 Event nodes
+2026-01-21 23:42:42,959 - SPEED_Ingestion - INFO - Ingesting Location nodes...
+2026-01-21 23:42:48,230 - SPEED_Ingestion - INFO - Created 6192 Location nodes
+2026-01-21 23:42:48,230 - SPEED_Ingestion - INFO - Ingesting Actor nodes...
+2026-01-21 23:42:52,422 - SPEED_Ingestion - INFO - Created 3014 Actor nodes
+2026-01-21 23:42:52,442 - SPEED_Ingestion - INFO - Ingesting event characteristics...
+2026-01-22 00:19:52,341 - SPEED_Ingestion - INFO - Event characteristics ingested successfully
+2026-01-22 00:19:52,401 - SPEED_Ingestion - INFO - Ingesting temporal information...
+2026-01-22 00:20:42,969 - SPEED_Ingestion - INFO - Temporal information ingested successfully
+2026-01-22 00:20:43,001 - SPEED_Ingestion - INFO - Ingesting news sources...
+2026-01-22 00:21:04,674 - SPEED_Ingestion - INFO - Created 25939 NewsSource nodes
+2026-01-22 00:21:04,708 - SPEED_Ingestion - INFO - Creating event relationships...
+2026-01-22 00:21:04,708 - SPEED_Ingestion - INFO - Creating OCCURRED_AT relationships...
+2026-01-22 00:21:06,329 - SPEED_Ingestion - INFO - Created 62071 OCCURRED_AT relationships
+2026-01-22 00:21:06,329 - SPEED_Ingestion - INFO - Creating HAS_TYPE relationships...
+2026-01-22 00:21:06,696 - SPEED_Ingestion - INFO - Creating HAS_INTENSITY relationships...
+2026-01-22 00:21:07,308 - SPEED_Ingestion - INFO - Creating DRIVEN_BY relationships...
+2026-01-22 00:21:07,909 - SPEED_Ingestion - INFO - Creating RESULTS_IN relationships...
+2026-01-22 00:21:08,574 - SPEED_Ingestion - INFO - Creating HAS_TEMPORAL_INFO relationships...
+2026-01-22 00:21:09,304 - SPEED_Ingestion - INFO - Creating REPORTED_IN relationships...
+2026-01-22 00:21:09,581 - SPEED_Ingestion - INFO - Event relationships created successfully
+2026-01-22 00:21:09,584 - SPEED_Ingestion - INFO - Creating actor relationships...
+2026-01-22 00:21:34,820 - SPEED_Ingestion - INFO - Actor relationships created successfully
+2026-01-22 00:21:34,850 - SPEED_Ingestion - INFO - Creating temporal relationships...
+2026-01-22 00:21:58,227 - SPEED_Ingestion - INFO - Temporal relationships created successfully
+2026-01-22 00:21:58,250 - SPEED_Ingestion - INFO - Creating location hierarchy...
+2026-01-22 00:21:58,250 - SPEED_Ingestion - INFO - Location hierarchy creation skipped (requires geographic data)
+2026-01-22 00:21:58,250 - SPEED_Ingestion - INFO - Validating graph structure...
+2026-01-22 00:21:58,250 - SPEED_Ingestion - INFO - 
+=== Graph Statistics ===
+2026-01-22 00:21:58,258 - SPEED_Ingestion - INFO - Events: 62,141
+2026-01-22 00:21:58,262 - SPEED_Ingestion - INFO - Locations: 6,192
+2026-01-22 00:21:58,266 - SPEED_Ingestion - INFO - Actors: 3,014
+2026-01-22 00:21:58,270 - SPEED_Ingestion - INFO - EventTypes: 62,141
+2026-01-22 00:21:58,275 - SPEED_Ingestion - INFO - IntensityMetrics: 62,141
+2026-01-22 00:21:58,279 - SPEED_Ingestion - INFO - Drivers: 62,141
+2026-01-22 00:21:58,284 - SPEED_Ingestion - INFO - Outcomes: 62,141
+2026-01-22 00:21:58,288 - SPEED_Ingestion - INFO - TemporalInfo: 62,141
+2026-01-22 00:21:58,292 - SPEED_Ingestion - INFO - NewsSources: 25,939
+2026-01-22 00:21:58,292 - SPEED_Ingestion - INFO - 
+=== Relationship Statistics ===
+2026-01-22 00:21:58,328 - SPEED_Ingestion - INFO - HAS_TYPE: 62,141
+2026-01-22 00:21:58,328 - SPEED_Ingestion - INFO - HAS_INTENSITY: 62,141
+2026-01-22 00:21:58,328 - SPEED_Ingestion - INFO - RESULTS_IN: 62,141
+2026-01-22 00:21:58,328 - SPEED_Ingestion - INFO - HAS_TEMPORAL_INFO: 62,141
+2026-01-22 00:21:58,328 - SPEED_Ingestion - INFO - DRIVEN_BY: 46,134
+2026-01-22 00:21:58,328 - SPEED_Ingestion - INFO - HAS_INITIATOR: 17,516
+2026-01-22 00:21:58,328 - SPEED_Ingestion - INFO - LINKED_TO: 14,889
+2026-01-22 00:21:58,328 - SPEED_Ingestion - INFO - HAS_TARGET: 11,795
+2026-01-22 00:21:58,328 - SPEED_Ingestion - INFO - HAS_VICTIM: 1,022
+2026-01-22 00:21:58,328 - SPEED_Ingestion - INFO - 
+=== Data Quality Checks ===
+2026-01-22 00:21:58,359 - SPEED_Ingestion - INFO - Events without locations: ⚠️  62,141 issues
+2026-01-22 00:21:58,391 - SPEED_Ingestion - INFO - Events without temporal info: ✅ PASS
+2026-01-22 00:21:58,398 - SPEED_Ingestion - INFO - Actors without type: ✅ PASS
+2026-01-22 00:21:58,398 - SPEED_Ingestion - INFO - 
+=== Validation Complete ===
+2026-01-22 00:21:58,398 - SPEED_Ingestion - INFO - ================================================================================
+2026-01-22 00:21:58,398 - SPEED_Ingestion - INFO - ✅ Ingestion Complete Successfully!
+2026-01-22 00:21:58,398 - SPEED_Ingestion - INFO - ================================================================================
+2026-01-22 00:21:58,398 - SPEED_Ingestion - INFO - Neo4j connection closed
+2026-01-22 00:35:04,403 - SPEED_Ingestion - INFO - ================================================================================
+2026-01-22 00:35:04,404 - SPEED_Ingestion - INFO - Starting SPEED Temporal Knowledge Graph Ingestion
+2026-01-22 00:35:04,404 - SPEED_Ingestion - INFO - ================================================================================
+2026-01-22 00:35:04,448 - SPEED_Ingestion - INFO - Connected to Neo4j at bolt://localhost:7687
+2026-01-22 00:35:04,448 - SPEED_Ingestion - INFO - Loading CSV from output/resolved_data_20260121_152103.csv
+2026-01-22 00:35:04,841 - SPEED_Ingestion - INFO - Loaded 62141 rows and 106 columns
+2026-01-22 00:35:04,841 - SPEED_Ingestion - INFO - Columns: ['Cowcode of country where event occurred', 'Month of event - multi-day=average', 'Year of event - multi-day=average', 'Event identification number', 'Country in which the event occurred', 'Name of insurgent group initiator', 'Name of insurgent group target', 'Name of insurgent group victim', 'Name of socio-cultural group initiator', 'Name of socio-cultural group target']...
+2026-01-22 00:35:04,841 - SPEED_Ingestion - INFO - Creating constraints and indexes...
+2026-01-22 00:35:04,871 - SPEED_Ingestion - INFO - Constraints and indexes created successfully
+2026-01-22 00:35:04,871 - SPEED_Ingestion - INFO - Ingesting Event nodes...
+2026-01-22 00:35:05,429 - SPEED_Ingestion - ERROR - ❌ Ingestion failed: {code: Neo.ClientError.Schema.ConstraintValidationFailed} {message: Node(0) already exists with label `Event` and property `eventid` = 'EID40124'}
+Traceback (most recent call last):
+  File "/Users/aselaillayapparachchi/code/GraphRAG/Speed-Start/ingest_speed_to_neo4j.py", line 974, in run_ingestion
+    self.ingest_events()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/Users/aselaillayapparachchi/code/GraphRAG/Speed-Start/ingest_speed_to_neo4j.py", line 298, in ingest_events
+    session.run(query, events=event_data)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aselaillayapparachchi/code/GraphRAG/Speed-Start/.venv/lib/python3.14/site-packages/neo4j/_sync/work/session.py", line 313, in run
+    self._auto_result._run(
+    ~~~~~~~~~~~~~~~~~~~~~~^
+        query, parameters, self._config.database,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        self._config.notifications_disabled_categories,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/aselaillayapparachchi/code/GraphRAG/Speed-Start/.venv/lib/python3.14/site-packages/neo4j/_sync/work/result.py", line 181, in _run
+    self._attach()
+    ~~~~~~~~~~~~^^
+  File "/Users/aselaillayapparachchi/code/GraphRAG/Speed-Start/.venv/lib/python3.14/site-packages/neo4j/_sync/work/result.py", line 298, in _attach
+    self._connection.fetch_message()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/aselaillayapparachchi/code/GraphRAG/Speed-Start/.venv/lib/python3.14/site-packages/neo4j/_sync/io/_common.py", line 178, in inner
+    func(*args, **kwargs)
+    ~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/aselaillayapparachchi/code/GraphRAG/Speed-Start/.venv/lib/python3.14/site-packages/neo4j/_sync/io/_bolt.py", line 849, in fetch_message
+    res = self._process_message(tag, fields)
+  File "/Users/aselaillayapparachchi/code/GraphRAG/Speed-Start/.venv/lib/python3.14/site-packages/neo4j/_sync/io/_bolt5.py", line 369, in _process_message
+    response.on_failure(summary_metadata or {})
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aselaillayapparachchi/code/GraphRAG/Speed-Start/.venv/lib/python3.14/site-packages/neo4j/_sync/io/_common.py", line 245, in on_failure
+    raise Neo4jError.hydrate(**metadata)
+neo4j.exceptions.ConstraintError: {code: Neo.ClientError.Schema.ConstraintValidationFailed} {message: Node(0) already exists with label `Event` and property `eventid` = 'EID40124'}
+2026-01-22 00:35:05,432 - SPEED_Ingestion - INFO - Neo4j connection closed
+2026-01-22 00:39:21,099 - SPEED_Ingestion - INFO - ================================================================================
+2026-01-22 00:39:21,099 - SPEED_Ingestion - INFO - Starting SPEED Temporal Knowledge Graph Ingestion
+2026-01-22 00:39:21,099 - SPEED_Ingestion - INFO - ================================================================================
+2026-01-22 00:39:21,121 - SPEED_Ingestion - INFO - Connected to Neo4j at bolt://localhost:7687
+2026-01-22 00:39:21,121 - SPEED_Ingestion - INFO - Loading CSV from output/resolved_data_20260121_152103.csv
+2026-01-22 00:39:21,475 - SPEED_Ingestion - INFO - Loaded 62141 rows and 106 columns
+2026-01-22 00:39:21,476 - SPEED_Ingestion - INFO - Columns: ['Cowcode of country where event occurred', 'Month of event - multi-day=average', 'Year of event - multi-day=average', 'Event identification number', 'Country in which the event occurred', 'Name of insurgent group initiator', 'Name of insurgent group target', 'Name of insurgent group victim', 'Name of socio-cultural group initiator', 'Name of socio-cultural group target']...
+2026-01-22 00:39:21,476 - SPEED_Ingestion - INFO - Creating constraints and indexes...
+2026-01-22 00:39:21,489 - SPEED_Ingestion - INFO - Constraints and indexes created successfully
+2026-01-22 00:39:21,489 - SPEED_Ingestion - INFO - Ingesting Event nodes...
+2026-01-22 00:39:25,382 - SPEED_Ingestion - INFO - Created 62141 Event nodes
+2026-01-22 00:39:25,383 - SPEED_Ingestion - INFO - Ingesting Location nodes...
+2026-01-22 00:39:29,236 - SPEED_Ingestion - INFO - Created 6192 Location nodes
+2026-01-22 00:39:29,237 - SPEED_Ingestion - INFO - Ingesting Actor nodes...
+2026-01-22 00:39:32,387 - SPEED_Ingestion - INFO - Created 3014 Actor nodes
+2026-01-22 00:39:32,416 - SPEED_Ingestion - INFO - Ingesting event characteristics...
+2026-01-22 01:38:10,229 - SPEED_Ingestion - INFO - Event characteristics ingested successfully
+2026-01-22 01:38:10,303 - SPEED_Ingestion - INFO - Ingesting temporal information...
+2026-01-22 01:38:58,877 - SPEED_Ingestion - INFO - Temporal information ingested successfully
+2026-01-22 01:38:58,894 - SPEED_Ingestion - INFO - Ingesting news sources...
+2026-01-22 01:39:22,092 - SPEED_Ingestion - INFO - Created 25939 NewsSource nodes
+2026-01-22 01:39:22,133 - SPEED_Ingestion - INFO - Creating event relationships...
+2026-01-22 01:39:22,133 - SPEED_Ingestion - INFO - Creating OCCURRED_AT relationships...
+2026-01-22 01:39:23,847 - SPEED_Ingestion - INFO - Created 62141 OCCURRED_AT relationships
+2026-01-22 01:39:23,847 - SPEED_Ingestion - INFO - Validation: 62141 OCCURRED_AT relationships exist in graph
+2026-01-22 01:39:23,847 - SPEED_Ingestion - INFO - Creating HAS_TYPE relationships...
+2026-01-22 01:39:24,061 - SPEED_Ingestion - INFO - Creating HAS_INTENSITY relationships...
+2026-01-22 01:39:24,167 - SPEED_Ingestion - INFO - Creating DRIVEN_BY relationships...
+2026-01-22 01:39:24,279 - SPEED_Ingestion - INFO - Creating RESULTS_IN relationships...
+2026-01-22 01:39:24,360 - SPEED_Ingestion - INFO - Creating HAS_TEMPORAL_INFO relationships...
+2026-01-22 01:39:24,534 - SPEED_Ingestion - INFO - Creating REPORTED_IN relationships...
+2026-01-22 01:39:24,551 - SPEED_Ingestion - INFO - Event relationships created successfully
+2026-01-22 01:39:24,554 - SPEED_Ingestion - INFO - Creating actor relationships...
+2026-01-22 01:39:54,631 - SPEED_Ingestion - INFO - Actor relationships created successfully
+2026-01-22 01:39:54,664 - SPEED_Ingestion - INFO - Creating temporal relationships...
+2026-01-22 01:40:24,858 - SPEED_Ingestion - INFO - Temporal relationships created successfully
+2026-01-22 01:40:24,886 - SPEED_Ingestion - INFO - Creating location hierarchy...
+2026-01-22 01:40:24,886 - SPEED_Ingestion - INFO - Location hierarchy creation skipped (requires geographic data)
+2026-01-22 01:40:24,886 - SPEED_Ingestion - INFO - Validating graph structure...
+2026-01-22 01:40:24,886 - SPEED_Ingestion - INFO - 
+=== Graph Statistics ===
+2026-01-22 01:40:24,890 - SPEED_Ingestion - INFO - Events: 62,141
+2026-01-22 01:40:24,893 - SPEED_Ingestion - INFO - Locations: 6,192
+2026-01-22 01:40:24,896 - SPEED_Ingestion - INFO - Actors: 3,014
+2026-01-22 01:40:24,898 - SPEED_Ingestion - INFO - EventTypes: 62,141
+2026-01-22 01:40:24,901 - SPEED_Ingestion - INFO - IntensityMetrics: 62,141
+2026-01-22 01:40:24,903 - SPEED_Ingestion - INFO - Drivers: 62,141
+2026-01-22 01:40:24,905 - SPEED_Ingestion - INFO - Outcomes: 62,141
+2026-01-22 01:40:24,907 - SPEED_Ingestion - INFO - TemporalInfo: 62,141
+2026-01-22 01:40:24,910 - SPEED_Ingestion - INFO - NewsSources: 25,939
+2026-01-22 01:40:24,910 - SPEED_Ingestion - INFO - 
+=== Relationship Statistics ===
+2026-01-22 01:40:24,937 - SPEED_Ingestion - INFO - OCCURRED_AT: 62,141
+2026-01-22 01:40:24,938 - SPEED_Ingestion - INFO - HAS_TYPE: 62,141
+2026-01-22 01:40:24,938 - SPEED_Ingestion - INFO - HAS_INTENSITY: 62,141
+2026-01-22 01:40:24,938 - SPEED_Ingestion - INFO - RESULTS_IN: 62,141
+2026-01-22 01:40:24,938 - SPEED_Ingestion - INFO - HAS_TEMPORAL_INFO: 62,141
+2026-01-22 01:40:24,938 - SPEED_Ingestion - INFO - DRIVEN_BY: 46,134
+2026-01-22 01:40:24,938 - SPEED_Ingestion - INFO - HAS_INITIATOR: 17,516
+2026-01-22 01:40:24,938 - SPEED_Ingestion - INFO - LINKED_TO: 14,889
+2026-01-22 01:40:24,938 - SPEED_Ingestion - INFO - HAS_TARGET: 11,795
+2026-01-22 01:40:24,938 - SPEED_Ingestion - INFO - HAS_VICTIM: 1,022
+2026-01-22 01:40:24,938 - SPEED_Ingestion - INFO - 
+=== Data Quality Checks ===
+2026-01-22 01:40:24,992 - SPEED_Ingestion - INFO - Events without locations: ✅ PASS
+2026-01-22 01:40:25,018 - SPEED_Ingestion - INFO - Events without temporal info: ✅ PASS
+2026-01-22 01:40:25,019 - SPEED_Ingestion - INFO - Actors without type: ✅ PASS
+2026-01-22 01:40:25,019 - SPEED_Ingestion - INFO - 
+=== Validation Complete ===
+2026-01-22 01:40:25,019 - SPEED_Ingestion - INFO - ================================================================================
+2026-01-22 01:40:25,019 - SPEED_Ingestion - INFO - ✅ Ingestion Complete Successfully!
+2026-01-22 01:40:25,019 - SPEED_Ingestion - INFO - ================================================================================
+2026-01-22 01:40:25,020 - SPEED_Ingestion - INFO - Neo4j connection closed
