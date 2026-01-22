@@ -1,0 +1,18 @@
+# SPEED Dataset - Neo4j Ingestion Configuration
+
+neo4j:
+  uri: bolt://localhost:7687
+  user: neo4j
+  password: speedkg123
+
+data:
+  csv_path: output/resolved_data_20260121_152103.csv
+
+ingestion:
+  batch_size: 10000
+  parallel: false
+  checkpoint_enabled: false
+
+logging:
+  level: INFO
+  file: logs/ingestion.log

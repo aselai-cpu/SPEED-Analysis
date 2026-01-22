@@ -1,0 +1,77 @@
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* D3 Visualization Styles */
+.visualization-container {
+  margin: 20px 0;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 12px;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* D3 Axes */
+.axis text {
+  font-size: 12px;
+  fill: #666;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #ccc;
+  shape-rendering: crispEdges;
+}
+
+.axis-label {
+  font-size: 14px;
+  fill: #333;
+  font-weight: 500;
+}
+
+/* Network Graph */
+.network-graph .links line {
+  stroke-opacity: 0.6;
+}
+
+.network-graph .nodes circle {
+  stroke: #fff;
+  stroke-width: 2px;
+  cursor: pointer;
+}
+
+.network-graph .nodes text {
+  font-size: 12px;
+  pointer-events: none;
+}
+
+/* Timeline */
+.timeline-viz .event-circle {
+  cursor: pointer;
+  transition: r 0.2s;
+}
+
+.timeline-viz .event-circle:hover {
+  r: 10;
+}

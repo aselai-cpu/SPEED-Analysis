@@ -1,0 +1,837 @@
+# SPEED Dataset - Neo4j Temporal Knowledge Graph Ingestion Script
+
+## Context
+
+You are tasked with creating a Python ingestion script that transforms the SPEED (Social, Political and Economic Event Database) CSV data into a Neo4j Temporal Knowledge Graph. This script will enable advanced querying and analysis of civil unrest events globally from 1946 to present.
+
+## Objectives
+
+1. Create a Python script (`ingest_speed_to_neo4j.py`) that ingests `output/resolved_data_20260121_152103.csv` into Neo4j
+2. Implement the graph ontology specified in `/design/speed_csv_to_neo4j_mapping.puml` and `/design/speed_neo4j_graph_model.puml`
+3. Apply Temporal Knowledge Graph (TKG) best practices and idiosyncrasies
+4. Ensure the resulting knowledge graph can answer the research questions in `/data/Questions.txt`
+5. Follow the implementation guide in `/design/IMPLEMENTATION_GUIDE.md`
+
+## Neo4j Database Configuration
+
+**Connection Details:**
+- **Container Name:** speedkg-neo4j
+- **Image:** neo4j:5.16-community
+- **Bolt URI:** bolt://localhost:7687
+- **HTTP URI:** http://localhost:7474
+- **Credentials:**
+  - Username: neo4j
+  - Password: speedkg123 (default from NEO4J_PASSWORD env var)
+- **Plugins:** APOC enabled
+- **Import Directory:** ./data mounted to /import in container
+
+## Data Source
+
+**CSV File:** `output/resolved_data_20260121_152103.csv`
+- **Total Columns:** 106
+- **Key Column Groups:**
+  - Event identifiers (eventid, year, month, day)
+  - Actor information (INI_*, TAR_*, VIC_* columns for initiators, targets, victims)
+  - Location data (country, cowcode, region, gp3/gp4 names, gp7/gp8 coordinates)
+  - Event types (ev_type, pe_type, sym_type, exp_type, atk_type, dsa_type, stat_act)
+  - Intensity metrics (n_killed_*, n_injurd*, n_of_ini_*, weapon, weap_grd, pol_viol, stat_viol)
+  - Drivers (sc_animosity, anti_gov_sentmnts, class_conflict, eco_scarcity, pol_desires, retain_power, pers_security)
+  - Outcomes (dam_prop, property_damaged, property_owner, arrests, victim_effect)
+  - Temporal info (date_type, julian dates, e_length)
+  - Event linkage (linked, link_type, from_eid, to_eid)
+  - News source (aid, news_source, pubdate, code_date)
+
+## Ontology Design - Node Types
+
+### 1. Event (Core Node)
+**Properties:**
+- eventid (UNIQUE, PRIMARY KEY)
+- year, month, day
+- event (Boolean - is this an actual event)
+- posthoc (post-hoc reaction type)
+- quasi_event (Boolean)
+- coup, coup_failed (Boolean flags)
+
+**Temporal Properties (TKG-specific):**
+- valid_from: DateTime (event start)
+- valid_to: DateTime (event end)
+- transaction_time: DateTime (when data was recorded/coded)
+
+### 2. Location (Spatial Node)
+**Properties:**
+- location_id (UNIQUE - derived from country+cowcode+gp3+gp4)
+- country, cowcode
+- region (8-category world region)
+- gp3, gp4 (place names)
+- latitude (gp7), longitude (gp8)
+- loc_type (location type: densely populated, military facility, border area, etc.)
+
+**Indexing:** Spatial index on (latitude, longitude) for geographic queries
+
+### 3. Actor (Polymorphic Node with Labels)
+**Base Properties:**
+- actor_id (UNIQUE - derived composite key)
+- name (actor name)
+- actor_role: initiator | target | victim
+
+**Actor Type Labels (multiple labels per node):**
+- `:Actor:Group` - Insurgent, socio-cultural, or political groups
+- `:Actor:Individual` - Government or non-government individuals
+- `:Actor:GovernmentEntity` - Government agencies
+
+**Group-specific Properties:**
+- group_category: insurgent | sociocultural | political
+- group_name (ini_igrp1, ini_sgrp1, ini_pgrp1, etc.)
+
+**Individual-specific Properties:**
+- individual_type: gov_individual | nongov_individual
+- gov_level (if government)
+
+**GovernmentEntity-specific Properties:**
+- gov_level: national | subnational | local | military
+- entity_type
+
+### 4. EventType (Characteristic Node)
+**Properties:**
+- type_id (UNIQUE - derived)
+- ev_type (Political Expression, Political Attacks, Disruptive State Acts)
+- pe_type (political expression subtype)
+- sym_type (symbolic event type)
+- exp_type (expression type)
+- atk_type (attack type)
+- dsa_type (disruptive state act type)
+- stat_act (state action type)
+
+### 5. IntensityMetrics (Measurement Node)
+**Properties:**
+- metrics_id (UNIQUE - derived from eventid)
+- n_killed_p, n_killed_a (pristine and adjusted killed count)
+- n_injurd, n_injurd_d (injured counts)
+- n_of_ini_p, n_of_ini_a (initiator counts)
+- weapon, weap_grd (weapon types)
+- pol_viol, stat_viol (violence intensity scores)
+- pol_express (political expression intensity)
+- mass_express (mass expression intensity)
+- tang_state_repr (tangible state repression)
+- intang_repr (intangible repression)
+- e_length (event length)
+
+### 6. Drivers (Causal Node)
+**Properties:**
+- driver_id (UNIQUE - derived from eventid)
+- sc_animosity (socio-cultural animosities)
+- anti_gov_sentmnts (anti-government sentiments)
+- class_conflict (class-based conflict)
+- eco_scarcity (ecological resource scarcities)
+- pol_desires (desire for political rights)
+- retain_power (desire to retain political power)
+- pers_security (personal security concerns)
+
+### 7. Outcomes (Result Node)
+**Properties:**
+- outcome_id (UNIQUE - derived from eventid)
+- dam_prop (property damaged)
+- property_damaged (type of property)
+- property_owner (owner type)
+- arrests (arrests made)
+- victim_effect (effect on victims)
+- ctry_bias (country bias in reporting)
+
+### 8. TemporalInfo (TKG Temporal Node)
+**Properties:**
+- temporal_id (UNIQUE - derived from eventid)
+- date_type (type of date info: precise, estimated, etc.)
+- day (single day)
+- jdate_pre (precise julian start date)
+- jdate_pre_end (precise julian end date)
+- jdate_est (estimated julian start date)
+- jdate_est_end (estimated julian end date)
+- ear_jdate (earliest start day)
+- lat_jdate (latest end day)
+- duration_days (event length in days)
+
+**Temporal Conversion:**
+- Convert Julian dates to ISO DateTime (Julian Date 0 = January 1, 1945)
+- Create valid_from and valid_to timestamps
+
+### 9. NewsSource (Provenance Node)
+**Properties:**
+- source_id (UNIQUE - aid)
+- aid (article ID)
+- news_source (NYT, WSJ, etc.)
+- pub_month, pub_day, pub_year (publication date)
+- code_year, code_month, code_day (coding date)
+- recap (is recapitulation)
+
+## Ontology Design - Relationship Types
+
+### Core Event Relationships
+
+1. **(:Event)-[:OCCURRED_AT]->(:Location)**
+   - Properties: None
+   - Cardinality: Many events to one location
+
+2. **(:Event)-[:HAS_TYPE]->(:EventType)**
+   - Properties: None
+   - Cardinality: One-to-one
+
+3. **(:Event)-[:HAS_INTENSITY]->(:IntensityMetrics)**
+   - Properties: None
+   - Cardinality: One-to-one
+
+4. **(:Event)-[:DRIVEN_BY]->(:Drivers)**
+   - Properties: None
+   - Create only if at least one driver is true
+   - Cardinality: One-to-one (when exists)
+
+5. **(:Event)-[:RESULTS_IN]->(:Outcomes)**
+   - Properties: None
+   - Cardinality: One-to-one
+
+6. **(:Event)-[:HAS_TEMPORAL_INFO]->(:TemporalInfo)**
+   - Properties: None
+   - Cardinality: One-to-one
+
+7. **(:Event)-[:REPORTED_IN]->(:NewsSource)**
+   - Properties: None
+   - Cardinality: Many events to one source
+
+### Actor Relationships
+
+8. **(:Event)-[:HAS_INITIATOR]->(:Actor)**
+   - Properties:
+     - know_ini (was initiator known)
+     - ambig_ini (ambiguous initiator/target)
+     - ini_type (type of initiator)
+   - Cardinality: One event to multiple initiators
+
+9. **(:Event)-[:HAS_TARGET]->(:Actor)**
+   - Properties:
+     - tar_type (type of target)
+     - tar_human_type (if human target)
+     - tar_gov_type (if government target)
+   - Cardinality: One event to multiple targets
+
+10. **(:Event)-[:HAS_VICTIM]->(:Actor)**
+    - Properties:
+      - vic_type (type of victim)
+      - vic_human_type (if human victim)
+      - vic_gov_type (if government victim)
+    - Cardinality: One event to multiple victims
+
+11. **(:Actor)-[:IS_A]->(:Group|Individual|GovernmentEntity)**
+    - Properties: None
+    - Type: Inheritance/Classification
+    - Note: In Neo4j, use multiple labels instead (e.g., :Actor:Group)
+
+### Temporal Relationships (TKG-specific)
+
+12. **(:Event)-[:LINKED_TO {valid_from, valid_to}]->(:Event)**
+    - Properties:
+      - link_type (part_of | stems_from)
+      - valid_from (when link became valid)
+      - valid_to (when link ceased to be valid, or null if still valid)
+    - Cardinality: One-to-many (event chains/sequences)
+    - Temporal Semantics: Link exists within temporal validity window
+
+13. **(:Event)-[:REACTS_TO {valid_from, valid_to}]->(:Event)**
+    - Properties:
+      - posthoc (post-hoc reaction description)
+      - valid_from, valid_to (temporal validity)
+    - Cardinality: One-to-many
+    - Created when: posthoc field indicates reaction
+
+### Location Hierarchy
+
+14. **(:Location)-[:CONTAINS]->(:Location)**
+    - Properties: None
+    - Type: Hierarchical spatial containment
+    - Example: Country contains Region
+
+## Temporal Knowledge Graph (TKG) Implementation
+
+### TKG Principles Applied
+
+1. **Temporal Validity:**
+   - Every Event node has `valid_from` and `valid_to` timestamps
+   - Relationships can have temporal validity windows
+   - Support point-in-time queries: "What was the state of the graph on date X?"
+
+2. **Temporal Evolution:**
+   - Event sequences tracked via LINKED_TO relationships
+   - Temporal chains show escalation patterns
+   - Reaction cascades via REACTS_TO relationships
+
+3. **Temporal Indexing:**
+   - Create composite indexes on (year, month, day)
+   - Range indexes for julian dates
+   - Timeline indexes for temporal queries
+
+4. **Snapshot Queries:**
+   - Support queries like: "All events and relationships valid in January 2010"
+   - Temporal slicing: "Show event evolution over time in Syria"
+
+5. **Temporal Aggregation:**
+   - Time-series aggregations: events per month/year
+   - Sliding window analysis: intensity trends over time periods
+
+### TKG-Specific Cypher Patterns
+
+```cypher
+// Point-in-time query
+MATCH (e:Event)-[r:LINKED_TO]->(e2:Event)
+WHERE e.valid_from <= datetime('2010-01-15')
+  AND (e.valid_to IS NULL OR e.valid_to >= datetime('2010-01-15'))
+  AND r.valid_from <= datetime('2010-01-15')
+  AND (r.valid_to IS NULL OR r.valid_to >= datetime('2010-01-15'))
+RETURN e, r, e2
+
+// Temporal evolution query
+MATCH path = (e:Event)-[:LINKED_TO*]->(e2:Event)
+WHERE e.year = 2010 AND e.country = 'Syria'
+RETURN path
+ORDER BY e.valid_from
+```
+
+## Implementation Requirements
+
+### Script Structure
+
+```python
+# ingest_speed_to_neo4j.py
+
+import pandas as pd
+from neo4j import GraphDatabase
+from datetime import datetime, timedelta
+import logging
+from typing import Dict, List, Optional
+import numpy as np
+
+class SPEEDKnowledgeGraphIngestion:
+    """
+    Ingests SPEED dataset into Neo4j as a Temporal Knowledge Graph
+    """
+
+    def __init__(self, uri: str, user: str, password: str, csv_path: str):
+        self.driver = GraphDatabase.driver(uri, auth=(user, password))
+        self.csv_path = csv_path
+        self.logger = self._setup_logging()
+
+    def _setup_logging(self):
+        """Configure logging"""
+        pass
+
+    def julian_to_datetime(self, julian_date: float) -> Optional[datetime]:
+        """
+        Convert Julian date to datetime
+        Julian Date 0 = January 1, 1945
+        """
+        pass
+
+    def create_constraints_and_indexes(self):
+        """
+        Step 1: Create all constraints and indexes
+        Following TKG best practices
+        """
+        pass
+
+    def ingest_events(self, batch_size: int = 10000):
+        """
+        Step 2: Create Event nodes with temporal properties
+        """
+        pass
+
+    def ingest_locations(self):
+        """
+        Step 3: Create Location nodes with spatial indexing
+        """
+        pass
+
+    def ingest_actors(self):
+        """
+        Step 4: Create Actor nodes with polymorphic labels
+        """
+        pass
+
+    def ingest_event_characteristics(self):
+        """
+        Step 5: Create EventType, IntensityMetrics, Drivers, Outcomes nodes
+        """
+        pass
+
+    def ingest_temporal_info(self):
+        """
+        Step 6: Create TemporalInfo nodes with TKG metadata
+        """
+        pass
+
+    def ingest_news_sources(self):
+        """
+        Step 7: Create NewsSource nodes for provenance
+        """
+        pass
+
+    def create_event_relationships(self):
+        """
+        Step 8: Create all Event-centric relationships
+        """
+        pass
+
+    def create_actor_relationships(self):
+        """
+        Step 9: Create HAS_INITIATOR, HAS_TARGET, HAS_VICTIM relationships
+        """
+        pass
+
+    def create_temporal_relationships(self):
+        """
+        Step 10: Create LINKED_TO and REACTS_TO with temporal validity
+        """
+        pass
+
+    def create_location_hierarchy(self):
+        """
+        Step 11: Create CONTAINS relationships for location hierarchy
+        """
+        pass
+
+    def validate_graph(self):
+        """
+        Step 12: Validate graph structure and run sanity checks
+        """
+        pass
+
+    def run_ingestion(self):
+        """
+        Main orchestration method
+        """
+        self.logger.info("Starting SPEED TKG ingestion...")
+
+        # Step 1: Schema
+        self.create_constraints_and_indexes()
+
+        # Step 2-7: Node creation
+        self.ingest_events()
+        self.ingest_locations()
+        self.ingest_actors()
+        self.ingest_event_characteristics()
+        self.ingest_temporal_info()
+        self.ingest_news_sources()
+
+        # Step 8-11: Relationship creation
+        self.create_event_relationships()
+        self.create_actor_relationships()
+        self.create_temporal_relationships()
+        self.create_location_hierarchy()
+
+        # Step 12: Validation
+        self.validate_graph()
+
+        self.logger.info("Ingestion complete!")
+
+    def close(self):
+        self.driver.close()
+
+if __name__ == "__main__":
+    ingestion = SPEEDKnowledgeGraphIngestion(
+        uri="bolt://localhost:7687",
+        user="neo4j",
+        password="speedkg123",
+        csv_path="output/resolved_data_20260121_152103.csv"
+    )
+
+    try:
+        ingestion.run_ingestion()
+    finally:
+        ingestion.close()
+```
+
+### Detailed Implementation Guidelines
+
+#### 1. Constraint and Index Creation
+
+```cypher
+// Unique constraints
+CREATE CONSTRAINT event_eventid IF NOT EXISTS
+FOR (e:Event) REQUIRE e.eventid IS UNIQUE;
+
+CREATE CONSTRAINT location_location_id IF NOT EXISTS
+FOR (l:Location) REQUIRE l.location_id IS UNIQUE;
+
+CREATE CONSTRAINT actor_actor_id IF NOT EXISTS
+FOR (a:Actor) REQUIRE a.actor_id IS UNIQUE;
+
+// Temporal indexes (TKG-critical)
+CREATE INDEX event_temporal IF NOT EXISTS
+FOR (e:Event) ON (e.valid_from, e.valid_to);
+
+CREATE INDEX event_year IF NOT EXISTS
+FOR (e:Event) ON (e.year);
+
+// Spatial index
+CREATE POINT INDEX location_coords IF NOT EXISTS
+FOR (l:Location) ON (l.coordinates);
+
+// Text indexes for search
+CREATE TEXT INDEX location_country IF NOT EXISTS
+FOR (l:Location) ON (l.country);
+
+CREATE TEXT INDEX actor_name IF NOT EXISTS
+FOR (a:Actor) ON (a.name);
+```
+
+#### 2. Data Cleaning and Transformation Rules
+
+**Missing Values:**
+- Empty strings ('') -> NULL
+- '.' -> NULL
+- NaN -> NULL
+- 0 for numeric IDs -> handle as missing
+
+**Boolean Conversions:**
+- 1 -> True, 0 -> False
+- "Yes"/"No" -> True/False
+
+**Date Handling:**
+- Convert Julian dates (base: Jan 1, 1945)
+- Handle date_type: precise vs estimated
+- Use earliest/latest for ranges
+
+**Actor Deduplication:**
+- Group actors by normalized name
+- Handle name variations (fuzzy matching optional)
+- Create unique actor_id from name+type+role
+
+**Location Deduplication:**
+- Deduplicate by country+cowcode
+- Further deduplicate by gp3+gp4 if available
+- Create location_id composite key
+
+#### 3. Batch Processing Strategy
+
+- **Batch Size:** 10,000 nodes/relationships per transaction
+- **Memory Management:** Use APOC periodic iterate for large datasets
+- **Progress Tracking:** Log progress every 10,000 rows
+- **Error Handling:** Transaction rollback on error, log failed batches
+
+#### 4. Temporal Validity Assignment
+
+```python
+def assign_temporal_validity(row: pd.Series) -> tuple:
+    """
+    Assign valid_from and valid_to based on date type
+    """
+    if row['date_type'] == 'Precise Single Day':
+        valid_from = julian_to_datetime(row['jdate_pre'])
+        valid_to = valid_from + timedelta(days=1)
+    elif row['date_type'] == 'Precise Multi-day':
+        valid_from = julian_to_datetime(row['jdate_pre'])
+        valid_to = julian_to_datetime(row['jdate_pre_end'])
+    elif row['date_type'] == 'Estimated Single Day':
+        valid_from = julian_to_datetime(row['ear_jdate'])
+        valid_to = julian_to_datetime(row['lat_jdate'])
+    else:
+        # Handle other date types
+        pass
+
+    return valid_from, valid_to
+```
+
+#### 5. Actor Polymorphic Node Creation
+
+```python
+def create_actor_node(tx, actor_data: Dict):
+    """
+    Create actor with multiple labels based on type
+    """
+    labels = ['Actor']
+
+    # Determine additional labels
+    if actor_data.get('group_name'):
+        labels.append('Group')
+    elif actor_data.get('individual_type'):
+        labels.append('Individual')
+    elif actor_data.get('gov_entity_id'):
+        labels.append('GovernmentEntity')
+
+    label_str = ':'.join(labels)
+
+    query = f"""
+    MERGE (a:{label_str} {{actor_id: $actor_id}})
+    SET a += $properties
+    """
+
+    tx.run(query, actor_id=actor_data['actor_id'],
+           properties=actor_data)
+```
+
+#### 6. Event Linkage with Temporal Validity
+
+```cypher
+// Create LINKED_TO relationships with temporal windows
+MATCH (e1:Event {eventid: $from_eid})
+MATCH (e2:Event {eventid: $to_eid})
+MERGE (e1)-[r:LINKED_TO]->(e2)
+SET r.link_type = $link_type,
+    r.valid_from = e1.valid_from,
+    r.valid_to = CASE
+        WHEN e2.valid_to IS NOT NULL THEN e2.valid_to
+        ELSE NULL
+    END
+```
+
+## Validation Requirements
+
+### Graph Statistics
+
+1. **Node Counts:**
+   - Total Event nodes
+   - Total Location nodes (unique locations)
+   - Total Actor nodes (unique actors)
+   - EventType, IntensityMetrics, Drivers, Outcomes, TemporalInfo, NewsSource counts
+
+2. **Relationship Counts:**
+   - OCCURRED_AT relationships
+   - HAS_INITIATOR, HAS_TARGET, HAS_VICTIM relationships
+   - LINKED_TO and REACTS_TO relationships
+   - Total relationships
+
+3. **Data Quality Checks:**
+   - Events without locations (should be minimal)
+   - Events without temporal info (should be 0)
+   - Actors without type labels (should be 0)
+   - Orphaned nodes (should be 0)
+
+### Sample Queries for Research Questions
+
+Include these validation queries in the script:
+
+```cypher
+// Q1: Origins and Drivers
+MATCH (e:Event)-[:DRIVEN_BY]->(d:Drivers)
+RETURN
+  sum(CASE WHEN d.anti_gov_sentmnts THEN 1 ELSE 0 END) as anti_gov_events,
+  sum(CASE WHEN d.sc_animosity THEN 1 ELSE 0 END) as sociocultural_events,
+  count(e) as total_events;
+
+// Q2: Intensity comparison
+MATCH (e:Event)-[:HAS_INTENSITY]->(im:IntensityMetrics)
+WHERE e.year >= 2000
+RETURN
+  e.year,
+  avg(im.pol_viol) as avg_political_violence,
+  avg(im.stat_viol) as avg_state_violence
+ORDER BY e.year;
+
+// Q3: Event sequences and escalation
+MATCH path = (e1:Event)-[:LINKED_TO*1..5]->(e2:Event)
+WHERE e1.year = 2010 AND e1.country = 'Syria'
+RETURN path, length(path) as chain_length
+ORDER BY chain_length DESC
+LIMIT 10;
+
+// Q4: Temporal episode boundaries
+MATCH (e:Event)-[:OCCURRED_AT]->(l:Location)
+MATCH (e)-[:HAS_INTENSITY]->(im:IntensityMetrics)
+WHERE l.country = 'Lebanon' AND im.pol_viol > 3.0
+WITH e, im
+ORDER BY e.valid_from
+RETURN
+  min(e.valid_from) as episode_start,
+  max(e.valid_to) as episode_end,
+  count(e) as event_count,
+  avg(im.pol_viol) as avg_violence;
+
+// Q5: Small-bore precursor events
+MATCH (small:Event)-[:HAS_TYPE]->(et:EventType)
+WHERE et.ev_type = 'Political Expression'
+MATCH (small)-[:LINKED_TO*1..5]->(major:Event)-[:HAS_INTENSITY]->(im:IntensityMetrics)
+WHERE im.n_killed_a > 10
+RETURN small.eventid, major.eventid, im.n_killed_a
+LIMIT 20;
+
+// Q6: Actor involvement by region
+MATCH (e:Event)-[:OCCURRED_AT]->(l:Location)
+WHERE l.region = 'Middle East'
+MATCH (e)-[:HAS_INITIATOR]->(a:Actor:Group)
+RETURN a.name, a.group_category, count(e) as event_count
+ORDER BY event_count DESC
+LIMIT 20;
+```
+
+## Performance Optimization Guidelines
+
+1. **Use APOC for Batch Operations:**
+```cypher
+CALL apoc.periodic.iterate(
+  "LOAD CSV WITH HEADERS FROM 'file:///resolved_data_20260121_152103.csv' AS row RETURN row",
+  "CREATE (e:Event {...})",
+  {batchSize: 10000, parallel: false}
+)
+```
+
+2. **Create Indexes Before Data Load**
+
+3. **Use MERGE for Deduplication, CREATE for Unique Nodes**
+
+4. **Parallel Relationship Creation:**
+   - Create different relationship types in parallel
+   - Use APOC parallel batch
+
+5. **Monitor Memory:**
+   - Check heap usage
+   - Use periodic commit for large transactions
+
+## Error Handling and Logging
+
+1. **Log Levels:**
+   - INFO: Progress updates
+   - WARNING: Data quality issues (missing values, invalid dates)
+   - ERROR: Failed transactions, connection errors
+
+2. **Error Recovery:**
+   - Checkpoint after each major step
+   - Resume capability from last checkpoint
+   - Failed row tracking
+
+3. **Data Quality Reports:**
+   - Summary statistics
+   - Missing data percentages
+   - Validation query results
+
+## Deliverables
+
+### Primary Script: `ingest_speed_to_neo4j.py`
+
+**Features:**
+- Complete data ingestion pipeline
+- TKG temporal modeling
+- Batch processing with progress tracking
+- Comprehensive logging
+- Data quality validation
+- Error handling and recovery
+- Performance optimization
+- Documentation and comments
+
+### Configuration File: `config.yaml`
+
+```yaml
+neo4j:
+  uri: bolt://localhost:7687
+  user: neo4j
+  password: speedkg123
+
+data:
+  csv_path: output/resolved_data_20260121_152103.csv
+
+ingestion:
+  batch_size: 10000
+  parallel: false
+  checkpoint_enabled: true
+
+logging:
+  level: INFO
+  file: logs/ingestion.log
+```
+
+### Validation Notebook: `validate_speed_kg.ipynb`
+
+Create a Jupyter notebook that:
+1. Connects to Neo4j
+2. Runs graph statistics queries
+3. Tests all research questions from Questions.txt
+4. Visualizes sample subgraphs
+5. Generates data quality report
+6. Creates temporal analysis visualizations
+
+Expected notebook sections:
+- **Section 1:** Connection and Setup
+- **Section 2:** Graph Statistics
+- **Section 3:** Research Question Validation (Q1-Q6)
+- **Section 4:** Temporal Analysis
+- **Section 5:** Actor Network Analysis
+- **Section 6:** Geographic Distribution
+- **Section 7:** Event Escalation Patterns
+- **Section 8:** Data Quality Report
+
+## Additional Requirements
+
+1. **Documentation:**
+   - Docstrings for all methods
+   - README with setup instructions
+   - Comments explaining TKG design decisions
+
+2. **Testing:**
+   - Unit tests for date conversion
+   - Integration tests for small CSV subset
+   - Validation tests for graph structure
+
+3. **Dependencies:**
+```txt
+neo4j==5.16.0
+pandas>=2.0.0
+numpy>=1.24.0
+python-dateutil>=2.8.0
+pyyaml>=6.0
+tqdm>=4.65.0
+```
+
+4. **Command-line Interface:**
+```bash
+python ingest_speed_to_neo4j.py --config config.yaml
+python ingest_speed_to_neo4j.py --config config.yaml --validate-only
+python ingest_speed_to_neo4j.py --config config.yaml --resume-from-checkpoint
+```
+
+## Success Criteria
+
+The ingestion is successful when:
+1. All 106 CSV columns are mapped to appropriate graph elements
+2. No data loss (row count matches)
+3. All research questions can be answered with efficient queries
+4. Temporal queries work correctly (point-in-time, ranges)
+5. Graph statistics match expected values
+6. Validation notebook runs without errors
+7. Performance: < 30 minutes for full dataset on standard hardware
+8. Graph can be queried for temporal evolution patterns
+9. Actor networks are correctly represented
+10. Location hierarchy is properly structured
+
+## TKG Idiosyncrasies to Implement
+
+1. **Temporal Validity Propagation:** When creating relationships, inherit temporal validity from source nodes
+2. **Snapshot Isolation:** Support queries at specific points in time
+3. **Temporal Join:** Enable joining events that overlap temporally
+4. **Evolution Queries:** Track how the graph changes over time
+5. **Temporal Aggregation:** Support time-windowed aggregations
+6. **Bitemporal Modeling:** Distinguish between valid time (when event occurred) and transaction time (when it was recorded)
+7. **Temporal Indexing:** Optimize for temporal range queries
+8. **Temporal Constraints:** Ensure temporal consistency (valid_from < valid_to)
+
+## Notes
+
+- The script should handle missing values gracefully (many CSV fields have '.' or NaN)
+- Actor names may have variations - consider normalization
+- Julian date conversion is critical for temporal queries
+- Location coordinates enable spatial queries (consider Neo4j spatial functions)
+- Event linkage creates temporal chains - optimize for path queries
+- The APOC library provides utilities for batch processing and date conversion
+- Consider creating intermediate nodes for complex relationships if needed
+- Use Neo4j's native datetime types for temporal properties
+- Implement proper transaction boundaries to prevent partial data loads
+
+---
+
+## Expected Output
+
+A fully functional Python ingestion script that:
+1. Reads the SPEED CSV file
+2. Creates a Neo4j Temporal Knowledge Graph following the specified ontology
+3. Implements TKG best practices
+4. Enables answering all research questions
+5. Provides comprehensive validation
+6. Includes detailed logging and error handling
+7. Comes with a validation Jupyter notebook
+
+This will enable researchers to query civil unrest patterns, understand event escalation, analyze actor networks, and study temporal dynamics of global instability from 1946 to present.
+

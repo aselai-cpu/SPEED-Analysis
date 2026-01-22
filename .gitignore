@@ -1,0 +1,290 @@
+# ================================
+# Environment Variables & Secrets
+# ================================
+.env
+.env.local
+.env.*.local
+*.env
+backend/.env
+frontend/.env
+
+# API Keys and Credentials
+*secret*
+*SECRET*
+credentials.json
+api_keys.txt
+
+# ================================
+# Python
+# ================================
+# Virtual Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+backend/venv/
+backend/env/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / Packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# pyenv
+.python-version
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath
+*.sage.py
+
+# Spyder
+.spyderproject
+.spyproject
+
+# Rope
+.ropeproject
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre
+.pyre/
+
+# ================================
+# Node.js / JavaScript / React
+# ================================
+# Dependencies
+node_modules/
+frontend/node_modules/
+jspm_packages/
+
+# Production Build
+frontend/build/
+frontend/dist/
+
+# Testing
+frontend/coverage/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Misc
+.DS_Store
+frontend/.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor directories and files
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# ================================
+# Neo4j / Database
+# ================================
+# Neo4j data directories
+neo4j_data/
+neo4j_logs/
+data/neo4j/
+
+# Database dumps
+*.db
+*.sqlite
+*.sqlite3
+
+# ================================
+# Logs
+# ================================
+logs/
+*.log
+backend/logs/
+backend/*.log
+frontend/logs/
+
+# ================================
+# Docker
+# ================================
+# Don't ignore docker files themselves, but ignore generated data
+# docker-compose.override.yml  # Uncomment if you use overrides
+
+# ================================
+# Operating System Files
+# ================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ================================
+# IDEs and Editors
+# ================================
+# VSCode
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# PyCharm / IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea_modules/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# ================================
+# Temporary Files
+# ================================
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+*.old
+
+# ================================
+# Output / Generated Files
+# ================================
+output/*.csv
+!output/.gitkeep
+*.pyc
+*.pyo
+*.pyd
+.cache/
+
+# Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# ================================
+# Documentation Build
+# ================================
+docs/_build/
+docs/.doctrees/
+site/
+
+# ================================
+# Package managers
+# ================================
+package-lock.json  # Optional: remove if you want to track exact versions
+yarn.lock  # Optional: remove if you want to track exact versions
+
+# ================================
+# Application Specific
+# ================================
+# SPEED specific files that might be large or temporary
+output/resolved_*.csv
+data/temp/
+checkpoints/
+
+# Ingestion logs
+ingestion_*.log
+
+# Model files (if any)
+*.h5
+*.pkl
+*.pickle
+*.joblib
+
+# ================================
+# Keep These Files (Examples)
+# ================================
+# Use .gitkeep files to keep empty directories in git
+!.gitkeep
+!output/.gitkeep
+!logs/.gitkeep
