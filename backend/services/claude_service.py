@@ -54,11 +54,10 @@ class ClaudeService:
             logger.info(f"Temperature: {temperature}")
 
             if system:
-                logger.info(f"System Prompt: {system[:200]}..." if len(system) > 200 else f"System Prompt: {system}")
+                logger.info(f"System Prompt:\n{system}")
 
-            # Log prompt (truncated if too long)
-            prompt_preview = prompt[:500] + "..." if len(prompt) > 500 else prompt
-            logger.info(f"User Prompt:\n{prompt_preview}")
+            # Log full prompt
+            logger.info(f"User Prompt:\n{prompt}")
             logger.info("-"*60)
 
             messages = [{"role": "user", "content": prompt}]
@@ -85,9 +84,8 @@ class ClaudeService:
             logger.info(f"Output Tokens: {message.usage.output_tokens}")
             logger.info(f"Response Length: {len(response_text)} characters")
 
-            # Log response preview (truncated if too long)
-            response_preview = response_text[:500] + "..." if len(response_text) > 500 else response_text
-            logger.info(f"Response Preview:\n{response_preview}")
+            # Log full response
+            logger.info(f"Response:\n{response_text}")
             logger.info("-"*60)
 
             return response_text

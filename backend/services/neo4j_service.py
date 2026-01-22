@@ -54,9 +54,8 @@ class Neo4jService:
             logger.info("🗄️  NEO4J QUERY EXECUTION")
             logger.info("-"*60)
 
-            # Log the Cypher query (formatted)
-            cypher_preview = cypher[:500] + "..." if len(cypher) > 500 else cypher
-            logger.info(f"Cypher Query:\n{cypher_preview}")
+            # Log the full Cypher query
+            logger.info(f"Cypher Query:\n{cypher}")
 
             # Log parameters
             if parameters:
@@ -102,12 +101,9 @@ class Neo4jService:
                 if records and len(records) > 0:
                     sample = records[0]
                     logger.info(f"Sample Record Keys: {list(sample.keys())}")
-                    # Log first few key-value pairs as preview
-                    for i, (key, value) in enumerate(list(sample.items())[:3]):
-                        value_str = str(value)[:100] + "..." if len(str(value)) > 100 else str(value)
-                        logger.info(f"  {key}: {value_str}")
-                    if len(sample) > 3:
-                        logger.info(f"  ... and {len(sample) - 3} more fields")
+                    # Log all key-value pairs
+                    for key, value in sample.items():
+                        logger.info(f"  {key}: {value}")
 
                 logger.info("-"*60)
 
@@ -116,7 +112,7 @@ class Neo4jService:
         except Exception as e:
             logger.error("❌ NEO4J QUERY ERROR")
             logger.error("-"*60)
-            logger.error(f"Query: {cypher[:200]}...")
+            logger.error(f"Query:\n{cypher}")
             logger.error(f"Parameters: {parameters}")
             logger.error(f"Error: {str(e)}")
             logger.error("-"*60)
