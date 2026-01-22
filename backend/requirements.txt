@@ -1,0 +1,32 @@
+# SPEED Knowledge Graph Query API - Python Dependencies
+# Updated for Python 3.14 compatibility
+
+# Web Framework
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+python-multipart>=0.0.9
+
+# Neo4j Driver
+neo4j>=5.16.0
+
+# Claude AI
+anthropic>=0.40.0
+
+# Environment
+python-dotenv>=1.0.0
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# WebSocket
+python-socketio>=5.11.0
+
+# CORS
+fastapi-cors>=0.0.6
+
+# Validation - Updated for Python 3.14 support
+pydantic>=2.9.0
+
+# Logging
+python-json-logger>=2.0.7

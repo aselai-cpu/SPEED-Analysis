@@ -1,0 +1,228 @@
+@startuml Backend_Agentic_Workflow
+skinparam roundcorner 10
+skinparam shadowing false
+
+title SPEED Knowledge Graph - Backend Agentic Workflow Sequence Diagram
+
+actor User
+participant "FastAPI\nApplication" as FastAPI
+participant "Planning Agent" as Planning
+participant "Execution Agent" as Execution
+participant "Rendering Agent" as Rendering
+participant "Claude Service" as Claude
+participant "Neo4j Service" as Neo4j
+database "Neo4j\nDatabase" as DB
+participant "Query Templates" as Templates
+
+== Initialization ==
+
+User -> FastAPI: POST /api/query\n{query: "..."}
+activate FastAPI
+
+FastAPI -> FastAPI: Log: NEW QUERY RECEIVED
+FastAPI -> FastAPI: Validate request
+
+== Phase 1: Planning ==
+
+FastAPI -> FastAPI: Log: PHASE 1: PLANNING AGENT
+activate FastAPI
+
+FastAPI -> Planning: create_plan(user_query)
+activate Planning
+
+Planning -> Planning: Build planning prompt\nwith research questions,\nvisualization types,\nquery templates
+
+Planning -> Claude: generate(planning_prompt,\ntemperature=0.3)
+activate Claude
+
+note right of Claude
+  Claude analyzes:
+  - Query intent
+  - Research questions (Q1-Q6)
+  - Visualization types needed
+  - Cypher query templates
+  - Parameters to extract
+end note
+
+Claude --> Planning: JSON execution plan
+deactivate Claude
+
+Planning -> Planning: Parse JSON response\nClean markdown wrappers
+
+alt Valid JSON
+    Planning -> Planning: Extract:\n- query_intent\n- research_questions\n- cypher_queries\n- visualizations\n- text_sections
+    Planning --> FastAPI: execution_plan
+else JSON Parse Error
+    Planning -> Planning: _create_fallback_plan()
+    Planning --> FastAPI: fallback_plan
+end
+
+deactivate Planning
+
+FastAPI -> FastAPI: Log planning results:\n- Query intent\n- Research questions\n- Planned queries\n- Planned visualizations
+
+== Phase 2: Execution ==
+
+FastAPI -> FastAPI: Log: PHASE 2: EXECUTION AGENT
+activate FastAPI
+
+FastAPI -> Execution: execute(execution_plan)
+activate Execution
+
+Execution -> Execution: Initialize results dict:\n- query_results\n- visualizations_data\n- statistics
+
+loop For each cypher_query in plan
+    Execution -> Execution: Extract:\n- template_name\n- parameters\n- purpose
+    
+    Execution -> Templates: Get query template
+    activate Templates
+    Templates --> Execution: cypher_query_string
+    deactivate Templates
+    
+    Execution -> Execution: Merge parameters\nwith DEFAULT_PARAMETERS
+    
+    Execution -> Neo4j: execute_query(cypher, params)
+    activate Neo4j
+    
+    Neo4j -> DB: Execute Cypher query
+    activate DB
+    DB --> Neo4j: Query results
+    deactivate DB
+    
+    Neo4j -> Neo4j: Convert Neo4j records\nto dictionaries\nHandle nodes/relationships
+    
+    Neo4j --> Execution: List[Dict] records
+    deactivate Neo4j
+    
+    Execution -> Execution: Store result:\n- purpose\n- template\n- data\n- record_count
+end
+
+loop For each visualization in plan
+    Execution -> Execution: _prepare_visualization_data(\nviz_spec, query_results)
+    
+    alt Timeline visualization
+        Execution -> Execution: _prepare_timeline()\nExtract dates, intensity,\ncasualties
+    else Network graph
+        Execution -> Execution: _prepare_network_graph()\nBuild nodes and links
+    else Bar chart
+        Execution -> Execution: _prepare_bar_chart()\nExtract categories and values
+    else Line chart
+        Execution -> Execution: _prepare_line_chart()\nExtract time series data
+    end
+    
+    Execution -> Execution: Store visualization data
+end
+
+Execution -> Execution: _calculate_statistics()\n- total_records\n- queries_executed
+
+Execution --> FastAPI: execution_results
+deactivate Execution
+
+FastAPI -> FastAPI: Log execution results:\n- Total records\n- Queries executed\n- Visualizations prepared
+
+== Phase 3: Rendering ==
+
+FastAPI -> FastAPI: Log: PHASE 3: RENDERING AGENT
+activate FastAPI
+
+FastAPI -> Rendering: render(user_query,\nexecution_plan,\nexecution_results)
+activate Rendering
+
+Rendering -> Rendering: _build_data_summary(\nexecution_results)\nExtract:\n- Record counts\n- Time ranges\n- Countries\n- Casualties
+
+Rendering -> Rendering: Build analysis prompt\nwith:\n- User query\n- Query intent\n- Data summary\n- Statistics
+
+Rendering -> Claude: generate(analysis_prompt,\ntemperature=0.7)
+activate Claude
+
+note right of Claude
+  Claude generates:\n- Executive summary\n- Key findings\n- Detailed analysis\n- Context and insights\n- Data notes
+end note
+
+Claude --> Rendering: Markdown text analysis
+deactivate Claude
+
+Rendering -> Rendering: _format_visualizations(\nvisualizations_data)\nCreate VisualizationSpec objects
+
+Rendering -> Rendering: Create QueryResponse:\n- message_id (UUID)\n- response_type\n- content (text + viz)\n- metadata\n- timestamp
+
+Rendering --> FastAPI: QueryResponse
+deactivate Rendering
+
+FastAPI -> FastAPI: Log rendering results:\n- Text length\n- Visualizations count\n- Data points
+
+== Response ==
+
+FastAPI --> User: QueryResponse\n{\n  message_id,\n  response_type,\n  content: {\n    text: "...",\n    visualizations: [...]\n  },\n  metadata,\n  timestamp\n}
+deactivate FastAPI
+
+== WebSocket Alternative Flow ==
+
+User -> FastAPI: WebSocket: /ws/query
+activate FastAPI
+
+FastAPI -> User: {phase: "planning",\nstatus: "in_progress"}
+
+FastAPI -> Planning: create_plan(query)
+activate Planning
+Planning -> Claude: generate()
+activate Claude
+Claude --> Planning: execution_plan
+deactivate Claude
+Planning --> FastAPI: execution_plan
+deactivate Planning
+
+FastAPI -> User: {phase: "planning",\nstatus: "complete",\nplan: {...}}
+
+FastAPI -> User: {phase: "execution",\nstatus: "in_progress"}
+
+FastAPI -> Execution: execute(plan)
+activate Execution
+Execution -> Neo4j: execute_query()
+activate Neo4j
+Neo4j -> DB: Query
+DB --> Neo4j: Results
+deactivate DB
+Neo4j --> Execution: Data
+deactivate Neo4j
+Execution --> FastAPI: results
+deactivate Execution
+
+FastAPI -> User: {phase: "execution",\nstatus: "complete",\nstats: {...}}
+
+FastAPI -> User: {phase: "rendering",\nstatus: "in_progress"}
+
+FastAPI -> Rendering: render()
+activate Rendering
+Rendering -> Claude: generate()
+activate Claude
+Claude --> Rendering: text
+deactivate Claude
+Rendering --> FastAPI: response
+deactivate Rendering
+
+FastAPI -> User: {phase: "rendering",\nstatus: "complete",\nresponse: {...}}
+
+deactivate FastAPI
+
+== Error Handling ==
+
+alt Error in Planning
+    Planning -> Planning: Catch exception
+    Planning -> Planning: _create_fallback_plan()
+    Planning --> FastAPI: fallback_plan
+end
+
+alt Error in Execution
+    Execution -> Execution: Catch exception
+    Execution -> Execution: Log error
+    Execution --> FastAPI: results with error
+end
+
+alt Error in Rendering
+    Rendering -> Rendering: Catch exception
+    Rendering -> Rendering: _create_error_response()
+    Rendering --> FastAPI: error_response
+end
+
+@enduml

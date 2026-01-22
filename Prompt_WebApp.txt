@@ -1,0 +1,1719 @@
+# SPEED Knowledge Graph - AI-Powered Query Interface with Agentic Workflow
+
+## Context
+
+You are tasked with creating an intelligent web application that allows users to query the SPEED (Social, Political and Economic Event Database) Knowledge Graph using natural language. The application uses an **agentic workflow** powered by Claude AI to plan, execute, and visualize responses combining both textual analysis and interactive D3.js visualizations.
+
+## Objectives
+
+1. Build a **Python backend** (FastAPI/Flask) that connects to Neo4j and Claude API
+2. Create a **JavaScript frontend** with a chat-like interface
+3. Implement an **agentic workflow** with three phases:
+   - **Planning Phase**: Analyze query and plan text + visual response strategy
+   - **Execution Phase**: Generate Cypher queries, retrieve data, and create visualizations
+   - **Rendering Phase**: Display rich text answers with embedded D3.js visualizations
+4. Support the 6 SPEED research questions with pre-built query templates
+5. Enable exploratory natural language queries
+6. Provide interactive, publication-quality visualizations using D3.js
+
+## System Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     User Interface (React/Vue.js)           │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │           Chat Interface (Message Thread)            │   │
+│  │  ┌─────────────────────────────────────────────┐     │   │
+│  │  │  User: "Show me escalation patterns in     │     │   │
+│  │  │         Syria during 2011"                  │     │   │
+│  │  └─────────────────────────────────────────────┘     │   │
+│  │                                                       │   │
+│  │  ┌─────────────────────────────────────────────┐     │   │
+│  │  │  AI: [Text Analysis]                        │     │   │
+│  │  │                                              │     │   │
+│  │  │  [D3.js Timeline Visualization]              │     │   │
+│  │  │  [D3.js Network Graph]                      │     │   │
+│  │  └─────────────────────────────────────────────┘     │   │
+│  └──────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
+                           ↕ HTTP/WebSocket
+┌─────────────────────────────────────────────────────────────┐
+│               Python Backend (FastAPI)                      │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │           Agentic Workflow Controller                │   │
+│  │  ┌────────────┐  ┌────────────┐  ┌──────────────┐   │   │
+│  │  │  Planning  │→ │ Execution  │→ │  Rendering   │   │   │
+│  │  │   Agent    │  │   Agent    │  │    Agent     │   │   │
+│  │  └────────────┘  └────────────┘  └──────────────┘   │   │
+│  └──────────────────────────────────────────────────────┘   │
+│                                                              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
+│  │  Claude API  │  │  Neo4j       │  │  Query       │      │
+│  │  Integration │  │  Driver      │  │  Templates   │      │
+│  └──────────────┘  └──────────────┘  └──────────────┘      │
+└─────────────────────────────────────────────────────────────┘
+                           ↕
+                    ┌──────────────┐
+                    │   Neo4j DB   │
+                    │  (SPEED KG)  │
+                    └──────────────┘
+```
+
+## Technology Stack
+
+### Backend (Python)
+- **Web Framework**: FastAPI (recommended) or Flask
+- **Neo4j Driver**: neo4j-driver (Python)
+- **Claude Integration**: anthropic (official SDK)
+- **Data Processing**: pandas, numpy
+- **WebSocket**: python-socketio (for real-time updates)
+- **CORS**: fastapi-cors-middleware
+
+### Frontend (JavaScript)
+- **Framework**: React (recommended) or Vue.js
+- **UI Components**: Material-UI or Ant Design
+- **Visualizations**: D3.js v7
+- **State Management**: React Context or Redux
+- **HTTP Client**: axios
+- **WebSocket**: socket.io-client
+- **Markdown Rendering**: react-markdown
+
+### Infrastructure
+- **Neo4j**: Docker container (from docker-compose.yml)
+- **Development Server**: uvicorn (FastAPI) or gunicorn
+- **Environment Variables**: python-dotenv
+
+## Agentic Workflow Architecture
+
+### Phase 1: Planning Agent
+
+**Responsibilities:**
+1. Analyze user's natural language query
+2. Determine query intent and complexity
+3. Identify relevant research question(s) from Questions.txt
+4. Plan visualization strategy (which D3.js charts to use)
+5. Create execution plan with Cypher query templates
+
+**Input:** User's natural language question
+
+**Output:** Execution Plan Object
+```json
+{
+  "query_intent": "escalation_analysis",
+  "research_questions": ["Q3: Dynamics and Outcomes"],
+  "cypher_queries": [
+    {
+      "purpose": "Get event chains",
+      "template": "event_escalation_chain",
+      "parameters": {"country": "Syria", "year": 2011}
+    }
+  ],
+  "visualizations": [
+    {
+      "type": "timeline",
+      "library": "d3",
+      "data_mapping": "events_over_time"
+    },
+    {
+      "type": "network_graph",
+      "library": "d3",
+      "data_mapping": "event_linkages"
+    }
+  ],
+  "text_sections": [
+    "Summary statistics",
+    "Temporal analysis",
+    "Actor involvement",
+    "Intensity trends"
+  ]
+}
+```
+
+**Claude Prompt for Planning:**
+```
+You are a SPEED Knowledge Graph query planning agent. Analyze the user's question and create an execution plan.
+
+User Question: {user_query}
+
+Available Research Questions:
+1. Origins and Drivers of civil unrest
+2. Intensity and disruptiveness of events
+3. Dynamics and outcomes of civil strife
+4. Temporal boundaries of instability episodes
+5. Role of small-bore precursor events
+6. Actors involved in civil unrest
+
+Available Visualization Types:
+- timeline: Temporal sequences of events
+- bar_chart: Comparative statistics
+- network_graph: Actor networks and event linkages
+- choropleth_map: Geographic distribution
+- sankey_diagram: Flow of event types
+- force_directed_graph: Actor-event relationships
+- line_chart: Trends over time
+- heatmap: Intensity patterns
+
+Generate an execution plan with:
+1. Query intent
+2. Relevant research questions
+3. Cypher query templates needed
+4. Visualization recommendations
+5. Text analysis sections
+
+Output as JSON.
+```
+
+### Phase 2: Execution Agent
+
+**Responsibilities:**
+1. Execute Cypher queries against Neo4j
+2. Process and transform data for visualizations
+3. Generate statistical summaries
+4. Create data structures for D3.js
+5. Handle errors and fallbacks
+
+**Input:** Execution Plan from Planning Agent
+
+**Output:** Execution Results Object
+```json
+{
+  "query_results": [
+    {
+      "query_id": "event_chains",
+      "data": [...],
+      "record_count": 45,
+      "execution_time_ms": 123
+    }
+  ],
+  "visualizations_data": [
+    {
+      "viz_id": "timeline_1",
+      "type": "timeline",
+      "data": {
+        "events": [...],
+        "timeRange": {"start": "2011-01-01", "end": "2011-12-31"}
+      }
+    }
+  ],
+  "statistics": {
+    "total_events": 156,
+    "event_chains": 12,
+    "avg_intensity": 3.4,
+    "casualties": 1250
+  }
+}
+```
+
+**Cypher Query Templates:**
+
+Should include templates for:
+- Event escalation chains
+- Actor networks
+- Temporal trends
+- Geographic distribution
+- Driver analysis
+- Intensity patterns
+- Precursor sequences
+
+Example:
+```python
+QUERY_TEMPLATES = {
+    "event_escalation_chain": """
+        MATCH path = (e1:Event)-[:LINKED_TO*1..5]->(e2:Event)
+        WHERE e1.country = $country AND e1.year = $year
+        RETURN path, length(path) as chain_length
+        ORDER BY chain_length DESC
+        LIMIT $limit
+    """,
+    "temporal_intensity": """
+        MATCH (e:Event)-[:HAS_INTENSITY]->(im:IntensityMetrics)
+        WHERE e.year >= $start_year AND e.year <= $end_year
+        AND e.country = $country
+        RETURN e.year, e.month,
+               avg(im.pol_viol) as avg_violence,
+               count(e) as event_count
+        ORDER BY e.year, e.month
+    """,
+    # ... more templates
+}
+```
+
+### Phase 3: Rendering Agent
+
+**Responsibilities:**
+1. Generate natural language text analysis using Claude
+2. Create D3.js visualization specifications
+3. Format markdown-enhanced responses
+4. Combine text and visualizations into cohesive answer
+5. Add interactive elements and tooltips
+
+**Input:** Execution Results from Execution Agent
+
+**Output:** Rendered Response Object
+```json
+{
+  "message_id": "msg_123",
+  "response_type": "analysis",
+  "content": {
+    "text": "# Syria Civil Unrest Analysis (2011)\n\n## Summary\nAnalysis of 156 events...",
+    "visualizations": [
+      {
+        "id": "viz_timeline_1",
+        "type": "timeline",
+        "spec": {...},
+        "data": [...]
+      }
+    ]
+  },
+  "metadata": {
+    "execution_time": "2.3s",
+    "data_points": 156,
+    "confidence": 0.95
+  }
+}
+```
+
+**Claude Prompt for Text Generation:**
+```
+You are analyzing civil unrest data from the SPEED Knowledge Graph.
+
+Query: {user_query}
+Statistics: {statistics_summary}
+Data Points: {data_count}
+
+Based on the data retrieved, provide a comprehensive analysis including:
+1. Executive summary (2-3 sentences)
+2. Key findings with specific numbers
+3. Temporal patterns observed
+4. Actor involvement highlights
+5. Intensity and severity assessment
+6. Contextual insights
+
+Use markdown formatting. Be specific and data-driven.
+Reference the visualizations that will appear below your text.
+```
+
+## Implementation Details
+
+### Backend Structure
+
+```
+backend/
+├── main.py                      # FastAPI application entry point
+├── config.py                    # Configuration and environment variables
+├── requirements.txt             # Python dependencies
+│
+├── agents/
+│   ├── __init__.py
+│   ├── planning_agent.py        # Planning phase logic
+│   ├── execution_agent.py       # Query execution
+│   └── rendering_agent.py       # Response generation
+│
+├── services/
+│   ├── __init__.py
+│   ├── neo4j_service.py         # Neo4j connection and queries
+│   ├── claude_service.py        # Claude API integration
+│   └── query_templates.py       # Cypher query templates
+│
+├── models/
+│   ├── __init__.py
+│   ├── query_models.py          # Pydantic models for queries
+│   └── response_models.py       # Response data models
+│
+├── routes/
+│   ├── __init__.py
+│   ├── query_routes.py          # Query endpoints
+│   └── websocket_routes.py      # WebSocket handlers
+│
+└── utils/
+    ├── __init__.py
+    ├── data_transformers.py     # Data transformation for D3
+    └── validators.py            # Input validation
+```
+
+### Frontend Structure
+
+```
+frontend/
+├── public/
+│   └── index.html
+├── src/
+│   ├── App.jsx                  # Main application component
+│   ├── index.js                 # Entry point
+│   │
+│   ├── components/
+│   │   ├── ChatInterface/
+│   │   │   ├── ChatInterface.jsx
+│   │   │   ├── MessageThread.jsx
+│   │   │   └── QueryInput.jsx
+│   │   │
+│   │   ├── Visualizations/
+│   │   │   ├── TimelineViz.jsx        # D3 timeline
+│   │   │   ├── NetworkGraph.jsx       # D3 network graph
+│   │   │   ├── BarChart.jsx           # D3 bar chart
+│   │   │   ├── ChoroplethMap.jsx      # D3 geographic map
+│   │   │   ├── SankeyDiagram.jsx      # D3 Sankey
+│   │   │   └── ForceGraph.jsx         # D3 force-directed
+│   │   │
+│   │   ├── ResponseCard/
+│   │   │   ├── ResponseCard.jsx
+│   │   │   ├── TextSection.jsx
+│   │   │   └── VisualizationWrapper.jsx
+│   │   │
+│   │   └── UI/
+│   │       ├── Header.jsx
+│   │       ├── Sidebar.jsx
+│   │       └── LoadingIndicator.jsx
+│   │
+│   ├── services/
+│   │   ├── apiService.js        # Backend API calls
+│   │   └── websocketService.js  # WebSocket connection
+│   │
+│   ├── hooks/
+│   │   ├── useQuery.js          # Query management hook
+│   │   └── useVisualization.js  # Visualization state
+│   │
+│   ├── utils/
+│   │   ├── d3Helpers.js         # D3 utility functions
+│   │   └── formatters.js        # Data formatters
+│   │
+│   └── styles/
+│       ├── App.css
+│       └── visualizations.css
+│
+└── package.json
+```
+
+## Backend Implementation Guide
+
+### 1. FastAPI Application (main.py)
+
+```python
+from fastapi import FastAPI, WebSocket, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from agents.planning_agent import PlanningAgent
+from agents.execution_agent import ExecutionAgent
+from agents.rendering_agent import RenderingAgent
+from services.neo4j_service import Neo4jService
+from services.claude_service import ClaudeService
+from models.query_models import QueryRequest, QueryResponse
+import asyncio
+
+app = FastAPI(title="SPEED Knowledge Graph Query API")
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Initialize services
+neo4j_service = Neo4jService()
+claude_service = ClaudeService()
+
+# Initialize agents
+planning_agent = PlanningAgent(claude_service)
+execution_agent = ExecutionAgent(neo4j_service)
+rendering_agent = RenderingAgent(claude_service)
+
+@app.post("/api/query", response_model=QueryResponse)
+async def process_query(request: QueryRequest):
+    """
+    Main endpoint for processing natural language queries
+    Implements the three-phase agentic workflow
+    """
+    try:
+        # Phase 1: Planning
+        execution_plan = await planning_agent.create_plan(request.query)
+
+        # Phase 2: Execution
+        execution_results = await execution_agent.execute(execution_plan)
+
+        # Phase 3: Rendering
+        response = await rendering_agent.render(
+            request.query,
+            execution_plan,
+            execution_results
+        )
+
+        return response
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.websocket("/ws/query")
+async def websocket_query(websocket: WebSocket):
+    """
+    WebSocket endpoint for streaming responses
+    Sends updates for each phase of the workflow
+    """
+    await websocket.accept()
+
+    try:
+        while True:
+            data = await websocket.receive_json()
+            query = data.get("query")
+
+            # Send planning update
+            await websocket.send_json({
+                "phase": "planning",
+                "status": "in_progress"
+            })
+
+            execution_plan = await planning_agent.create_plan(query)
+
+            await websocket.send_json({
+                "phase": "planning",
+                "status": "complete",
+                "plan": execution_plan
+            })
+
+            # Send execution update
+            await websocket.send_json({
+                "phase": "execution",
+                "status": "in_progress"
+            })
+
+            execution_results = await execution_agent.execute(execution_plan)
+
+            await websocket.send_json({
+                "phase": "execution",
+                "status": "complete",
+                "results": execution_results
+            })
+
+            # Send rendering update
+            await websocket.send_json({
+                "phase": "rendering",
+                "status": "in_progress"
+            })
+
+            response = await rendering_agent.render(
+                query,
+                execution_plan,
+                execution_results
+            )
+
+            await websocket.send_json({
+                "phase": "rendering",
+                "status": "complete",
+                "response": response
+            })
+
+    except Exception as e:
+        await websocket.send_json({
+            "error": str(e)
+        })
+    finally:
+        await websocket.close()
+
+@app.get("/api/health")
+async def health_check():
+    """Health check endpoint"""
+    return {
+        "status": "healthy",
+        "neo4j": neo4j_service.is_connected(),
+        "claude": claude_service.is_available()
+    }
+```
+
+### 2. Planning Agent (agents/planning_agent.py)
+
+```python
+from services.claude_service import ClaudeService
+from typing import Dict, List
+import json
+
+class PlanningAgent:
+    """
+    Analyzes user queries and creates execution plans
+    """
+
+    def __init__(self, claude_service: ClaudeService):
+        self.claude = claude_service
+
+    async def create_plan(self, user_query: str) -> Dict:
+        """
+        Create an execution plan for the user's query
+        """
+
+        planning_prompt = f"""
+You are a SPEED Knowledge Graph query planning agent. Analyze the user's question and create a detailed execution plan.
+
+User Question: "{user_query}"
+
+Available Research Questions:
+1. Origins and Drivers - What causes civil unrest?
+2. Intensity - How severe are events?
+3. Dynamics - How do events escalate?
+4. Temporal Boundaries - When do episodes begin/end?
+5. Precursor Events - Role of small events?
+6. Actors - Who participates in unrest?
+
+Available Visualization Types:
+- timeline: Shows events over time with markers
+- network_graph: Shows relationships between events/actors
+- bar_chart: Compares categories or metrics
+- line_chart: Shows trends over time
+- choropleth_map: Geographic distribution
+- force_directed_graph: Actor-event networks
+- sankey_diagram: Flow between categories
+- heatmap: Intensity patterns by time/location
+
+Available Data Domains:
+- Events, Locations, Actors, EventTypes, IntensityMetrics
+- Drivers, Outcomes, TemporalInfo
+
+Analyze the query and return a JSON execution plan with:
+1. "query_intent": Brief description of what user wants
+2. "research_questions": List of relevant question IDs
+3. "cypher_queries": Array of query specifications
+4. "visualizations": Array of visualization specs
+5. "text_sections": Array of text analysis topics
+
+Example output:
+{{
+  "query_intent": "Analyze event escalation patterns in Syria 2011",
+  "research_questions": ["Q3"],
+  "cypher_queries": [
+    {{
+      "purpose": "Get event chains",
+      "template": "event_escalation_chain",
+      "parameters": {{"country": "Syria", "year": 2011, "limit": 20}}
+    }}
+  ],
+  "visualizations": [
+    {{
+      "type": "timeline",
+      "title": "Event Timeline Syria 2011",
+      "data_source": "event_chains"
+    }},
+    {{
+      "type": "network_graph",
+      "title": "Event Linkage Network",
+      "data_source": "event_chains"
+    }}
+  ],
+  "text_sections": ["summary", "temporal_analysis", "intensity_trends"]
+}}
+
+Return ONLY the JSON, no other text.
+"""
+
+        response = await self.claude.generate(
+            prompt=planning_prompt,
+            max_tokens=2000
+        )
+
+        # Parse JSON from Claude's response
+        try:
+            plan = json.loads(response)
+            return plan
+        except json.JSONDecodeError:
+            # Fallback plan
+            return self._create_fallback_plan(user_query)
+
+    def _create_fallback_plan(self, query: str) -> Dict:
+        """Create a basic fallback plan if Claude response is invalid"""
+        return {
+            "query_intent": "General query",
+            "research_questions": ["Q1"],
+            "cypher_queries": [{
+                "purpose": "Get basic events",
+                "template": "recent_events",
+                "parameters": {"limit": 50}
+            }],
+            "visualizations": [{
+                "type": "bar_chart",
+                "title": "Event Distribution",
+                "data_source": "events"
+            }],
+            "text_sections": ["summary"]
+        }
+```
+
+### 3. Execution Agent (agents/execution_agent.py)
+
+```python
+from services.neo4j_service import Neo4jService
+from services.query_templates import QUERY_TEMPLATES
+from typing import Dict, List
+import pandas as pd
+
+class ExecutionAgent:
+    """
+    Executes Cypher queries and prepares data for visualizations
+    """
+
+    def __init__(self, neo4j_service: Neo4jService):
+        self.neo4j = neo4j_service
+
+    async def execute(self, execution_plan: Dict) -> Dict:
+        """
+        Execute all queries in the plan and prepare data
+        """
+        results = {
+            "query_results": [],
+            "visualizations_data": [],
+            "statistics": {}
+        }
+
+        # Execute each Cypher query
+        for query_spec in execution_plan.get("cypher_queries", []):
+            template = query_spec["template"]
+            params = query_spec["parameters"]
+
+            if template in QUERY_TEMPLATES:
+                cypher = QUERY_TEMPLATES[template]
+                data = await self.neo4j.execute_query(cypher, params)
+
+                results["query_results"].append({
+                    "query_id": query_spec["purpose"],
+                    "data": data,
+                    "record_count": len(data)
+                })
+
+        # Prepare visualization data
+        for viz_spec in execution_plan.get("visualizations", []):
+            viz_data = self._prepare_visualization_data(
+                viz_spec,
+                results["query_results"]
+            )
+            results["visualizations_data"].append(viz_data)
+
+        # Calculate statistics
+        results["statistics"] = self._calculate_statistics(
+            results["query_results"]
+        )
+
+        return results
+
+    def _prepare_visualization_data(
+        self,
+        viz_spec: Dict,
+        query_results: List[Dict]
+    ) -> Dict:
+        """
+        Transform query results into D3-ready format
+        """
+        viz_type = viz_spec["type"]
+
+        if viz_type == "timeline":
+            return self._prepare_timeline_data(query_results)
+        elif viz_type == "network_graph":
+            return self._prepare_network_data(query_results)
+        elif viz_type == "bar_chart":
+            return self._prepare_bar_chart_data(query_results)
+        # ... more viz types
+
+        return {}
+
+    def _prepare_timeline_data(self, query_results: List[Dict]) -> Dict:
+        """Prepare data for D3 timeline visualization"""
+        # Extract events and format for timeline
+        events = []
+        for result in query_results:
+            for record in result["data"]:
+                if "e" in record:  # Event node
+                    events.append({
+                        "id": record["e"]["eventid"],
+                        "date": record["e"]["valid_from"],
+                        "title": f"Event {record['e']['eventid']}",
+                        "intensity": record["e"].get("pol_viol", 0),
+                        "country": record["e"].get("country", "")
+                    })
+
+        return {
+            "type": "timeline",
+            "data": {
+                "events": sorted(events, key=lambda x: x["date"]),
+                "timeRange": {
+                    "start": min(e["date"] for e in events),
+                    "end": max(e["date"] for e in events)
+                }
+            }
+        }
+
+    def _prepare_network_data(self, query_results: List[Dict]) -> Dict:
+        """Prepare data for D3 network graph"""
+        nodes = []
+        links = []
+
+        # Extract nodes and edges from query results
+        # ... implementation
+
+        return {
+            "type": "network_graph",
+            "data": {
+                "nodes": nodes,
+                "links": links
+            }
+        }
+
+    def _calculate_statistics(self, query_results: List[Dict]) -> Dict:
+        """Calculate summary statistics"""
+        stats = {
+            "total_records": sum(r["record_count"] for r in query_results)
+        }
+
+        # Calculate more specific stats based on data
+        # ... implementation
+
+        return stats
+```
+
+### 4. Rendering Agent (agents/rendering_agent.py)
+
+```python
+from services.claude_service import ClaudeService
+from typing import Dict
+import uuid
+
+class RenderingAgent:
+    """
+    Generates natural language analysis and final response
+    """
+
+    def __init__(self, claude_service: ClaudeService):
+        self.claude = claude_service
+
+    async def render(
+        self,
+        user_query: str,
+        execution_plan: Dict,
+        execution_results: Dict
+    ) -> Dict:
+        """
+        Generate final response with text and visualizations
+        """
+
+        # Generate text analysis
+        text_content = await self._generate_text_analysis(
+            user_query,
+            execution_plan,
+            execution_results
+        )
+
+        # Format visualizations
+        visualizations = self._format_visualizations(
+            execution_results["visualizations_data"]
+        )
+
+        return {
+            "message_id": str(uuid.uuid4()),
+            "response_type": "analysis",
+            "content": {
+                "text": text_content,
+                "visualizations": visualizations
+            },
+            "metadata": {
+                "data_points": execution_results["statistics"].get("total_records", 0),
+                "visualizations_count": len(visualizations)
+            }
+        }
+
+    async def _generate_text_analysis(
+        self,
+        query: str,
+        plan: Dict,
+        results: Dict
+    ) -> str:
+        """
+        Use Claude to generate natural language analysis
+        """
+
+        analysis_prompt = f"""
+You are analyzing civil unrest data from the SPEED Knowledge Graph.
+
+User Query: "{query}"
+
+Query Intent: {plan.get("query_intent", "General analysis")}
+
+Statistics:
+- Total Records: {results["statistics"].get("total_records", 0)}
+- Data Points: {len(results["query_results"])}
+
+Data Summary:
+{self._format_data_summary(results["query_results"])}
+
+Provide a comprehensive analysis with:
+
+# Analysis Title
+
+## Executive Summary
+[2-3 sentences summarizing key findings]
+
+## Key Findings
+[Bullet points with specific numbers and insights]
+
+## Temporal Patterns
+[Trends observed over time]
+
+## Actor Involvement
+[Who was involved and their roles]
+
+## Intensity Assessment
+[Severity and impact analysis]
+
+## Context and Insights
+[Broader contextual understanding]
+
+Use markdown formatting. Be specific and data-driven.
+Reference that visualizations appear below to illustrate these findings.
+"""
+
+        text = await self.claude.generate(
+            prompt=analysis_prompt,
+            max_tokens=2000
+        )
+
+        return text
+
+    def _format_data_summary(self, query_results: List[Dict]) -> str:
+        """Create a text summary of the data"""
+        summary = []
+        for result in query_results:
+            summary.append(
+                f"- {result['query_id']}: {result['record_count']} records"
+            )
+        return "\n".join(summary)
+
+    def _format_visualizations(
+        self,
+        viz_data: List[Dict]
+    ) -> List[Dict]:
+        """Format visualization specs for frontend"""
+        formatted = []
+
+        for viz in viz_data:
+            formatted.append({
+                "id": f"viz_{uuid.uuid4().hex[:8]}",
+                "type": viz["type"],
+                "spec": viz.get("spec", {}),
+                "data": viz.get("data", {})
+            })
+
+        return formatted
+```
+
+### 5. Claude Service (services/claude_service.py)
+
+```python
+import anthropic
+import os
+from typing import Optional
+
+class ClaudeService:
+    """
+    Service for interacting with Claude API
+    """
+
+    def __init__(self):
+        self.api_key = os.getenv("ANTHROPIC_API_KEY")
+        self.client = anthropic.Anthropic(api_key=self.api_key)
+        self.model = "claude-sonnet-4-5-20250929"
+
+    async def generate(
+        self,
+        prompt: str,
+        max_tokens: int = 4000,
+        temperature: float = 0.7
+    ) -> str:
+        """
+        Generate text using Claude
+        """
+        try:
+            message = self.client.messages.create(
+                model=self.model,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ]
+            )
+
+            return message.content[0].text
+
+        except Exception as e:
+            raise Exception(f"Claude API error: {str(e)}")
+
+    def is_available(self) -> bool:
+        """Check if Claude API is accessible"""
+        return self.api_key is not None
+```
+
+### 6. Neo4j Service (services/neo4j_service.py)
+
+```python
+from neo4j import GraphDatabase
+from typing import Dict, List, Any
+import os
+
+class Neo4jService:
+    """
+    Service for interacting with Neo4j SPEED Knowledge Graph
+    """
+
+    def __init__(self):
+        self.uri = os.getenv("NEO4J_URI", "bolt://localhost:7687")
+        self.user = os.getenv("NEO4J_USER", "neo4j")
+        self.password = os.getenv("NEO4J_PASSWORD", "speedkg123")
+        self.driver = GraphDatabase.driver(
+            self.uri,
+            auth=(self.user, self.password)
+        )
+
+    async def execute_query(
+        self,
+        cypher: str,
+        parameters: Dict[str, Any] = None
+    ) -> List[Dict]:
+        """
+        Execute a Cypher query and return results
+        """
+        with self.driver.session() as session:
+            result = session.run(cypher, parameters or {})
+            return [dict(record) for record in result]
+
+    def is_connected(self) -> bool:
+        """Check Neo4j connection"""
+        try:
+            with self.driver.session() as session:
+                session.run("RETURN 1")
+            return True
+        except:
+            return False
+
+    def close(self):
+        """Close driver connection"""
+        if self.driver:
+            self.driver.close()
+```
+
+### 7. Query Templates (services/query_templates.py)
+
+```python
+QUERY_TEMPLATES = {
+    "event_escalation_chain": """
+        MATCH path = (e1:Event)-[:LINKED_TO*1..5]->(e2:Event)
+        WHERE e1.country = $country AND e1.year = $year
+        WITH path, length(path) as chain_length
+        RETURN
+            [node in nodes(path) | node] as events,
+            chain_length,
+            relationships(path) as links
+        ORDER BY chain_length DESC
+        LIMIT $limit
+    """,
+
+    "temporal_intensity_trend": """
+        MATCH (e:Event)-[:HAS_INTENSITY]->(im:IntensityMetrics)
+        WHERE e.year >= $start_year AND e.year <= $end_year
+        AND ($country IS NULL OR e.country = $country)
+        RETURN
+            e.year as year,
+            e.month as month,
+            avg(im.pol_viol) as avg_political_violence,
+            avg(im.stat_viol) as avg_state_violence,
+            count(e) as event_count,
+            sum(im.n_killed_a) as total_casualties
+        ORDER BY e.year, e.month
+    """,
+
+    "actor_network": """
+        MATCH (e:Event)-[:HAS_INITIATOR]->(a1:Actor)
+        MATCH (e)-[:HAS_TARGET]->(a2:Actor)
+        WHERE ($country IS NULL OR e.country = $country)
+        AND ($year IS NULL OR e.year = $year)
+        RETURN
+            a1.name as initiator,
+            a2.name as target,
+            count(e) as interaction_count,
+            collect(e.eventid)[..10] as event_samples
+        ORDER BY interaction_count DESC
+        LIMIT $limit
+    """,
+
+    "driver_distribution": """
+        MATCH (e:Event)-[:DRIVEN_BY]->(d:Drivers)
+        WHERE ($year IS NULL OR e.year = $year)
+        AND ($country IS NULL OR e.country = $country)
+        RETURN
+            sum(CASE WHEN d.anti_gov_sentmnts THEN 1 ELSE 0 END) as anti_government,
+            sum(CASE WHEN d.sc_animosity THEN 1 ELSE 0 END) as sociocultural,
+            sum(CASE WHEN d.class_conflict THEN 1 ELSE 0 END) as class_based,
+            sum(CASE WHEN d.eco_scarcity THEN 1 ELSE 0 END) as economic,
+            sum(CASE WHEN d.pol_desires THEN 1 ELSE 0 END) as political_rights,
+            count(e) as total_events
+    """,
+
+    "geographic_distribution": """
+        MATCH (e:Event)-[:OCCURRED_AT]->(l:Location)
+        WHERE ($year IS NULL OR e.year = $year)
+        RETURN
+            l.country as country,
+            l.region as region,
+            l.latitude as lat,
+            l.longitude as lon,
+            count(e) as event_count
+        ORDER BY event_count DESC
+        LIMIT $limit
+    """,
+
+    "precursor_events": """
+        MATCH (small:Event)-[:HAS_TYPE]->(et:EventType)
+        WHERE et.ev_type = 'Political Expression'
+        AND ($country IS NULL OR small.country = $country)
+        MATCH (small)-[:LINKED_TO*1..5]->(major:Event)-[:HAS_INTENSITY]->(im:IntensityMetrics)
+        WHERE im.n_killed_a > $casualty_threshold
+        RETURN
+            small.eventid as precursor_id,
+            small.year as precursor_year,
+            major.eventid as major_event_id,
+            major.year as major_event_year,
+            im.n_killed_a as casualties,
+            length([(small)-[:LINKED_TO*]->(major) | 1]) as chain_length
+        ORDER BY casualties DESC
+        LIMIT $limit
+    """,
+
+    "recent_events": """
+        MATCH (e:Event)
+        WHERE e.year IS NOT NULL
+        WITH e
+        ORDER BY e.year DESC, e.month DESC, e.day DESC
+        LIMIT $limit
+        RETURN e
+    """
+}
+```
+
+## Frontend Implementation Guide
+
+### 1. Main App Component (App.jsx)
+
+```javascript
+import React, { useState } from 'react';
+import ChatInterface from './components/ChatInterface/ChatInterface';
+import Header from './components/UI/Header';
+import Sidebar from './components/UI/Sidebar';
+import { QueryProvider } from './contexts/QueryContext';
+import './styles/App.css';
+
+function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  return (
+    <QueryProvider>
+      <div className="app">
+        <Header onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
+
+        <div className="app-content">
+          {sidebarOpen && <Sidebar />}
+          <ChatInterface />
+        </div>
+      </div>
+    </QueryProvider>
+  );
+}
+
+export default App;
+```
+
+### 2. Chat Interface Component (ChatInterface.jsx)
+
+```javascript
+import React, { useState, useEffect, useRef } from 'react';
+import MessageThread from './MessageThread';
+import QueryInput from './QueryInput';
+import { useQuery } from '../../hooks/useQuery';
+import './ChatInterface.css';
+
+const ChatInterface = () => {
+  const { messages, sendQuery, isLoading } = useQuery();
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const handleSendQuery = async (query) => {
+    await sendQuery(query);
+  };
+
+  return (
+    <div className="chat-interface">
+      <div className="messages-container">
+        <MessageThread messages={messages} />
+        <div ref={messagesEndRef} />
+      </div>
+
+      <QueryInput
+        onSend={handleSendQuery}
+        disabled={isLoading}
+      />
+    </div>
+  );
+};
+
+export default ChatInterface;
+```
+
+### 3. D3 Timeline Visualization (TimelineViz.jsx)
+
+```javascript
+import React, { useEffect, useRef } from 'react';
+import * as d3 from 'd3';
+import './TimelineViz.css';
+
+const TimelineViz = ({ data, width = 900, height = 400 }) => {
+  const svgRef = useRef();
+
+  useEffect(() => {
+    if (!data || !data.events || data.events.length === 0) return;
+
+    // Clear previous content
+    d3.select(svgRef.current).selectAll('*').remove();
+
+    const margin = { top: 40, right: 30, bottom: 60, left: 60 };
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
+
+    // Create SVG
+    const svg = d3.select(svgRef.current)
+      .attr('width', width)
+      .attr('height', height);
+
+    const g = svg.append('g')
+      .attr('transform', `translate(${margin.left},${margin.top})`);
+
+    // Parse dates
+    const events = data.events.map(e => ({
+      ...e,
+      date: new Date(e.date)
+    }));
+
+    // Scales
+    const xScale = d3.scaleTime()
+      .domain([
+        d3.min(events, d => d.date),
+        d3.max(events, d => d.date)
+      ])
+      .range([0, innerWidth]);
+
+    const yScale = d3.scaleLinear()
+      .domain([0, d3.max(events, d => d.intensity) || 10])
+      .range([innerHeight, 0]);
+
+    const colorScale = d3.scaleSequential()
+      .domain([0, d3.max(events, d => d.intensity) || 10])
+      .interpolator(d3.interpolateYlOrRd);
+
+    // Axes
+    const xAxis = d3.axisBottom(xScale)
+      .ticks(10)
+      .tickFormat(d3.timeFormat('%b %Y'));
+
+    const yAxis = d3.axisLeft(yScale)
+      .ticks(5);
+
+    g.append('g')
+      .attr('class', 'x-axis')
+      .attr('transform', `translate(0,${innerHeight})`)
+      .call(xAxis)
+      .selectAll('text')
+      .attr('transform', 'rotate(-45)')
+      .style('text-anchor', 'end');
+
+    g.append('g')
+      .attr('class', 'y-axis')
+      .call(yAxis);
+
+    // Axis labels
+    g.append('text')
+      .attr('class', 'axis-label')
+      .attr('x', innerWidth / 2)
+      .attr('y', innerHeight + 50)
+      .attr('text-anchor', 'middle')
+      .text('Date');
+
+    g.append('text')
+      .attr('class', 'axis-label')
+      .attr('transform', 'rotate(-90)')
+      .attr('x', -innerHeight / 2)
+      .attr('y', -45)
+      .attr('text-anchor', 'middle')
+      .text('Intensity');
+
+    // Tooltip
+    const tooltip = d3.select('body')
+      .append('div')
+      .attr('class', 'tooltip')
+      .style('opacity', 0);
+
+    // Events as circles
+    g.selectAll('.event-circle')
+      .data(events)
+      .enter()
+      .append('circle')
+      .attr('class', 'event-circle')
+      .attr('cx', d => xScale(d.date))
+      .attr('cy', d => yScale(d.intensity))
+      .attr('r', 6)
+      .attr('fill', d => colorScale(d.intensity))
+      .attr('stroke', '#333')
+      .attr('stroke-width', 1)
+      .on('mouseover', function(event, d) {
+        d3.select(this)
+          .attr('r', 10)
+          .attr('stroke-width', 2);
+
+        tooltip.transition()
+          .duration(200)
+          .style('opacity', 0.9);
+
+        tooltip.html(`
+          <strong>${d.title}</strong><br/>
+          Date: ${d3.timeFormat('%Y-%m-%d')(d.date)}<br/>
+          Intensity: ${d.intensity.toFixed(2)}<br/>
+          Country: ${d.country}
+        `)
+          .style('left', (event.pageX + 10) + 'px')
+          .style('top', (event.pageY - 28) + 'px');
+      })
+      .on('mouseout', function() {
+        d3.select(this)
+          .attr('r', 6)
+          .attr('stroke-width', 1);
+
+        tooltip.transition()
+          .duration(500)
+          .style('opacity', 0);
+      });
+
+    // Cleanup tooltip on unmount
+    return () => {
+      d3.selectAll('.tooltip').remove();
+    };
+
+  }, [data, width, height]);
+
+  return (
+    <div className="timeline-viz">
+      <svg ref={svgRef}></svg>
+    </div>
+  );
+};
+
+export default TimelineViz;
+```
+
+### 4. D3 Network Graph (NetworkGraph.jsx)
+
+```javascript
+import React, { useEffect, useRef } from 'react';
+import * as d3 from 'd3';
+import './NetworkGraph.css';
+
+const NetworkGraph = ({ data, width = 900, height = 600 }) => {
+  const svgRef = useRef();
+
+  useEffect(() => {
+    if (!data || !data.nodes || !data.links) return;
+
+    // Clear previous
+    d3.select(svgRef.current).selectAll('*').remove();
+
+    const svg = d3.select(svgRef.current)
+      .attr('width', width)
+      .attr('height', height);
+
+    // Create force simulation
+    const simulation = d3.forceSimulation(data.nodes)
+      .force('link', d3.forceLink(data.links)
+        .id(d => d.id)
+        .distance(100))
+      .force('charge', d3.forceManyBody().strength(-300))
+      .force('center', d3.forceCenter(width / 2, height / 2))
+      .force('collision', d3.forceCollide().radius(30));
+
+    // Create links
+    const link = svg.append('g')
+      .attr('class', 'links')
+      .selectAll('line')
+      .data(data.links)
+      .enter()
+      .append('line')
+      .attr('stroke', '#999')
+      .attr('stroke-opacity', 0.6)
+      .attr('stroke-width', d => Math.sqrt(d.value || 1));
+
+    // Create nodes
+    const node = svg.append('g')
+      .attr('class', 'nodes')
+      .selectAll('g')
+      .data(data.nodes)
+      .enter()
+      .append('g')
+      .call(d3.drag()
+        .on('start', dragstarted)
+        .on('drag', dragged)
+        .on('end', dragended));
+
+    node.append('circle')
+      .attr('r', d => d.size || 10)
+      .attr('fill', d => d.color || '#69b3a2')
+      .attr('stroke', '#fff')
+      .attr('stroke-width', 2);
+
+    node.append('text')
+      .attr('dx', 15)
+      .attr('dy', 5)
+      .text(d => d.label)
+      .style('font-size', '12px');
+
+    // Tooltip
+    const tooltip = d3.select('body')
+      .append('div')
+      .attr('class', 'tooltip')
+      .style('opacity', 0);
+
+    node.on('mouseover', function(event, d) {
+      tooltip.transition()
+        .duration(200)
+        .style('opacity', 0.9);
+      tooltip.html(`
+        <strong>${d.label}</strong><br/>
+        Type: ${d.type || 'N/A'}<br/>
+        Connections: ${d.connections || 0}
+      `)
+        .style('left', (event.pageX + 10) + 'px')
+        .style('top', (event.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      tooltip.transition()
+        .duration(500)
+        .style('opacity', 0);
+    });
+
+    // Update positions on tick
+    simulation.on('tick', () => {
+      link
+        .attr('x1', d => d.source.x)
+        .attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x)
+        .attr('y2', d => d.target.y);
+
+      node.attr('transform', d => `translate(${d.x},${d.y})`);
+    });
+
+    // Drag functions
+    function dragstarted(event, d) {
+      if (!event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+
+    function dragged(event, d) {
+      d.fx = event.x;
+      d.fy = event.y;
+    }
+
+    function dragended(event, d) {
+      if (!event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    }
+
+    // Cleanup
+    return () => {
+      simulation.stop();
+      d3.selectAll('.tooltip').remove();
+    };
+
+  }, [data, width, height]);
+
+  return (
+    <div className="network-graph">
+      <svg ref={svgRef}></svg>
+    </div>
+  );
+};
+
+export default NetworkGraph;
+```
+
+### 5. Query Hook (hooks/useQuery.js)
+
+```javascript
+import { useState, useCallback } from 'react';
+import axios from 'axios';
+
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
+export const useQuery = () => {
+  const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const sendQuery = useCallback(async (query) => {
+    // Add user message
+    const userMessage = {
+      id: Date.now(),
+      type: 'user',
+      content: query,
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post(`${API_URL}/api/query`, {
+        query: query
+      });
+
+      // Add AI response
+      const aiMessage = {
+        id: Date.now() + 1,
+        type: 'ai',
+        content: response.data.content,
+        metadata: response.data.metadata,
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, aiMessage]);
+
+    } catch (error) {
+      console.error('Query error:', error);
+
+      const errorMessage = {
+        id: Date.now() + 1,
+        type: 'error',
+        content: {
+          text: 'Sorry, there was an error processing your query. Please try again.'
+        },
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  return {
+    messages,
+    sendQuery,
+    isLoading
+  };
+};
+```
+
+## Environment Configuration
+
+### Backend .env
+
+```bash
+# Neo4j Configuration
+NEO4J_URI=bolt://localhost:7687
+NEO4J_USER=neo4j
+NEO4J_PASSWORD=speedkg123
+
+# Claude API
+ANTHROPIC_API_KEY=your_api_key_here
+
+# Server
+HOST=0.0.0.0
+PORT=8000
+DEBUG=True
+
+# CORS
+CORS_ORIGINS=http://localhost:3000
+```
+
+### Frontend .env
+
+```bash
+REACT_APP_API_URL=http://localhost:8000
+REACT_APP_WS_URL=ws://localhost:8000
+```
+
+## Pre-built Query Templates for Users
+
+### Sidebar with Example Queries
+
+```javascript
+const EXAMPLE_QUERIES = [
+  {
+    category: "Origins & Drivers",
+    queries: [
+      "What are the main drivers of civil unrest in the Middle East from 2000-2020?",
+      "Compare anti-government vs socio-cultural drivers globally",
+      "Show me how drivers changed over time in Latin America"
+    ]
+  },
+  {
+    category: "Intensity Analysis",
+    queries: [
+      "Which countries had the most intense events in 2011?",
+      "Show casualty trends in Syria from 2011-2015",
+      "Compare political violence vs state violence over time"
+    ]
+  },
+  {
+    category: "Event Dynamics",
+    queries: [
+      "Show me event escalation chains in Syria 2011",
+      "How did the Arab Spring events link together?",
+      "What outcomes resulted from protests in Egypt?"
+    ]
+  },
+  {
+    category: "Temporal Analysis",
+    queries: [
+      "When did major instability episodes occur in Lebanon?",
+      "Show me the timeline of events in Libya 2011",
+      "Identify peaks of unrest globally by decade"
+    ]
+  },
+  {
+    category: "Precursor Events",
+    queries: [
+      "Find small protests that led to major conflicts",
+      "Show the progression from symbolic acts to violence",
+      "Which political expressions preceded coups?"
+    ]
+  },
+  {
+    category: "Actor Analysis",
+    queries: [
+      "Who were the main actors in Syrian civil unrest?",
+      "Show me the network of initiators and targets in Egypt 2011",
+      "Which groups were most active across the Arab Spring?"
+    ]
+  }
+];
+```
+
+## Deployment Guide
+
+### Docker Compose for Full Stack
+
+```yaml
+version: '3.8'
+
+services:
+  neo4j:
+    image: neo4j:5.16-community
+    container_name: speedkg-neo4j
+    environment:
+      - NEO4J_AUTH=neo4j/speedkg123
+      - NEO4J_PLUGINS=["apoc"]
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+
+  backend:
+    build: ./backend
+    container_name: speedkg-backend
+    environment:
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=speedkg123
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - neo4j
+
+  frontend:
+    build: ./frontend
+    container_name: speedkg-frontend
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  neo4j_data:
+```
+
+## Success Criteria
+
+The application is successful when:
+
+1. ✅ Users can ask natural language questions about SPEED data
+2. ✅ Agentic workflow correctly plans text + visual responses
+3. ✅ Cypher queries execute and return relevant data
+4. ✅ D3.js visualizations render correctly and are interactive
+5. ✅ Text analysis is coherent and data-driven
+6. ✅ All 6 research questions can be explored
+7. ✅ Response time < 5 seconds for most queries
+8. ✅ UI is responsive and intuitive
+9. ✅ Visualizations are publication-quality
+10. ✅ System handles errors gracefully
+
+## Expected Deliverables
+
+1. **Backend Application**
+   - FastAPI server with agentic workflow
+   - All three agents implemented
+   - Neo4j and Claude service integrations
+   - Query templates for common patterns
+   - WebSocket support for streaming
+
+2. **Frontend Application**
+   - React-based chat interface
+   - At least 6 D3.js visualization components
+   - Responsive design
+   - Example query sidebar
+   - Loading states and error handling
+
+3. **Documentation**
+   - README with setup instructions
+   - API documentation
+   - Example queries guide
+   - Deployment guide
+
+4. **Testing**
+   - Unit tests for agents
+   - Integration tests for queries
+   - Frontend component tests
+   - End-to-end test scenarios
+
+## Additional Features (Optional)
+
+- **Query History**: Save and revisit past queries
+- **Export**: Download visualizations as PNG/SVG
+- **Share**: Generate shareable links to analyses
+- **Custom Queries**: Allow advanced users to write Cypher
+- **Multi-modal**: Add image analysis if photos in data
+- **Collaboration**: Multi-user sessions
+- **Notifications**: Alert when long queries complete
+
+---
+
+## Notes
+
+- The agentic workflow ensures high-quality responses by separating planning, execution, and rendering
+- Claude handles both planning and text generation for natural, coherent responses
+- D3.js provides publication-quality, interactive visualizations
+- The system is extensible - new query templates and visualizations can be added easily
+- WebSocket support allows for streaming responses and progress updates
+- The architecture supports scaling to larger datasets and more complex queries
+
+This application transforms the SPEED Knowledge Graph into an accessible, intelligent research tool that combines the power of graph databases, AI language models, and interactive visualizations.
